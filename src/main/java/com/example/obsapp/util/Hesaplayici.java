@@ -1,6 +1,6 @@
 package com.example.obsapp.util;
 
-public class Hesaplayici {
+public class  Hesaplayici {
     static public void ortalamaHesapla(){
 
     }
