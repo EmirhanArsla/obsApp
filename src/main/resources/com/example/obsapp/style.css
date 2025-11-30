@@ -1,0 +1,68 @@
+/* Kök (Root) element: Arka planı koyu ve hafif şeffaf hale getirir */
+.root {
+    -fx-background-color: rgba(30, 30, 45, 0.95); /* Yarı saydam koyu mavi/gri */
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace; /* Daha modern/kodcu yazı tipi */
+    -fx-text-fill: #b3fff2; /* Neon mavi/turkuaz yazı rengi */
+    -fx-font-size: 13px;
+}
+
+/* Tüm etiketler (Label) için canlı renk */
+.label {
+    -fx-text-fill: #b3fff2;
+}
+
+/* Başlıklar için daha kalın ve parlak stil */
+.title-label {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00e0ff; /* Parlak mavi neon vurgu */
+    -fx-effect: dropshadow(gaussian, rgba(0, 224, 255, 0.5), 10, 0, 0, 0); /* Neon ışık efekti */
+}
+
+/* Panellere (örneğin sol menü veya ana içerik paneline) uygulayın */
+.container-panel {
+    -fx-background-color: rgba(60, 60, 80, 0.7); /* Çok hafif şeffaf arka plan */
+    -fx-border-color: #00e0ff; /* İnce neon çerçeve */
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    /* JavaFX'te tam CSS "backdrop-filter: blur" olmadığı için
+       gölgeyi derinlik efekti vermek için kullanıyoruz */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 15, 0.1, 0, 0);
+}
+
+/* Butonlar: Düz, koyu zemin üzerinde neon vurgu */
+.button {
+    -fx-background-color: #1a1a2e; /* Çok koyu zemin */
+    -fx-text-fill: #b3fff2;
+    -fx-border-color: #00e0ff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 18px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: innershadow(gaussian, rgba(0, 224, 255, 0.3), 5, 0, 0, 0); /* İç neon gölge */
+}
+
+.button:hover {
+    -fx-background-color: #31314f; /* Hafif aydınlanma */
+    -fx-effect: dropshadow(gaussian, rgba(0, 224, 255, 0.8), 15, 0, 0, 0); /* Parlak dış gölge */
+}
+
+/* Metin Alanları: Gizli zemin, belirgin neon çerçeve */
+.text-field {
+    -fx-background-color: rgba(20, 20, 30, 0.9); /* Neredeyse şeffaf siyah */
+    -fx-text-fill: #e8e8e8;
+    -fx-prompt-text-fill: #7d7d7d;
+    -fx-border-color: #444466; /* Soluk çerçeve */
+    -fx-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+}
+
+.text-field:focused {
+    -fx-border-color: #00e0ff; /* Odaklanınca tam neon rengi */
+    -fx-border-width: 2px;
+}

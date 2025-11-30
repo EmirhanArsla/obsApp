@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Pane prefHeight="528.0" prefWidth="760.0">
+      <children>
+         <Label fx:id="welcomeText1" layoutX="100.0" layoutY="51.0" prefHeight="50.0" prefWidth="100.0" text="Kullanıcı Adı " textAlignment="CENTER" textFill="WHITE" />
+      
+          <Label fx:id="welcomeText" layoutX="101.0" layoutY="109.0" prefHeight="39.0" prefWidth="49.0" text="Sifre:" />
+          <Button layoutX="200.0" layoutY="225.0" onAction="#onLoginClick" prefHeight="39.0" prefWidth="86.0" text="GİRİS" />
+         <TextField fx:id="usernameField" layoutX="225.0" layoutY="59.0" promptText="Lütfen Kullanıcı Adı Girin" />
+         <PasswordField fx:id="passwordField" layoutX="220.0" layoutY="111.0" />
+         <Label fx:id="loginText" layoutX="462.0" layoutY="176.0" prefHeight="35.0" prefWidth="162.0" />
+      </children>
+   </Pane>
+</VBox>
