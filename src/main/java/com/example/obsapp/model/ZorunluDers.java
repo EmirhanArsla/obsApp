@@ -4,7 +4,6 @@ import com.example.obsapp.Interfaceler.INotHesaplayabilir;
 import com.example.obsapp.util.HesaplamaUtil;
 
 public class ZorunluDers extends Ders implements INotHesaplayabilir {
-    private final String zorunlulukNedeni; // örn: MEB zorunlu müfredat
 
     // ==================== CONSTRUCTORS ====================
 
@@ -12,20 +11,13 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
                        int kredi, double katsayi, boolean aktif,
                        String zorunlulukNedeni) {
 
-        super(id, dersAdi, sinifSeviyesi, kredi, katsayi, aktif);
-        this.zorunlulukNedeni = zorunlulukNedeni;
+        super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
     public ZorunluDers(String dersAdi, int sinifSeviyesi) {
         super(dersAdi, sinifSeviyesi);
-        this.zorunlulukNedeni = "MEB müfredatına göre zorunlu ders";
     }
 
-    // ==================== GETTER ====================
-
-    public String getZorunlulukNedeni() {
-        return zorunlulukNedeni;
-    }
 
     // ==================== ZORUNLU OVERRIDE ====================
 
@@ -34,10 +26,7 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
         System.out.println("=== ZORUNLU DERS ===");
         System.out.println("Ders Adı: " + formatliDersAdi());
         System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
-        System.out.println("Kredi: " + getKredi());
         System.out.println("Katsayı: " + getKatsayi());
-        System.out.println("Zorunluluk Nedeni: " + zorunlulukNedeni);
-        System.out.println("Aktif mi: " + (isAktif() ? "Evet" : "Hayır"));
         System.out.println("=====================\n");
     }
 
@@ -50,16 +39,12 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
 
     @Override
     public boolean gectiMi(int y1, int y2, int performans) {
-        return HesaplamaUtil.gectiMi(y1, y2, performans);
+        return HesaplamaUtil.ortalama(y1, y2, performans)>=50;
     }
 
     @Override
-    public double agirlikliNot(int y1, int y2, int performans) {
-        return HesaplamaUtil.agirlikliNot(
-                y1, y2, performans,
-                getKatsayi(),
-                getKredi()
-        );
+    public double agirlikliNot(int y1, int y2, int performans, int Katsayi) {
+        return HesaplamaUtil.agirlikliNot(y1,y2,performans,getKatsayi());
     }
 
 }

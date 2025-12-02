@@ -1,7 +1,7 @@
 package com.example.obsapp.model;
+
 import com.example.obsapp.Interfaceler.INotHesaplayabilir;
 import com.example.obsapp.util.HesaplamaUtil;
-
 
 /**
  * Lise Öğrenci Bilgi Sistemi
@@ -15,8 +15,8 @@ public class Ders extends DersBase implements INotHesaplayabilir {
 
     // ======================== CONSTRUCTORS ========================
 
-    public Ders(String id, String dersAdi, int sinifSeviyesi, int kredi, double katsayi, boolean aktif) {
-        super(id, dersAdi, sinifSeviyesi, kredi, katsayi, aktif);
+    public Ders(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
+        super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
     public Ders(String dersAdi, int sinifSeviyesi) {
@@ -30,10 +30,16 @@ public class Ders extends DersBase implements INotHesaplayabilir {
         System.out.println("=== DERS BİLGİLERİ ===");
         System.out.println("Ders: " + formatliDersAdi());
         System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
-        System.out.println("Kredi: " + getKredi());
         System.out.println("Katsayı: " + getKatsayi());
-        System.out.println("Aktif mi: " + (isAktif() ? "Evet" : "Hayır"));
         System.out.println("=======================\n");
+    }
+
+    @Override
+    public double agirlikliNot(int y1, int y2, int perf,int Katsayi) {
+        return HesaplamaUtil.agirlikliNot(
+                y1, y2, perf,
+                getKatsayi()
+        );
     }
 
     // ======================== NOT İŞLEMLERİ ========================
@@ -41,6 +47,7 @@ public class Ders extends DersBase implements INotHesaplayabilir {
     /**
      * Üç notun ortalamasını hesaplar.
      */
+    @Override
     public double ortalama(int yazili1, int yazili2, int performans) {
         return HesaplamaUtil.ortalama(yazili1, yazili2, performans);
     }
@@ -48,18 +55,8 @@ public class Ders extends DersBase implements INotHesaplayabilir {
     /**
      * Öğrencinin geçip geçmediğini kontrol eder.
      */
+    @Override
     public boolean gectiMi(int y1, int y2, int perf) {
-        return HesaplamaUtil.gectiMi(y1, y2, perf);
-    }
-
-    /**
-     * Ağırlıklı not hesaplama (kredi × katsayı × ortalama)
-     */
-    public double agirlikliNot(int y1, int y2, int perf) {
-        return HesaplamaUtil.agirlikliNot(
-                y1, y2, perf,
-                getKatsayi(),
-                getKredi()
-        );
+        return HesaplamaUtil.ortalama(y1, y2, perf) >= 50;
     }
 }

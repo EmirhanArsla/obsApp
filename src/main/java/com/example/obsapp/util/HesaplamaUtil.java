@@ -28,37 +28,19 @@ public class  HesaplamaUtil {
 
         return (y1 + y2 + performans) / 3.0; // int -> double dönüşümü (implicit)
     }
-    // ======================== GEÇME / KALMA ========================
 
-    /**
-     * Geçme kriteri: ortalama >= 50
-     */
-    public static boolean gectiMi(double ort) {
-        return ort >= 50;   // karşılaştırma
-    }
-
-    /**
-     * Notlar üzerinden geçme kontrolü
-     */
-    public static boolean gectiMi(int y1, int y2, int performans) {
-        double ort = ortalama(y1, y2, performans);
-        return ort >= 50;   // mantıksal: >=
-    }
     // ======================== AĞIRLIKLI NOT ========================
 
     /**
      * Katsayı ve kredi kullanılarak ağırlıklı ortalama hesaplar.
      * Formül: ağırlıklı = ortalama * katsayı + kredi
      */
-    public static double agirlikliNot(int y1, int y2, int perf, double katsayi, int kredi) {
+    public static double agirlikliNot(int y1, int y2, int perf, double katsayi) {
 
         double ort = ortalama(y1, y2, perf); // util içi çağrı
 
         if (katsayi <= 0 || katsayi > 5)
             throw new IllegalArgumentException("Katsayı 1–5 arası olmalıdır!");
-
-        if (kredi < 1 || kredi > 5)
-            throw new IllegalArgumentException("Kredi 1–5 arası olmalıdır!");
 
         return ort * katsayi;   // aritmetik operatörler
     }

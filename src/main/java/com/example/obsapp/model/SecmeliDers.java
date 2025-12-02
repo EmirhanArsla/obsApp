@@ -13,7 +13,7 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
                        int kredi, double katsayi, boolean aktif,
                        String alanAdi) {
 
-        super(id, dersAdi, sinifSeviyesi, kredi, katsayi, aktif);
+        super(id, dersAdi, sinifSeviyesi, katsayi);
         this.alanAdi = alanAdi;
     }
 
@@ -35,10 +35,8 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
         System.out.println("=== SEÇMELİ DERS ===");
         System.out.println("Ders Adı: " + formatliDersAdi());
         System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
-        System.out.println("Kredi: " + getKredi());
         System.out.println("Katsayı: " + getKatsayi());
         System.out.println("Alan / Branş: " + alanAdi);
-        System.out.println("Aktif mi: " + (isAktif() ? "Evet" : "Hayır"));
         System.out.println("======================\n");
     }
 
@@ -51,15 +49,12 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
 
     @Override
     public boolean gectiMi(int y1, int y2, int performans) {
-        return HesaplamaUtil.gectiMi(y1, y2, performans);
+        return HesaplamaUtil.ortalama(y1, y2, performans)>=40;
     }
 
     @Override
-    public double agirlikliNot(int y1, int y2, int performans) {
-        return HesaplamaUtil.agirlikliNot(
-                y1, y2, performans,
-                getKatsayi(),
-                getKredi()
-        );
+    public double agirlikliNot(int y1, int y2, int performans,int Katsayi) {
+        return HesaplamaUtil.agirlikliNot(y1,y2,performans,Katsayi);
+
     }
 }

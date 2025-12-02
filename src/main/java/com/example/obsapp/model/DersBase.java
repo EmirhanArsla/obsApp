@@ -3,26 +3,24 @@ package com.example.obsapp.model;
 import java.util.Objects;
 
 public abstract class DersBase {
-    private String id;
+
     // ===================== ALANLAR =====================
              // MongoDB ID (String olarak tutulabilir)
+    private String id;
     private String dersAdi;     // Türkçe, Matematik, Fizik...
     private int sinifSeviyesi;  // 9,10,11,12
-    private int kredi;          // 1–5 arası
     private double katsayi;     // 0–5 arası pozitif değer
-    private boolean aktif;      // Ders aktif mi?
-    public DersBase(String id, String dersAdi, int sinifSeviyesi, int kredi, double katsayi, boolean aktif) {
+    public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
         setId(id);
         setDersAdi(dersAdi);
         setSinifSeviyesi(sinifSeviyesi);
-        setKredi(kredi);
         setKatsayi(katsayi);
-        setAktif(aktif);
     }
 
     public DersBase(String dersAdi, int sinifSeviyesi) {
-        this(null, dersAdi, sinifSeviyesi, 1, 1.0, true);
+        this(null, dersAdi, sinifSeviyesi, 1.0);
     }
+
 
 
     public abstract void dersBilgisiYazdir();
@@ -65,13 +63,7 @@ public abstract class DersBase {
             throw new IllegalArgumentException("Sınıf seviyesi 9–12 arasında olmalıdır!");
         this.sinifSeviyesi = sinifSeviyesi;
     }
-    public int getKredi() { return kredi; }
 
-    public void setKredi(int kredi) {
-        if (kredi < 1 || kredi > 5)
-            throw new IllegalArgumentException("Kredi 1–5 arasında olmalıdır!");
-        this.kredi = kredi;
-    }
 
     public double getKatsayi() { return katsayi; }
 
@@ -81,9 +73,6 @@ public abstract class DersBase {
         this.katsayi = katsayi;
     }
 
-    public boolean isAktif() { return aktif; }
-
-    public void setAktif(boolean aktif) { this.aktif = aktif; }
 
     @Override
     public boolean equals(Object o) {
@@ -97,6 +86,7 @@ public abstract class DersBase {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
 
 
