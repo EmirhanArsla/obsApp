@@ -63,7 +63,7 @@ public class HelloController {
         }
 
       private boolean girisKontrol(String username, String password) {
-          File dosya = new File("/Kullanıcılar.txt");
+          File dosya = new File("\\Kullanıcılar.txt");
 
           try {
               // 2. Dosyayı okumak için Scanner açıyoruz (listFiles KULLANILMAZ)

@@ -6,4 +6,8 @@ import javafx.scene.control.Label;
 public class SecondController {
     @FXML
     private Label loginText2;
+    @FXML
+    private Label label2;
+    @FXML
+    private Label loginText4;
 }
