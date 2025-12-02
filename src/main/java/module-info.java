@@ -6,6 +6,7 @@ module com.example.obsapp {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
+    requires org.mongodb.driver.sync.client;
 
     opens com.example.obsapp to javafx.fxml;
     exports com.example.obsapp;
