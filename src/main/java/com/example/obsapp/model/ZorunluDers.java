@@ -8,13 +8,13 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
     // ==================== CONSTRUCTORS ====================
 
     public ZorunluDers(String id, String dersAdi, int sinifSeviyesi,
-                       int kredi, double katsayi, boolean aktif,
-                       String zorunlulukNedeni) {
+                       double katsayi) {
 
         super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
     public ZorunluDers(String dersAdi, int sinifSeviyesi) {
+
         super(dersAdi, sinifSeviyesi);
     }
 
