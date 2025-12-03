@@ -5,12 +5,14 @@ import com.example.obsapp.util.HesaplamaUtil;
 
 public class ZorunluDers extends Ders implements INotHesaplayabilir {
 
+    boolean zorunluMu=true;
     // ==================== CONSTRUCTORS ====================
 
     public ZorunluDers(String id, String dersAdi, int sinifSeviyesi,
-                       double katsayi) {
+                       double katsayi,boolean zorunluMu) {
 
         super(id, dersAdi, sinifSeviyesi, katsayi);
+        this.zorunluMu=zorunluMu;
     }
 
     public ZorunluDers(String dersAdi, int sinifSeviyesi) {
