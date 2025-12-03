@@ -5,28 +5,18 @@ import com.example.obsapp.util.HesaplamaUtil;
 
 public class SecmeliDers extends Ders implements INotHesaplayabilir {
 
-    private final String alanAdi;   // örn: "Sanat", "Spor", "Bilişim", "Müzik"
-
     // ==================== CONSTRUCTORS ====================
 
     public SecmeliDers(String id, String dersAdi, int sinifSeviyesi,
-                       int kredi, double katsayi, boolean aktif,
-                       String alanAdi) {
+                       double katsayi) {
 
         super(id, dersAdi, sinifSeviyesi, katsayi);
-        this.alanAdi = alanAdi;
     }
 
     public SecmeliDers(String dersAdi, int sinifSeviyesi) {
         super(dersAdi, sinifSeviyesi);
-        this.alanAdi = "Genel Seçmeli Ders";
     }
 
-    // ==================== GETTER ====================
-
-    public String getAlanAdi() {
-        return alanAdi;
-    }
 
     // ==================== OVERRIDES ====================
 
@@ -36,7 +26,6 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
         System.out.println("Ders Adı: " + formatliDersAdi());
         System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
         System.out.println("Katsayı: " + getKatsayi());
-        System.out.println("Alan / Branş: " + alanAdi);
         System.out.println("======================\n");
     }
 
