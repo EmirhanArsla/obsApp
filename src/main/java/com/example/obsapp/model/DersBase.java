@@ -9,20 +9,15 @@ public abstract class DersBase {
     private String id;
     private String dersAdi;     // Türkçe, Matematik, Fizik...
     private int sinifSeviyesi;  // 9,10,11,12
-    private double katsayi;     // 0–5 arası pozitif değer
-    public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
+    private double katsayi;// 0–5 arası pozitif değer
+    private String ogretmenAdi;
+    public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi,String ogretmenAdi) {
         setId(id);
         setDersAdi(dersAdi);
         setSinifSeviyesi(sinifSeviyesi);
         setKatsayi(katsayi);
+
     }
-
-    public DersBase(String dersAdi, int sinifSeviyesi) {
-        this(null, dersAdi, sinifSeviyesi, 1.0);
-    }
-
-
-
     public abstract void dersBilgisiYazdir();
 
     public String formatliDersAdi() {
@@ -32,9 +27,11 @@ public abstract class DersBase {
                 .replace("İ", "I");
     }
     public int katsayiInt() {
+
         return (int) katsayi;  // Explicit cast
     }
     public String tamBilgi() {
+
         return formatliDersAdi() + " (" + sinifSeviyesi + ". Sınıf)";
     }
     public String getId() { return id; }
@@ -73,6 +70,13 @@ public abstract class DersBase {
         this.katsayi = katsayi;
     }
 
+    public String getOgretmenAdi() {
+        return ogretmenAdi;
+    }
+
+    public void setOgretmenAdi(String ogretmenAdi) {
+        this.ogretmenAdi = ogretmenAdi;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -86,7 +90,6 @@ public abstract class DersBase {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 }
 
 
