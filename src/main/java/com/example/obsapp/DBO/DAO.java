@@ -17,7 +17,7 @@ public class DAO {
 
     }
 
-    public void ogrenciAdd(String ad, String SoyAd , int tc , int OgrenciNo){
+    public void ogrenciAdd(String ad, String SoyAd , String tc , String OgrenciNo){
         Document document = new Document();
         document.append("ad", ad);
         document.append("soyAd", SoyAd);
@@ -31,7 +31,7 @@ public class DAO {
         }
     }
 
-    public void ogrenciDelete(int tc){
+    public void ogrenciDelete(String tc){
         Document filitre = new Document("tc", tc);
         long Stc= collection.deleteOne(filitre).getDeletedCount(); // sürücü longu zorunlu tutar
         if(Stc>0){
@@ -42,7 +42,7 @@ public class DAO {
         }
     }
 
-    public Document ogrencisearch(int tc){
+    public Document ogrencisearch(String tc){
         Document filitre = new Document("tc", tc);
         return collection.find(filitre).first() ;
     }
