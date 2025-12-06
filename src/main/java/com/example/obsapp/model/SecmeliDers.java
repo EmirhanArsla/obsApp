@@ -7,6 +7,7 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
 
     // ==================== CONSTRUCTORS ====================
 
+
     public SecmeliDers(String id, String dersAdi, int sinifSeviyesi,
                        double katsayi) {
 
@@ -43,7 +44,7 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
 
     @Override
     public double agirlikliNot(int y1, int y2, int performans,int Katsayi) {
-        return HesaplamaUtil.agirlikliNot(y1,y2,performans,Katsayi);
+        return HesaplamaUtil.agirlikliNot(y1,y2,performans,getKatsayi());
 
     }
 }
