@@ -41,5 +41,10 @@ public class DBUtil {
         return mongoClient.getDatabase(DATABASE_NAME);
     }
 
+    public static void closeConnection() {
+        if (mongoClient != null) {
+            mongoClient.close();
+        }
+        }
 
 }
