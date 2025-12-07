@@ -35,18 +35,18 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
     // ==================== INotHesaplayabilir METOTLARI ====================
 
     @Override
-    public double ortalama(int y1, int y2, int performans) {
-        return HesaplamaUtil.ortalama(y1, y2, performans);
+    public double ortalama(int y1, int y2) {
+        return HesaplamaUtil.ortalama(y1, y2);
     }
 
     @Override
-    public boolean gectiMi(int y1, int y2, int performans) {
-        return HesaplamaUtil.ortalama(y1, y2, performans)>=50;
+    public boolean gectiMi(int y1, int y2) {
+        return HesaplamaUtil.ortalama(y1, y2)>=50;
     }
 
     @Override
-    public double agirlikliNot(int y1, int y2, int performans, int Katsayi) {
-        return HesaplamaUtil.agirlikliNot(y1,y2,performans,getKatsayi());
+    public double agirlikliNot(int y1, int y2, int Katsayi) {
+        return HesaplamaUtil.agirlikliNot(y1,y2,getKatsayi());
     }
 
 }
