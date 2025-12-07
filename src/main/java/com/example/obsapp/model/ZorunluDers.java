@@ -15,11 +15,6 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
         this.zorunluMu=zorunluMu;
     }
 
-    public ZorunluDers(String dersAdi, int sinifSeviyesi) {
-
-        super(dersAdi, sinifSeviyesi);
-    }
-
 
     // ==================== ZORUNLU OVERRIDE ====================
 
