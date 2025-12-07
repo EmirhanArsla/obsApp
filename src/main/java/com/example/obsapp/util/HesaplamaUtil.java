@@ -1,32 +1,22 @@
 package com.example.obsapp.util;
 
 public class  HesaplamaUtil {
-    // ======================== NOT DOĞRULAMA ========================
 
-    /**
-     * Notlar 0–100 arasında değilse false döner.
-     */
     public static boolean notGecerliMi(int not) {
         return not >= 0 && not <= 100;   // karşılaştırma + mantıksal
     }
 
-    /**
-     * Üç notun da geçerli olup olmadığını kontrol eder.
-     */
-    public static boolean notlarGecerliMi(int y1, int y2, int performans) {
-        return notGecerliMi(y1) && notGecerliMi(y2) && notGecerliMi(performans);
+    public static boolean notlarGecerliMi(int y1, int y2) {
+        return notGecerliMi(y1) && notGecerliMi(y2) ;
     }
-    /**
-     * Ortalama = (y1 + y2 + performans) / 3
-     * → 3.0 kullanımı implicit casting örneği
-     */
-    public static double ortalama(int y1, int y2, int performans) {
 
-        if (!notlarGecerliMi(y1, y2, performans)) {
+    public static double ortalama(int y1, int y2) {
+
+        if (!notlarGecerliMi(y1, y2) ){
             throw new IllegalArgumentException("Notlar 0–100 arasında olmalıdır!");
         }
 
-        return (y1 + y2 + performans) / 3.0; // int -> double dönüşümü (implicit)
+        return (y1 + y2 ) / 3.0; // int -> double dönüşümü (implicit)
     }
 
     // ======================== AĞIRLIKLI NOT ========================
@@ -35,9 +25,9 @@ public class  HesaplamaUtil {
      * Katsayı ve kredi kullanılarak ağırlıklı ortalama hesaplar.
      * Formül: ağırlıklı = ortalama * katsayı + kredi
      */
-    public static double agirlikliNot(int y1, int y2, int perf, double katsayi) {
+    public static double agirlikliNot(int y1, int y2, double katsayi) {
 
-        double ort = ortalama(y1, y2, perf); // util içi çağrı
+        double ort = ortalama(y1, y2); // util içi çağrı
 
         if (katsayi <= 0 || katsayi > 5)
             throw new IllegalArgumentException("Katsayı 1–5 arası olmalıdır!");

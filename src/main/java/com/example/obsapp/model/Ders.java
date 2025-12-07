@@ -35,9 +35,9 @@ public class Ders extends DersBase implements INotHesaplayabilir {
     }
 
     @Override
-    public double agirlikliNot(int y1, int y2, int perf,int Katsayi) {
+    public double agirlikliNot(int y1, int y2,int Katsayi) {
         return HesaplamaUtil.agirlikliNot(
-                y1, y2, perf,
+                y1, y2,
                 getKatsayi()
         );
     }
@@ -48,15 +48,15 @@ public class Ders extends DersBase implements INotHesaplayabilir {
      * Üç notun ortalamasını hesaplar.
      */
     @Override
-    public double ortalama(int yazili1, int yazili2, int performans) {
-        return HesaplamaUtil.ortalama(yazili1, yazili2, performans);
+    public double ortalama(int yazili1, int yazili2) {
+        return HesaplamaUtil.ortalama(yazili1, yazili2);
     }
 
     /**
      * Öğrencinin geçip geçmediğini kontrol eder.
      */
     @Override
-    public boolean gectiMi(int y1, int y2, int perf) {
-        return HesaplamaUtil.ortalama(y1, y2, perf) >= 50;
+    public boolean gectiMi(int y1, int y2) {
+        return HesaplamaUtil.ortalama(y1, y2) >= 50;
     }
 }

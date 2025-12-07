@@ -18,6 +18,19 @@ public abstract class DersBase {
         setKatsayi(katsayi);
 
     }
+    public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
+        setId(id);
+        setDersAdi(dersAdi);
+        setSinifSeviyesi(sinifSeviyesi);
+        setKatsayi(katsayi);
+
+    }
+    public DersBase(String dersAdi, int sinifSeviyesi) {
+
+        setDersAdi(dersAdi);
+        setSinifSeviyesi(sinifSeviyesi);
+
+    }
     public abstract void dersBilgisiYazdir();
 
     public String formatliDersAdi() {
