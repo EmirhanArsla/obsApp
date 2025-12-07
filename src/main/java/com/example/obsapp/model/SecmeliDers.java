@@ -4,19 +4,16 @@ import com.example.obsapp.Interfaceler.INotHesaplayabilir;
 import com.example.obsapp.util.HesaplamaUtil;
 
 public class SecmeliDers extends Ders implements INotHesaplayabilir {
-
+    boolean zorunluMu=false;
     // ==================== CONSTRUCTORS ====================
 
 
     public SecmeliDers(String id, String dersAdi, int sinifSeviyesi,
-                       double katsayi) {
+                       double katsayi,boolean zorunluMu) {
 
         super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
-    public SecmeliDers(String dersAdi, int sinifSeviyesi) {
-        super(dersAdi, sinifSeviyesi);
-    }
 
 
     // ==================== OVERRIDES ====================

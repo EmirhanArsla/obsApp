@@ -12,6 +12,7 @@ public class RaporlamaManager {
      private final DAO ogrenciDao = new DAO();
      private final NotDao notDao = new NotDao();
 
+     //Notları çekebilmek ve Tabloda görüntülemek için kullanabilceğimiz fonksiyon
      public List<NotGorunum> notGoruntule(String ogrencid){
          List<NotGorunum> notGorunum=new ArrayList<>();
          List<Document> notlist= notDao.notSearch(ogrencid);

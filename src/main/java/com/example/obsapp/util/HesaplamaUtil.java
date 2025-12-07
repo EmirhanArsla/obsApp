@@ -44,6 +44,7 @@ public class  HesaplamaUtil {
         return (int) ort;   // explicit cast
     }
 
+
     // ======================== NOTU SINIRLANDIRMA ========================
 
     /**
