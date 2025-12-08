@@ -1,0 +1,78 @@
+package com.example.obsapp.controller;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+
+public class LoginController {
+
+    @FXML
+    private TextField yoneticiKullanici;
+
+    @FXML
+    private PasswordField yoneticiSifre;
+
+    @FXML
+    private TextField ogrenciKullanici;
+
+    @FXML
+    private PasswordField ogrenciSifre;
+
+    // ============================
+    // YÖNETİCİ GİRİŞİ
+    // ============================
+    @FXML
+    private void yoneticiGiris() {
+
+        String user = yoneticiKullanici.getText();
+        String pass = yoneticiSifre.getText();
+
+        if (user.equals("admin") && pass.equals("1234")) {
+            loadPage("/com/example/obsapp/Yonetici_sis.fxml", "Yönetici Paneli");
+        } else {
+            System.out.println("Hatalı yönetici girişi!");
+        }
+    }
+
+    // ============================
+    // ÖĞRENCİ GİRİŞİ
+    // ============================
+    @FXML
+    private void ogrenciGiris() {
+
+        String user = ogrenciKullanici.getText();
+        String pass = ogrenciSifre.getText();
+
+        if (user.equals("ogrenci") && pass.equals("0000")) {
+            loadPage("/com/example/obsapp/Ogrenci_sis.fxml", "Öğrenci Paneli");
+        } else {
+            System.out.println("Hatalı öğrenci girişi!");
+        }
+    }
+
+    // ============================
+    // SAYFA YÜKLEYİCİ
+    // ============================
+    private void loadPage(String fxmlPath, String title) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // giriş ekranını kapat
+            Stage loginStage = (Stage) yoneticiKullanici.getScene().getWindow();
+            loginStage.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+}
