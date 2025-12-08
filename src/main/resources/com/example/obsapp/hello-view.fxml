@@ -10,41 +10,55 @@
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.LoginController">
+
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+
     <Pane prefHeight="528.0" prefWidth="760.0">
         <children>
 
-            <!-- ÖĞRENCİ GİRİŞ -->
-            <TextField fx:id="usernameField1" layoutX="187.0" layoutY="292.0" prefHeight="37.0" prefWidth="164.0" promptText="Lütfen Kullanıcı Adı Girin" />
-            <PasswordField fx:id="passwordField1" layoutX="187.0" layoutY="347.0" />
+            <!-- ====================== -->
+            <!-- ÖĞRENCİ GİRİŞ BÖLÜMÜ -->
+            <!-- ====================== -->
 
-            <!-- ÖĞRENCİ GİRİŞ BUTONU -->
-            <Button layoutX="201.0" layoutY="406.0" onAction="#ogrenciGiris" prefHeight="39.0" prefWidth="86.0" text="GİRİS" />
-
-            <Label fx:id="welcomeText11" layoutX="56.0" layoutY="301.0" text="Kullanıcı Adı " textFill="WHITE" />
-            <Label fx:id="welcomeText2" layoutX="86.0" layoutY="346.0" text="Sifre:" />
-
-
-            <!-- YÖNETİCİ GİRİŞ -->
-            <TextField fx:id="usernameField" layoutX="195.0" layoutY="60.0" promptText="Lütfen Kullanıcı Adı Girin" />
-            <PasswordField fx:id="passwordField" layoutX="195.0" layoutY="111.0" />
-
-            <!-- YÖNETİCİ GİRİŞ BUTONU -->
-            <Button layoutX="205.0" layoutY="192.0" onAction="#yoneticiGiris" prefHeight="39.0" prefWidth="86.0" text="GİRİS" />
-
-            <Label layoutX="68.0" layoutY="50.0" text="Kullanıcı Adı " textFill="WHITE" />
-            <Label layoutX="76.0" layoutY="110.0" text="Sifre:" textFill="WHITE" />
-
-            <Label layoutX="172.0" layoutY="14.0" text=" YÖNETİCİ GİRİŞ">
-                <font><Font size="27.0" /></font>
+            <Label layoutX="177" layoutY="245" text="ÖĞRENCİ GİRİŞ">
+                <font><Font size="27" /></font>
             </Label>
 
-            <Label layoutX="177.0" layoutY="245.0" text="ÖĞRENCİ GİRİŞ">
-                <font><Font size="27.0" /></font>
+            <Label layoutX="56" layoutY="301" text="Kullanıcı Adı" textFill="WHITE" />
+            <TextField fx:id="ogrenciKullanici" layoutX="187" layoutY="292" prefHeight="37" prefWidth="164" promptText="Lütfen Kullanıcı Adı Girin" />
+
+            <Label layoutX="86" layoutY="346" text="Şifre:" textFill="WHITE" />
+            <PasswordField fx:id="ogrenciSifre" layoutX="187" layoutY="347" />
+
+            <Button layoutX="201" layoutY="406" onAction="#ogrenciGiris" prefHeight="39" prefWidth="86" text="GİRİŞ" />
+
+
+            <!-- ====================== -->
+            <!-- YÖNETİCİ GİRİŞ BÖLÜMÜ -->
+            <!-- ====================== -->
+
+            <Label layoutX="172" layoutY="14" text="YÖNETİCİ GİRİŞ">
+                <font><Font size="27" /></font>
             </Label>
+
+            <Label layoutX="68" layoutY="50" text="Kullanıcı Adı" textFill="WHITE" />
+            <TextField fx:id="yoneticiKullanici" layoutX="195" layoutY="60" promptText="Lütfen Kullanıcı Adı Girin" />
+
+            <Label layoutX="76" layoutY="110" text="Şifre:" textFill="WHITE" />
+            <PasswordField fx:id="yoneticiSifre" layoutX="195" layoutY="111" />
+
+            <Button layoutX="205" layoutY="192" onAction="#yoneticiGiris" prefHeight="39" prefWidth="86" text="GİRİŞ" />
+
+
+            <!-- ====================== -->
+            <!-- HATA MESAJI LABELİ -->
+            <!-- ====================== -->
+
+            <Label fx:id="hataMesaji" layoutX="457.0" layoutY="230" prefHeight="25.0" prefWidth="293.0" style="-fx-font-size: 16px;" text="" textFill="RED" />
 
         </children>
     </Pane>
+
 </VBox>
