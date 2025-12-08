@@ -3,9 +3,6 @@ import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import com.example.obsapp.controller.SecondController;
-
-import java.util.Collection;
 
 public class DAO {
     private MongoCollection<Document> collection;
