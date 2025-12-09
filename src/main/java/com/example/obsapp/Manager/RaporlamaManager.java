@@ -20,6 +20,7 @@ public class RaporlamaManager {
      //Notları çekebilmek ve Tabloda görüntülemek için kullanabilceğimiz fonksiyon
      public List<NotGorunum> notGoruntule(String ogrencid){
          List<NotGorunum> notGorunum=new ArrayList<>();
+
          List<Document> notlist= notDao.notSearch(ogrencid);
 
          if(notlist.isEmpty() || notlist== null ){

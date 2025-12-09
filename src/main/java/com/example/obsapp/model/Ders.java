@@ -35,11 +35,8 @@ public class Ders extends DersBase implements INotHesaplayabilir {
     }
 
     @Override
-    public double agirlikliNot(int y1, int y2,int Katsayi) {
-        return HesaplamaUtil.agirlikliNot(
-                y1, y2,
-                getKatsayi()
-        );
+    public double agirlikliNot(double ortalama ,int Katsayi) {
+        return HesaplamaUtil.agirlikliNot( ortalama, getKatsayi());
     }
 
     // ======================== NOT İŞLEMLERİ ========================
