@@ -3,15 +3,12 @@ import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import com.example.obsapp.controller.SecondController;
 
-import java.util.Collection;
-
-public class DAO {
+public class OgrenciDao {
     private MongoCollection<Document> collection;
 
 
-    public DAO() {
+    public OgrenciDao() {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
         this.collection = Db.getCollection("Ogrenciler");
 
