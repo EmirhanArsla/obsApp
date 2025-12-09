@@ -1,5 +1,6 @@
 package com.example.obsapp.controller;
 
+import com.example.obsapp.repository.YoneticiRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,8 +40,10 @@ public class LoginController {
         String user = yoneticiKullanici.getText();
         String pass = yoneticiSifre.getText();
 
-        if (user.equals("admin") && pass.equals("1234")) {
-            hataMesaji.setText(""); // hata mesajını temizle
+        YoneticiRepository repo = new YoneticiRepository();
+
+        if (repo.yoneticiDogrula(user, pass)) {
+            hataMesaji.setText("");
             loadPage("/com/example/obsapp/Yonetici_sis.fxml", "Yönetici Paneli");
         } else {
             hataMesaji.setText("Hatalı yönetici girişi!");
