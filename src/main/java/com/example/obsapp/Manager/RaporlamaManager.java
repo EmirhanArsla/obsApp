@@ -1,15 +1,16 @@
 package com.example.obsapp.Manager;
 
-import com.example.obsapp.DBO.DAO;
+import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.Viewmodel.NotGorunum;
+import com.example.obsapp.model.Ogrenci;
 import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RaporlamaManager {
-     private final DAO ogrenciDao = new DAO();
+     private final OgrenciDao ogrenciDao = new OgrenciDao();
      private final NotDao notDao = new NotDao();
 
      //Notları çekebilmek ve Tabloda görüntülemek için kullanabilceğimiz fonksiyon
