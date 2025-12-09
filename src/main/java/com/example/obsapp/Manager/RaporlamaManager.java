@@ -5,6 +5,7 @@ import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.Viewmodel.NotGorunum;
+import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.util.HesaplamaUtil;
 import org.bson.Document;
 
@@ -55,17 +56,24 @@ public class RaporlamaManager {
          return  notGorunum;
      }
 
-     public  void genelOrtalama(String ogrenciId){
+
+
+
+
+     public  List<OrtalamaGorunum> genelOrtalama(String ogrenciId){
+         List<OrtalamaGorunum> OrtalamaG = new ArrayList<>();
+         List<Double> toplams = new ArrayList<>();
+
          Document student = (Document) ogrenciDao.ogrencisearch(ogrenciId);
          if(student == null){
              System.out.println("örenci bulunamadi");
-            return;
+            return OrtalamaG;
          }
 
         List<Document> notlist= notDao.notSearch(ogrenciId);
          if(notlist.isEmpty() || notlist== null ){
              System.out.println("Not bulunamadi");
-            return;
+            return OrtalamaG;
          }
 
      double toplamAgirlik=0.0;
@@ -86,10 +94,12 @@ public class RaporlamaManager {
 
          toplamAgirlik= toplamAgirlik + agirlikliNot;
 
-
-         //buraya tablo şeklinde yazdıracakmış gibi yaz
+        OrtalamaG.add(new OrtalamaGorunum(dersId,dersOrtalamasi,kredi));
 
      }
+     toplams.add(toplamAgirlik);
+     toplams.add(toplamKredi);
+
     if (toplamKredi > 0 ){
         gno =  toplamAgirlik/toplamKredi;
         System.out.println("GNO hesaplandı ");
@@ -97,12 +107,16 @@ public class RaporlamaManager {
     else {
         System.out.println("GNO hesaplanmadı");
     }
+
+    return OrtalamaG;
      }
 
 
 
+         }
 
-     }
+
+
 
 
 
