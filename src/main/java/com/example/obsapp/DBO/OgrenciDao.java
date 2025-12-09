@@ -4,11 +4,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-public class DAO {
+public class OgrenciDao {
     private MongoCollection<Document> collection;
 
 
-    public DAO() {
+    public OgrenciDao() {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
         this.collection = Db.getCollection("Ogrenciler");
 
