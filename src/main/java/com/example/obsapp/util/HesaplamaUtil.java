@@ -16,7 +16,7 @@ public class  HesaplamaUtil {
             throw new IllegalArgumentException("Notlar 0–100 arasında olmalıdır!");
         }
 
-        return (y1 + y2 ) / 3.0; // int -> double dönüşümü (implicit)
+        return (y1 + y2 ) / 2.0; // int -> double dönüşümü (implicit)
     }
 
     // ======================== AĞIRLIKLI NOT ========================
@@ -25,14 +25,11 @@ public class  HesaplamaUtil {
      * Katsayı ve kredi kullanılarak ağırlıklı ortalama hesaplar.
      * Formül: ağırlıklı = ortalama * katsayı + kredi
      */
-    public static double agirlikliNot(int y1, int y2, double katsayi) {
-
-        double ort = ortalama(y1, y2); // util içi çağrı
-
+    public static double agirlikliNot(double ortalama, double katsayi) {
         if (katsayi <= 0 || katsayi > 5)
             throw new IllegalArgumentException("Katsayı 1–5 arası olmalıdır!");
 
-        return ort * katsayi;   // aritmetik operatörler
+        return ortalama * katsayi;   // aritmetik operatörler
     }
     // ======================== TİP DÖNÜŞÜMLERİ ========================
 
