@@ -74,6 +74,7 @@ public class Yonteci_sisController {
         } catch (Exception e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
         }
+
     }
 }
 
