@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -12,27 +13,27 @@
    <children>
       <TabPane layoutY="42.0" prefHeight="544.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Ögrenci Ekle">
+          <Tab text="Öğrenci Düzenle">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="ekleButton" layoutX="93.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
-                        <Label layoutX="29.0" layoutY="30.0" text="AD" textFill="WHITE">
+                        <Button fx:id="ekleButton" layoutX="118.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
+                        <Label layoutX="44.0" layoutY="78.0" text="AD" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="23.0" layoutY="65.0" text="SoyAd" textFill="WHITE">
+                        <Label layoutX="33.0" layoutY="120.0" text="SoyAd" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="33.0" layoutY="96.0" prefHeight="20.0" prefWidth="39.0" text="T.C" textFill="WHITE">
+                        <Label layoutX="44.0" layoutY="155.0" prefHeight="20.0" prefWidth="39.0" text="T.C" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="27.0" layoutY="131.0" text="Öğrenci No" textFill="WHITE">
+                        <Label layoutX="27.0" layoutY="194.0" text="Öğrenci No" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -42,22 +43,60 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtAd" layoutX="134.0" layoutY="16.0" />
-                        <TextField fx:id="txtSoyad" layoutX="134.0" layoutY="55.0" />
-                        <TextField fx:id="txtTc" layoutX="134.0" layoutY="93.0" />
-                        <TextField fx:id="txtOgrenciNo" layoutX="134.0" layoutY="128.0" />
-                        <TextField fx:id="txtSinif" layoutX="133.0" layoutY="168.0" />
-                        <Label layoutX="27.0" layoutY="166.0" prefHeight="25.0" prefWidth="91.0" text="Sınınf Seviyesi" textFill="WHITE">
+                        <TextField fx:id="txtAd" layoutX="134.0" layoutY="76.0" />
+                        <TextField fx:id="txtSoyad" layoutX="134.0" layoutY="117.0" />
+                        <TextField fx:id="txtTc" layoutX="134.0" layoutY="152.0" />
+                        <TextField fx:id="txtOgrenciNo" layoutX="134.0" layoutY="191.0" />
+                        <TextField fx:id="txtSinif" layoutX="134.0" layoutY="233.0" />
+                        <Label layoutX="27.0" layoutY="233.0" prefHeight="25.0" prefWidth="91.0" text="Sınınf Seviyesi" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <Label layoutX="83.0" layoutY="25.0" text="Ögrenci Ekle" textFill="WHITE">
+                           <font>
+                              <Font name="Cambria" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="540.0" layoutY="25.0" text="Öğrenci Sil" textFill="WHITE">
+                           <font>
+                              <Font name="Cambria" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="476.0" layoutY="78.0" text="T.C" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="528.0" layoutY="76.0" />
+                        <Button layoutX="576.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Sil" />
+                        <Label layoutX="34.0" layoutY="286.0" text="Kayıt Tarihi" textFill="WHITE" />
+                        <DatePicker layoutX="132.0" layoutY="282.0" prefHeight="25.0" prefWidth="153.0" />
                      </children>
                   </AnchorPane>
                </content></Tab>
-          <Tab text="Öğrenci Düzenle">
+          <Tab text="Öğrenci Ara">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="117.0" layoutY="107.0" mnemonicParsing="false" text="Button" />
+                        <Label layoutX="27.0" layoutY="69.0" text="TC" textFill="#f2f2f2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="69.0" layoutY="67.0" />
+                        <Label layoutX="68.0" layoutY="14.0" text="Öğrenci Ara" textFill="WHITE">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="171.0" text="Öğrenci Bilgileri" textFill="WHITE">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
                </content>
           </Tab>
         </tabs>
