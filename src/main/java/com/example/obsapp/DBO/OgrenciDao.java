@@ -4,6 +4,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 public class OgrenciDao {
     private final MongoCollection<Document> collection;
 
@@ -14,17 +18,30 @@ public class OgrenciDao {
 
     }
 
-    public void ogrenciAdd(String ad, String SoyAd , String tc , String OgrenciNo){
+    public String ogrenciAdd(String ad, String SoyAd , String tc , String OgrenciNo , int sinifSeviyesi) {
+        Document filtre= new Document("$or", Arrays.asList(
+                new Document("tc",tc),
+                new Document("OgrenciNo",OgrenciNo)
+        ));
+
+        Document hata = collection.find(filtre).first();
+        if(hata != null){
+            String mesaj= "Aynı Tc sahip ögrenci var " ;
+            return mesaj;
+        }
+
         Document document = new Document();
         document.append("ad", ad);
         document.append("soyAd", SoyAd);
         document.append("tc", tc);
         document.append("OgrenciNo", OgrenciNo);
+        document.append("sinifSeviyesi", sinifSeviyesi);
+
         try {
             collection.insertOne(document);
-            System.out.println("Öğrenci Başarıyla Eklendi ");         }
+           return "Öğrenci Başarıyla Eklendi";       }
         catch (Exception e) {
-            System.out.println("Öğrenci Eklenemedi" + e.getMessage());
+            return "Öğrenci Eklenemedi" + e.getMessage() ;
         }
     }
 

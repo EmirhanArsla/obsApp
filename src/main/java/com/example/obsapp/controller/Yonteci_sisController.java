@@ -29,6 +29,9 @@ public class Yonteci_sisController {
     @FXML
     private Label durumMesajLabel;
 
+    @FXML
+    private TextField txtSinif;
+
 
     private OgrenciDao ogrenciDao;
 
@@ -48,20 +51,25 @@ public class Yonteci_sisController {
         String soyad = txtSoyad.getText();
         String tc = txtTc.getText();
         String ogrenciNo = txtOgrenciNo.getText();
+        int sinifSeviyesi =Integer.parseInt(txtSinif.getText());
 
-        if (ad.isEmpty() || soyad.isEmpty() || tc.isEmpty() || ogrenciNo.isEmpty()) {
+        if (ad.isEmpty() || soyad.isEmpty() || tc.isEmpty() || ogrenciNo.isEmpty() || sinifSeviyesi == 0) {
             durumMesajLabel.setText("Lütfen tüm alanları doldurun!");
             return;
         }
 
         try {
-            ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo);
-            durumMesajLabel.setText("Öğrenci başarıyla eklendi!");
+
+            ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo,sinifSeviyesi);
+
+            String sonuc = ogrenciDao.ogrenciAdd(ad,soyad,tc,ogrenciNo,sinifSeviyesi);
+            durumMesajLabel.setText(sonuc);
 
             txtAd.clear();
             txtSoyad.clear();
             txtTc.clear();
             txtOgrenciNo.clear();
+            txtSinif.clear();
 
         } catch (Exception e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
