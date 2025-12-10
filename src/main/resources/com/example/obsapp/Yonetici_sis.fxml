@@ -16,23 +16,23 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="ekleButton" layoutX="88.0" layoutY="192.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
-                        <Label layoutX="33.0" layoutY="26.0" text="AD" textFill="WHITE">
+                        <Button fx:id="ekleButton" layoutX="93.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
+                        <Label layoutX="29.0" layoutY="30.0" text="AD" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="34.0" layoutY="64.0" text="SoyAd" textFill="WHITE">
+                        <Label layoutX="23.0" layoutY="65.0" text="SoyAd" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="34.0" layoutY="93.0" prefHeight="20.0" prefWidth="39.0" text="T.C" textFill="WHITE">
+                        <Label layoutX="33.0" layoutY="96.0" prefHeight="20.0" prefWidth="39.0" text="T.C" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="33.0" layoutY="128.0" text="Öğrenci No" textFill="WHITE">
+                        <Label layoutX="27.0" layoutY="131.0" text="Öğrenci No" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -46,6 +46,12 @@
                         <TextField fx:id="txtSoyad" layoutX="134.0" layoutY="55.0" />
                         <TextField fx:id="txtTc" layoutX="134.0" layoutY="93.0" />
                         <TextField fx:id="txtOgrenciNo" layoutX="134.0" layoutY="128.0" />
+                        <TextField fx:id="txtSinif" layoutX="133.0" layoutY="168.0" />
+                        <Label layoutX="27.0" layoutY="166.0" prefHeight="25.0" prefWidth="91.0" text="Sınınf Seviyesi" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content></Tab>

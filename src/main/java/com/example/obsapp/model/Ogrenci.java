@@ -7,7 +7,7 @@ import java.util.List;
 public class Ogrenci extends Kisi {
 
     private int sinifSeviyesi;
-    private int okulNo;
+    private int ogrenciNo;
 
     // Sadece yazılı1 ve yazılı2
     private int[] notlar = new int[2];   // [0] = yazılı1, [1] = yazılı2
@@ -16,17 +16,17 @@ public class Ogrenci extends Kisi {
 
     // -------------------- CONSTRUCTORLAR --------------------
 
-    public Ogrenci(String ad, String soyad, int sinifSeviyesi, int okulNo) {
+    public Ogrenci(String ad, String soyad, int sinifSeviyesi, int ogrenciNo) {
         super(ad, soyad);
         setSinifSeviyesi(sinifSeviyesi);
-        this.okulNo = okulNo;
+        this.ogrenciNo = ogrenciNo;
         this.aldigiDersler = new ArrayList<>();
     }
 
-    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, int okulNo) {
+    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, int ogrenciNo) {
         super(id, ad, soyad);
         setSinifSeviyesi(sinifSeviyesi);
-        this.okulNo = okulNo;
+        this.ogrenciNo = ogrenciNo;
         this.aldigiDersler = new ArrayList<>();
     }
 
@@ -34,7 +34,7 @@ public class Ogrenci extends Kisi {
                    int okulNo, LocalDate kayitTarihi) {
         super(id, ad, soyad, kayitTarihi);
         setSinifSeviyesi(sinifSeviyesi);
-        this.okulNo = okulNo;
+        this.ogrenciNo = ogrenciNo;
         this.aldigiDersler = new ArrayList<>();
     }
 
@@ -48,9 +48,9 @@ public class Ogrenci extends Kisi {
         this.sinifSeviyesi = sinifSeviyesi;
     }
 
-    public int getOkulNo() { return okulNo; }
+    public int getOkulNo() { return ogrenciNo ; }
 
-    public void setOkulNo(int okulNo) { this.okulNo = okulNo; }
+    public void setOkulNo(int okulNo) { this.ogrenciNo = ogrenciNo; }
 
     public int[] getNotlar() { return notlar; }
 
@@ -76,7 +76,7 @@ public class Ogrenci extends Kisi {
     public void bilgileriYazdir() {
         System.out.println("===== ÖĞRENCİ BİLGİLERİ =====");
         System.out.println("Ad Soyad     : " + ad + " " + soyad);
-        System.out.println("Okul No      : " + okulNo);
+        System.out.println("Okul No      : " +ogrenciNo );
         System.out.println("Sınıf        : " + sinifSeviyesi);
         System.out.println("Kayıt Tarihi : " + getKayitTarihiFormatted());
         System.out.println("Aldığı Ders  : " + aldigiDersler.size());
