@@ -4,12 +4,13 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 
 public class DBUtil {
 
 
-    private final static String ConnetingString ="mongodb+srv://Emirhan:<4002.Emir78>@emirhanarslan.7yqfsqr.mongodb.net/?appName=EmirhanArslan";
+    private final static String ConnetingString ="mongodb+srv://Emirhan:4002.Emir78@emirhanarslan.7yqfsqr.mongodb.net/?retryWrites=true&w=majority&appName=EmirhanArslan";
     private static MongoClient mongoClient;
     private static MongoDatabase datebase;
     private static DBUtil instance;
@@ -19,6 +20,7 @@ public class DBUtil {
         try {
             // Bağlantı dizesini kullanarak istemci ( nesnesini oluştur
             mongoClient = MongoClients.create(ConnetingString);
+            mongoClient.getDatabase("admin").runCommand(new Document("ping", 1)) ;//
             System.out.println("MongoDB bağlantısı başarılı.");
 
         } catch (Exception e) {
@@ -45,6 +47,6 @@ public class DBUtil {
         if (mongoClient != null) {
             mongoClient.close();
         }
-        }
+    }
 
 }
