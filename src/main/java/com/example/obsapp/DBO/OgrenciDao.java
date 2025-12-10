@@ -5,7 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 public class OgrenciDao {
-    private MongoCollection<Document> collection;
+    private final MongoCollection<Document> collection;
 
 
     public OgrenciDao() {

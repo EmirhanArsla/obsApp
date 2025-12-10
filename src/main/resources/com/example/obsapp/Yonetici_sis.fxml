@@ -16,7 +16,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="88.0" layoutY="192.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
+                        <Button fx:id="ekleButton" layoutX="88.0" layoutY="192.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
                         <Label layoutX="33.0" layoutY="26.0" text="AD" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
@@ -42,10 +42,10 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="134.0" layoutY="16.0" />
-                        <TextField layoutX="134.0" layoutY="55.0" />
-                        <TextField layoutX="134.0" layoutY="93.0" />
-                        <TextField layoutX="134.0" layoutY="128.0" />
+                        <TextField fx:id="txtAd" layoutX="134.0" layoutY="16.0" />
+                        <TextField fx:id="txtSoyad" layoutX="134.0" layoutY="55.0" />
+                        <TextField fx:id="txtTc" layoutX="134.0" layoutY="93.0" />
+                        <TextField fx:id="txtOgrenciNo" layoutX="134.0" layoutY="128.0" />
                      </children>
                   </AnchorPane>
                </content></Tab>
