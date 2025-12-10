@@ -7,7 +7,7 @@ import java.util.List;
 public class Ogrenci extends Kisi {
 
     private int sinifSeviyesi;
-    private int ogrenciNo;
+    private String ogrenciNo;
 
     // Sadece yazılı1 ve yazılı2
     private int[] notlar = new int[2];   // [0] = yazılı1, [1] = yazılı2
@@ -16,14 +16,8 @@ public class Ogrenci extends Kisi {
 
     // -------------------- CONSTRUCTORLAR --------------------
 
-    public Ogrenci(String ad, String soyad, int sinifSeviyesi, int ogrenciNo) {
-        super(ad, soyad);
-        setSinifSeviyesi(sinifSeviyesi);
-        this.ogrenciNo = ogrenciNo;
-        this.aldigiDersler = new ArrayList<>();
-    }
 
-    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, int ogrenciNo) {
+    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, String ogrenciNo) {
         super(id, ad, soyad);
         setSinifSeviyesi(sinifSeviyesi);
         this.ogrenciNo = ogrenciNo;
@@ -48,7 +42,7 @@ public class Ogrenci extends Kisi {
         this.sinifSeviyesi = sinifSeviyesi;
     }
 
-    public int getOkulNo() { return ogrenciNo ; }
+    public String getOgrenciNo() { return ogrenciNo ; }
 
     public void setOkulNo(int okulNo) { this.ogrenciNo = ogrenciNo; }
 

@@ -1,4 +1,5 @@
 package com.example.obsapp.DBO;
+import com.example.obsapp.model.Ogrenci;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -18,10 +19,10 @@ public class OgrenciDao {
 
     }
 
-    public String ogrenciAdd(String ad, String SoyAd , String tc , String OgrenciNo , int sinifSeviyesi) {
+    public String ogrenciAdd(Ogrenci ogrenci) {
         Document filtre= new Document("$or", Arrays.asList(
-                new Document("tc",tc),
-                new Document("OgrenciNo",OgrenciNo)
+                new Document("tc",ogrenci.getId()),
+                new Document("OgrenciNo",ogrenci.getOgrenciNo())
         ));
 
         Document hata = collection.find(filtre).first();
@@ -31,11 +32,11 @@ public class OgrenciDao {
         }
 
         Document document = new Document();
-        document.append("ad", ad);
-        document.append("soyAd", SoyAd);
-        document.append("tc", tc);
-        document.append("OgrenciNo", OgrenciNo);
-        document.append("sinifSeviyesi", sinifSeviyesi);
+        document.append("ad", ogrenci.getAd());
+        document.append("soyAd", ogrenci.getSoyad());
+        document.append("tc", ogrenci.getId());
+        document.append("OgrenciNo", ogrenci.getOgrenciNo());
+        document.append("sinifSeviyesi", ogrenci.getSinifSeviyesi());
 
         try {
             collection.insertOne(document);

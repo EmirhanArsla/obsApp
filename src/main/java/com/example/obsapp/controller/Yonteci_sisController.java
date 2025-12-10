@@ -1,5 +1,6 @@
 package com.example.obsapp.controller;
 import com.example.obsapp.DBO.OgrenciDao;
+import com.example.obsapp.model.Ogrenci;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -60,16 +61,17 @@ public class Yonteci_sisController {
 
         try {
 
-            ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo,sinifSeviyesi);
+            Ogrenci yeniOgrenci = new Ogrenci(tc,ad,soyad,sinifSeviyesi,ogrenciNo);
+                //ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo,sinifSeviyesi);
 
-            String sonuc = ogrenciDao.ogrenciAdd(ad,soyad,tc,ogrenciNo,sinifSeviyesi);
-            durumMesajLabel.setText(sonuc);
+                String sonuc = ogrenciDao.ogrenciAdd(yeniOgrenci);
+                durumMesajLabel.setText(sonuc);
 
-            txtAd.clear();
-            txtSoyad.clear();
-            txtTc.clear();
-            txtOgrenciNo.clear();
-            txtSinif.clear();
+                txtAd.clear();
+                txtSoyad.clear();
+                txtTc.clear();
+                txtOgrenciNo.clear();
+                txtSinif.clear();
 
         } catch (Exception e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
