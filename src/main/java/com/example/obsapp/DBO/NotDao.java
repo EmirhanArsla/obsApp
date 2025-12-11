@@ -1,5 +1,6 @@
 package com.example.obsapp.DBO;
 
+import com.example.obsapp.model.Not;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -17,14 +18,14 @@ public class NotDao {
 
     }
 
-    public void notadd(int notid , int dersid , String ogrencid , int sinav1 ,int sinav2,int sinif){
+    public void notadd(Not not){
         Document document = new Document();
-        document.append("notid",notid);
-        document.append("dersid",dersid);
-        document.append("ogrencid",ogrencid);
-        document.append("sinav1",sinav1);
-        document.append("sinav2",sinav2);
-        document.append("sinif",sinif);
+        document.append("notid",not.getNotId() );
+        document.append("dersid",not.getDersId());
+        document.append("ogrencid",not.getOgrenciId());
+        document.append("sinav1",not.getSinav1());
+        document.append("sinav2",not.getSinav2());
+        document.append("sinif",not.getSinif());
 
         try {
             collection.insertOne(document);
