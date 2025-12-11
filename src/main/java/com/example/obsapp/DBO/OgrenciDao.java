@@ -8,6 +8,7 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class OgrenciDao {
     private final MongoCollection<Document> collection;
@@ -62,4 +63,10 @@ public class OgrenciDao {
         return collection.find(filitre).first() ;
     }
 
+
+    public List<Document> ogrencisearch2(int sinifSeviyesi){
+        Document filitre = new Document("sinifSeviyesi", sinifSeviyesi);
+        List<Document> documents = new  ArrayList<>();
+        return collection.find(filitre).into(documents) ;
+    }
 }
