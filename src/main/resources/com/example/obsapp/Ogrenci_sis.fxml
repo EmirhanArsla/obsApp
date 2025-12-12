@@ -2,28 +2,45 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Ogrenci_sisController">
+<AnchorPane cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A192D;;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Ogrenci_sisController">
    <children>
       <TabPane fx:id="tabPane" layoutX="10.0" layoutY="16.0" prefHeight="372.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabDersNotu" text="Ders Notu Görüntüle">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="353.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="353.0">
+                     <children>
+                        <TableView layoutX="41.0" layoutY="35.0" prefHeight="200.0" prefWidth="489.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Ders" />
+                            <TableColumn prefWidth="75.0" text="1.Yazılı" />
+                              <TableColumn prefWidth="75.0" text="2.Yazılı" />
+                              <TableColumn prefWidth="75.0" text="Ortalama" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab fx:id="tabGenelOrtalama" text="Genel Ortalama Görüntüle">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="283.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="283.0">
+                     <children>
+                        <TableView layoutX="37.0" layoutY="29.0" prefHeight="280.0" prefWidth="488.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="9.sınıf" />
+                            <TableColumn prefWidth="75.0" text="10.sınıf" />
+                              <TableColumn prefWidth="75.0" text="11.sınıf" />
+                              <TableColumn prefWidth="75.0" text="12.sınıf" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab fx:id="tabSinifOrtalama" text="Sınıf Ortalaması">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-            <Tab fx:id="tabOther" text="Untitled Tab">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
