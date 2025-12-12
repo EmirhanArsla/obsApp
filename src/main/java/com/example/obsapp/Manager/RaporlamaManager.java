@@ -3,6 +3,7 @@ package com.example.obsapp.Manager;
 import com.example.obsapp.DBO.DersDao;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.NotDao;
+import com.example.obsapp.Viewmodel.GnoGorunum;
 import com.example.obsapp.Viewmodel.NotGorunum;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.model.Ogrenci;
@@ -37,10 +38,10 @@ public class RaporlamaManager {
         }
         for (Document not : notlist) {
             String dersId = not.getString("dersId");
-            String OgrenciId = not.getString("OgrenciId");
-            int Sinif = not.getInteger("Sinif");
-            int Sinav1 = not.getInteger("Sinav1");
-            int Sinav2 = not.getInteger("Sinav2");
+            String OgrenciId = not.getString("ogrenciId");
+            int Sinif = not.getInteger("sinif");
+            int Sinav1 = not.getInteger("sinav1");
+            int Sinav2 = not.getInteger("sinav2");
 
             if (Sinif == 0 || Sinav1 == 0 && Sinav2 == 0) {
                 System.out.println("Ders kaydı eksik veri içeriyor (Ders : dersId");
@@ -69,8 +70,8 @@ public class RaporlamaManager {
 
         for (Document not : tumNotKaydi) {
             String dersId = not.getString("dersId");
-            int sinav1 = not.getInteger("Sinav1", 0);
-            int sinav2 = not.getInteger("Sinav2", 0);
+            int sinav1 = not.getInteger("sinav1", 0);
+            int sinav2 = not.getInteger("sinav2", 0);
 
             List<Document> derslistesi = dersDao.dersSearch(dersId);
             Document dersBilgisi = derslistesi.get(0);
@@ -108,8 +109,8 @@ public class RaporlamaManager {
 
         for (Document not : notlist) {
             String dersId = not.getString("dersId");
-            int sinav1 = not.getInteger("Sinav1", 0);
-            int sinav2 = not.getInteger("Sinav2", 0);
+            int sinav1 = not.getInteger("sinav1", 0);
+            int sinav2 = not.getInteger("sinav2", 0);
 
             List<Document> derslistesi = dersDao.dersSearch(dersId);
 
@@ -147,7 +148,7 @@ public class RaporlamaManager {
             return 0.0;
         }
         for (Document ogrenci : ogrenciBilgi) {
-            String OgrenciNo = ogrenci.getString("OgrenciNo");
+            String OgrenciNo = ogrenci.getString("ogrenciNo");
 
             double ogrenciGno= gnoHesapla(OgrenciNo);
 
@@ -161,4 +162,56 @@ public class RaporlamaManager {
         }
         return toplamSinifOrtalama/ogernciSayisi;
     }
+
+    public List<GnoGorunum> tumGnolar(){
+        List<GnoGorunum> gnoRapor = new ArrayList<>(); //Gno'ların çekileceği liste
+        List<Document> tumOgrenciler = ogrenciDao.allOgrenci();
+
+        if (tumOgrenciler == null) {
+            System.out.println("Ogrenci bulunamadi");
+            return gnoRapor;
+        }
+
+        for (Document ogrenci : tumOgrenciler) {
+            String OgrenciNo = ogrenci.getString("ogrenciNo");
+            String ad = ogrenci.getString("ad");
+            String soyad = ogrenci.getString("soyad");
+
+            double gno =gnoHesapla(OgrenciNo);
+
+            GnoGorunum detay = new GnoGorunum(
+                    OgrenciNo,ad,soyad,gno
+            );
+            gnoRapor.add(detay);
+        }
+        return gnoRapor;
+    }
+
+
+    public double dersOrtalama(String dersid) {
+         double toplamDersOrtlama = 0.0;
+         double ogrenciSayisi=0;
+        List<Document> notlar = notDao.allNot(dersid);
+        if (notlar == null) {
+            return 0.0;
+        }
+        for (Document notlar1 : notlar) {
+            String Dersid = notlar1.getString("dersAdi");
+            int sinav1 = notlar1.getInteger("sinav1",0);
+            int sinav2 = notlar1.getInteger("sinav2",0);
+
+            double ortlama=HesaplamaUtil.ortalama(sinav1,sinav2);
+            toplamDersOrtlama+=ortlama;
+            ogrenciSayisi++;
+
+        }
+        if (ogrenciSayisi == 0.0) {
+            return 0.0;
+        }
+        return toplamDersOrtlama/ogrenciSayisi;
+    }
+
+
+
+
 }

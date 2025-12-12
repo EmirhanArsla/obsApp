@@ -1,14 +1,18 @@
 package com.example.obsapp.controller;
 
+import com.example.obsapp.Manager.RaporlamaManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Ogrenci_sisController implements Initializable {
+    private RaporlamaManager roporlamaManager;
+    private String gelen_ogrenciNo;
 
     @FXML
     private TabPane tabPane;
@@ -25,6 +29,9 @@ public class Ogrenci_sisController implements Initializable {
     @FXML
     private Tab tabOther; // "Untitled Tab"
 
+    public void setOgrenciNo(String ogrenciNo) {
+            this.gelen_ogrenciNo =ogrenciNo;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
