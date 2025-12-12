@@ -52,5 +52,11 @@ public class NotDao {
         List<Document> notlist= new ArrayList<>();
         return collection.find(filitre).into(notlist);
     }
+
+    public List<Document> allNot(String dersid) {
+        Document filitre = new Document("dersid",dersid);
+        List<Document> notlist= new ArrayList<>();
+        return collection.find(filitre).into(notlist);
+    }
 }
 

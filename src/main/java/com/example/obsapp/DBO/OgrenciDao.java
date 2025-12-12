@@ -36,7 +36,7 @@ public class OgrenciDao {
         document.append("ad", ogrenci.getAd());
         document.append("soyAd", ogrenci.getSoyad());
         document.append("tc", ogrenci.getId());
-        document.append("OgrenciNo", ogrenci.getOgrenciNo());
+        document.append("ogrenciNo", ogrenci.getOgrenciNo());
         document.append("sinifSeviyesi", ogrenci.getSinifSeviyesi());
 
         try {
@@ -58,6 +58,7 @@ public class OgrenciDao {
         }
     }
 
+
     public Document ogrencisearch(String tc){
         Document filitre = new Document("tc", tc);
         return collection.find(filitre).first() ;
@@ -68,5 +69,17 @@ public class OgrenciDao {
         Document filitre = new Document("sinifSeviyesi", sinifSeviyesi);
         List<Document> documents = new  ArrayList<>();
         return collection.find(filitre).into(documents) ;
+    }
+
+    public List<Document> allOgrenci(){
+        ArrayList<Document> documents = new ArrayList<>();
+        collection.find().into(documents) ;
+        return documents;
+    }
+
+    public Document girisKontrol(String ogrenciNo , String tc){
+        Document filtre = new Document("ogrenciNo", ogrenciNo)
+                .append("tc", tc);
+        return collection.find(filtre).first() ;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.obsapp.controller;
 
+import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.repository.YoneticiRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +10,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
+import org.bson.Document;
 
 public class LoginController {
-
+    private OgrenciDao ogrenciDao ;
     // ============================
     // FXML BİLEŞENLERİ
     // ============================
@@ -29,6 +31,7 @@ public class LoginController {
 
     @FXML
     private Label hataMesaji;  // Hata mesajını ekranda gösterecek label
+
 
 
     // ============================
@@ -60,9 +63,14 @@ public class LoginController {
         String user = ogrenciKullanici.getText();
         String pass = ogrenciSifre.getText();
 
-        if (user.equals("ogrenci") && pass.equals("0000")) {
+        Document kontrol = ogrenciDao.girisKontrol(user, pass);
+
+        if (kontrol != null) {
             hataMesaji.setText(""); // hata mesajını temizle
-            loadPage("/com/example/obsapp/Ogrenci_sis.fxml", "Öğrenci Paneli");
+
+           FXMLLoader loader = loadPage("/com/example/obsapp/Ogrenci_sis.fxml", "Öğrenci Paneli");
+            Ogrenci_sisController ogrenci_sis = new Ogrenci_sisController();
+            ogrenci_sis.setOgrenciNo(user);
         } else {
             hataMesaji.setText("Hatalı öğrenci girişi!");
         }
@@ -72,10 +80,10 @@ public class LoginController {
     // ============================
     // SAYFA YÜKLEYİCİ
     // ============================
-    private void loadPage(String fxmlPath, String title) {
+    private FXMLLoader loadPage(String fxmlPath, String title) {
+        FXMLLoader loader = new  FXMLLoader(getClass().getResource(fxmlPath));
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-
+            Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(new Scene(root));
@@ -84,10 +92,12 @@ public class LoginController {
             // giriş ekranını kapat
             Stage loginStage = (Stage) yoneticiKullanici.getScene().getWindow();
             loginStage.close();
-
         } catch (Exception e) {
             e.printStackTrace();
             hataMesaji.setText("Sayfa yüklenirken hata oluştu!");
+
         }
+        return loader;
+
     }
 }
