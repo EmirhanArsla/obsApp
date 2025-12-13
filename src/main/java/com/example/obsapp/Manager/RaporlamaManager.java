@@ -87,7 +87,7 @@ public class RaporlamaManager {
                 double dersOrtalama = HesaplamaUtil.ortalama(sinav1, sinav2);
 
                 OrtalamaGorunum detay = new OrtalamaGorunum(
-                        dersId, dersAdi, dersOrtalama, kredi
+                         sinav1,dersAdi,dersOrtalama,sinav2
                 );
 
                 ortlama.add(detay);

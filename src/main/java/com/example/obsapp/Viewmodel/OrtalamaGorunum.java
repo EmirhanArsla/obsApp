@@ -5,32 +5,32 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class OrtalamaGorunum {
-    private final SimpleStringProperty DersId;
-    private final SimpleStringProperty DersAdi;
-    private final SimpleDoubleProperty Ortalama;
-    private final SimpleIntegerProperty Kredi;
+    private final SimpleStringProperty dersAdi;
+    private final SimpleIntegerProperty sinav1;
+    private final SimpleIntegerProperty sinav2;
+    private final SimpleDoubleProperty ortalama;
 
-    public OrtalamaGorunum (String dersid,String dersAd ,double Ortalama ,int Kredi){
-        this.DersId = new SimpleStringProperty(dersid);
-        this.Ortalama = new SimpleDoubleProperty(Ortalama);
-        this.Kredi = new SimpleIntegerProperty(Kredi);
-        this.DersAdi = new SimpleStringProperty(dersAd);
+    public OrtalamaGorunum (int sinav1 ,String dersAd ,double ortalama ,int sinav2){
+        this.sinav1 = new SimpleIntegerProperty(sinav1);
+        this.ortalama = new SimpleDoubleProperty(ortalama);
+        this.sinav2= new SimpleIntegerProperty(sinav2);
+        this.dersAdi = new SimpleStringProperty(dersAd);
 
     }
 
-    public SimpleStringProperty getDersId() {
-        return DersId;
+    public SimpleIntegerProperty getDersId() {
+        return sinav1;
     }
 
     public SimpleDoubleProperty getOrtalama() {
-        return Ortalama;
+        return ortalama;
     }
 
     public SimpleIntegerProperty getKredi() {
-        return Kredi;
+        return sinav2;
     }
 
-    public SimpleStringProperty getDersAdi() {return DersAdi;
+    public SimpleStringProperty getDersAdi() {return dersAdi;
     }
 
 }
