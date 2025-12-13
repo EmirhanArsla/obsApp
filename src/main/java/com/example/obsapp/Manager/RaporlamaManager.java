@@ -7,7 +7,9 @@ import com.example.obsapp.Viewmodel.GnoGorunum;
 import com.example.obsapp.Viewmodel.NotGorunum;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.model.Ogrenci;
+import com.example.obsapp.util.DBUtil;
 import com.example.obsapp.util.HesaplamaUtil;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import javax.print.Doc;
@@ -15,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaporlamaManager {
-    private final OgrenciDao ogrenciDao = new OgrenciDao();
+    MongoDatabase database = DBUtil.getInstance().getDatabase();
+    private final OgrenciDao ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
     private final NotDao notDao = new NotDao();
     private final DersDao dersDao = new DersDao();
 

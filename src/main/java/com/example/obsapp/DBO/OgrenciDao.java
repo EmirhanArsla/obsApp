@@ -14,7 +14,7 @@ public class OgrenciDao {
     private final MongoCollection<Document> collection;
 
 
-    public OgrenciDao() {
+    public OgrenciDao(MongoCollection<Document> database) {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
         this.collection = Db.getCollection("Ogrenciler");
 
