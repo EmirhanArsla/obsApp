@@ -14,12 +14,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="353.0">
                      <children>
-                        <TableView layoutX="41.0" layoutY="35.0" prefHeight="200.0" prefWidth="489.0">
+                        <TableView fx:id="dersNotuTablo" layoutX="41.0" layoutY="35.0" prefHeight="236.0" prefWidth="489.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Ders" />
-                            <TableColumn prefWidth="75.0" text="1.Yazılı" />
-                              <TableColumn prefWidth="75.0" text="2.Yazılı" />
-                              <TableColumn prefWidth="75.0" text="Ortalama" />
+                            <TableColumn fx:id="dersSutun" prefWidth="75.0" text="Ders" />
+                              <TableColumn fx:id="ogrenciNoSutun" prefWidth="75.0" text="Öğrenci NO" />
+                              <TableColumn fx:id="SinifSutun" prefWidth="75.0" text="Sınıf" />
+                            <TableColumn fx:id="sinav1Sutun" prefWidth="75.0" text="1.Yazılı" />
+                              <TableColumn fx:id="sinav2Sutun" prefWidth="75.0" text="2.Yazılı" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>

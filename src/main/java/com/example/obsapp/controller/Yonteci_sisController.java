@@ -1,6 +1,8 @@
 package com.example.obsapp.controller;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.model.Ogrenci;
+import com.example.obsapp.util.DBUtil;
+import com.mongodb.client.MongoDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -136,11 +138,14 @@ public class Yonteci_sisController {
 
     public Yonteci_sisController() {
         // DAO sınıfını burada initialize ederiz
-        ogrenciDao = new OgrenciDao();
+
     }
 
     @FXML
     public void initialize() {
+        MongoDatabase database = DBUtil.getInstance().getDatabase();
+        ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
+
         ekleButton.setOnAction(event -> ogrenciEkle());
     }
 

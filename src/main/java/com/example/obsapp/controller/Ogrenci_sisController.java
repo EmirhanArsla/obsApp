@@ -1,14 +1,21 @@
 package com.example.obsapp.controller;
 
 import com.example.obsapp.Manager.RaporlamaManager;
+import com.example.obsapp.Viewmodel.NotGorunum;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class Ogrenci_sisController implements Initializable {
     private RaporlamaManager roporlamaManager;
@@ -27,39 +34,60 @@ public class Ogrenci_sisController implements Initializable {
     private Tab tabSinifOrtalama;  // "Sınıf Ortalaması"
 
     @FXML
-    private Tab tabOther; // "Untitled Tab"
+    private TableView<NotGorunum> dersNotuTablo;
+    @FXML
+    private TableColumn<NotGorunum,String> dersSutun ;
+    @FXML
+    private TableColumn<NotGorunum,String> ogrenciNoSutun;
+    @FXML
+    private TableColumn<NotGorunum,Integer> SinifSutun;
+    @FXML
+    private TableColumn<NotGorunum,Integer> sinav1Sutun;
+    @FXML
+    private TableColumn<NotGorunum,Integer> sinav2Sutun;
 
     public void setOgrenciNo(String ogrenciNo) {
             this.gelen_ogrenciNo =ogrenciNo;
+          //  loadOgrenciBilgiler();
     }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         // Tab değişim dinleyicisi
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
 
             if (newTab == tabDersNotu) {
                 loadDersNotlari();
-            }
-            else if (newTab == tabGenelOrtalama) {
+            } else if (newTab == tabGenelOrtalama) {
                 loadGenelOrtalama();
-            }
-            else if (newTab == tabSinifOrtalama) {
+            } else if (newTab == tabSinifOrtalama) {
                 loadSinifOrtalamasi();
             }
-            else if (newTab == tabOther) {
-                loadOtherTab();
-            }
         });
+
+
+        //1.Tab'ın Sutunları ile Değerler eşleşmesi yapıldı
+
+        dersSutun.setCellValueFactory(new PropertyValueFactory<>("dersId"));
+        ogrenciNoSutun.setCellValueFactory(new PropertyValueFactory<>("ogrenciId"));
+        SinifSutun.setCellValueFactory(new PropertyValueFactory<>("sinif"));
+        sinav1Sutun.setCellValueFactory(new PropertyValueFactory<>("sinav1"));
+        sinav2Sutun.setCellValueFactory(new PropertyValueFactory<>("sinav2"));
+
+
     }
-
-    // ===========================
-    // TAB FONKSİYONLARI
-    // ===========================
-
     private void loadDersNotlari() {
         System.out.println("➤ Ders notları sekmesi açıldı.");
-        // Burada öğrenci notları MongoDB'den yüklenebilir
+        if (gelen_ogrenciNo == null) {
+            List<NotGorunum> notlarList = roporlamaManager.notGoruntule(gelen_ogrenciNo);
+
+            dersNotuTablo.setItems(FXCollections.observableArrayList(notlarList));
+        }
+        else {
+            System.err.println("Öğrenci Numarası Bulunamadi.");
+        }
     }
 
     private void loadGenelOrtalama() {
@@ -72,7 +100,4 @@ public class Ogrenci_sisController implements Initializable {
         // Sınıf listesi üzerinden ortalama hesaplanabilir
     }
 
-    private void loadOtherTab() {
-        System.out.println("➤ Diğer sekme açıldı.");
-    }
 }
