@@ -1,11 +1,20 @@
 package com.example.obsapp.controller;
+import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
+import com.example.obsapp.DBO.OgretmenDao;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
+import com.example.obsapp.model.DersBase;
+import com.example.obsapp.model.Not;
 import com.example.obsapp.model.Ogrenci;
+import com.example.obsapp.model.Ogretmen;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import org.bson.Document;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -80,12 +89,16 @@ public class Yonteci_sisController {
 
     @FXML
     private Label labelDurumOgrenciAra;
-    @FXML private TableColumn<Ogrenci, String> kolonAraIsim;
-    @FXML private TableColumn<Ogrenci, String> kolonAraSoyisim;
-    @FXML private TableColumn<Ogrenci, String> kolonAraTc;
-    @FXML private TableColumn<Ogrenci, LocalDate> kolonAraKayittarihi;
-    @FXML private TableColumn<Ogrenci, String> kolonAraSinif;
-
+    @FXML
+    private TableColumn<Ogrenci, String> kolonAraIsim;
+    @FXML
+    private TableColumn<Ogrenci, String> kolonAraSoyisim;
+    @FXML
+    private TableColumn<Ogrenci, String> kolonAraTc;
+    @FXML
+    private TableColumn<Ogrenci, LocalDate> kolonAraKayittarihi;
+    @FXML
+    private TableColumn<Ogrenci, String> kolonAraSinif;
 
 
     // ============================
@@ -101,12 +114,14 @@ public class Yonteci_sisController {
     private TextField textFieldYazili1;
 
     @FXML
-    private TextField TextfieldYazili2;
+    private TextField textFieldyazili2;
 
     @FXML
     private Button buttonNotEkle;
     @FXML
     private Label labelDurumDersNot;
+    @FXML
+    private TextField notEkleSinif;
 
     // ============================
     // DERS NOTU GÖRÜNTÜLE
@@ -116,11 +131,16 @@ public class Yonteci_sisController {
 
     @FXML
     private TableView<OrtalamaGorunum> tableViewDersNotG;
-    @FXML private TableColumn<OrtalamaGorunum, String> kolonDersadi;
-    @FXML private TableColumn<OrtalamaGorunum, Integer> kolonYazili1;
-    @FXML private TableColumn<OrtalamaGorunum, Integer> kolonYazili2;
-    @FXML private TableColumn<OrtalamaGorunum, Double> kolonOrtalama;
-    @FXML private Label labelDersNotuG;
+    @FXML
+    private TableColumn<OrtalamaGorunum, String> kolonDersadi;
+    @FXML
+    private TableColumn<OrtalamaGorunum, Integer> kolonYazili1;
+    @FXML
+    private TableColumn<OrtalamaGorunum, Integer> kolonYazili2;
+    @FXML
+    private TableColumn<OrtalamaGorunum, Double> kolonOrtalama;
+    @FXML
+    private Label labelDersNotuG;
 
 
     @FXML
@@ -153,6 +173,8 @@ public class Yonteci_sisController {
     private Label labeldurumMesajiOgret;
 
     private OgrenciDao ogrenciDao;
+    private NotDao notDao;
+    private OgretmenDao ogretmenDao;
 
     public Yonteci_sisController() {
         // DAO sınıfını burada initialize ederiz
@@ -163,8 +185,95 @@ public class Yonteci_sisController {
     public void initialize() {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
+        notDao = new NotDao(database.getCollection("Notlar"));
+        ogretmenDao = new OgretmenDao(database.getCollection("Ogretmen"));
 
         ekleButton.setOnAction(event -> ogrenciEkle());
+        OgrenciSilButton.setOnAction(e -> ogrenciSil());
+        buttonOgrenciAra.setOnAction(e-> ogrenciAra());
+        buttonNotEkle.setOnAction(e->notEkle());
+        buttonogretmenEkle.setOnAction(e->ogretmenEkle());
+
+    }
+
+    private void ogretmenEkle() {
+        String isim = textfFieldOgretIsim.getText();
+        String soyisim = textfieldOgretSoyisim.getText();
+        String tc = textfleldOgretTc.getText();
+        String bransh = textFieldOgretBrans.getText();
+        String dersid =  TextFieldogretDersID.getText();
+        LocalDate ogretmenKayitTarihi = ogretKayitTarihi.getValue();
+
+        if (isim.isEmpty() || soyisim.isEmpty() || tc.isEmpty() || bransh.isEmpty() || dersid.isEmpty() ){
+            labeldurumMesajiOgret.setText("Lütfen tüm alanları doldurun!");
+            return;
+        }
+        try{
+            Ogretmen ogretmen = new Ogretmen(tc,isim,soyisim,bransh,ogretmenKayitTarihi);
+
+            ogretmenDao.ogretmenAdd(ogretmen);
+
+
+
+        }
+        catch (Exception e ){
+            labeldurumMesajiOgret.setText
+                    ("Hata oluştu: " + e.getMessage());
+        }
+    }
+
+    private void notEkle() {
+        String tc = textFieldOgrenciTcDersEKle.getText();
+        String dersad = textFieldDersİDekle.getText();
+        int sinif =Integer.parseInt(notEkleSinif.getText());
+        int sinav1=Integer.parseInt(textFieldYazili1.getText());
+        int sinav2=Integer.parseInt(textFieldyazili2.getText());
+        if (tc.isEmpty()||dersad.isEmpty()||sinif==0||sinav2==0||sinav1==0){
+            labelDurumDersNot.setText("Lütfen Tüm Alanları Doldurunuz");
+            return;
+        }
+        try{
+            Not yeninot = new Not(tc,dersad,sinav1,sinav2,sinif);
+            notDao.notadd(yeninot);
+
+        }
+        catch (Exception e) {
+            labelDurumDersNot.setText
+            ("Hata oluştu: " + e.getMessage());
+        }
+
+    }
+
+    private void ogrenciAra() {
+        String tc = textFieldOgrenciAraTC.getText();
+        if(tc.isEmpty()){
+            labelDurumOgrenciAra.setText("Lütfen Alanı Doldurunuz");
+            return;
+        }
+        try{
+            Document doc = ogrenciDao.ogrencisearch(tc);
+            textFieldOgrenciAraTC.clear();
+
+
+        }catch (Exception e){
+            labelDurumOgrenciAra.setText("Hata oluştu: " + e.getMessage());
+        }
+
+    }
+
+    private void ogrenciSil() {
+        String tc = tcsilTextField.getText();
+        if(tc.isEmpty()){
+            durumMesajLabel.setText("Lütfen tüm alanları doldurun!");
+            return;
+        }
+        try{
+            ogrenciDao.ogrenciDelete(tc);
+            tcsilTextField.clear();
+        }
+        catch (Exception e){
+            durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
+        }
     }
 
     private void ogrenciEkle() {
@@ -174,7 +283,7 @@ public class Yonteci_sisController {
         String soyad = txtSoyad.getText();
         String tc = txtTc.getText();
         String ogrenciNo = txtOgrenciNo.getText();
-        int sinifSeviyesi =Integer.parseInt(txtSinif.getText());
+        int sinifSeviyesi = Integer.parseInt(txtSinif.getText());
         LocalDate kayitTarihiOgrenciLocalDate = kayitTarihiOgrenci.getValue();
 
         if (ad.isEmpty() || soyad.isEmpty() || tc.isEmpty() || ogrenciNo.isEmpty() || sinifSeviyesi == 0) {
@@ -184,18 +293,18 @@ public class Yonteci_sisController {
 
         try {
 
-            Ogrenci yeniOgrenci = new Ogrenci(tc,ad,soyad,sinifSeviyesi,ogrenciNo,kayitTarihiOgrenciLocalDate);
-                //ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo,sinifSeviyesi);
+            Ogrenci yeniOgrenci = new Ogrenci(tc, ad, soyad, sinifSeviyesi, ogrenciNo, kayitTarihiOgrenciLocalDate);
+            //ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo,sinifSeviyesi);
 
-                String sonuc = ogrenciDao.ogrenciAdd(yeniOgrenci);
-                durumMesajLabel.setText(sonuc);
+            String sonuc = ogrenciDao.ogrenciAdd(yeniOgrenci);
+            durumMesajLabel.setText(sonuc);
 
-                txtAd.clear();
-                txtSoyad.clear();
-                txtTc.clear();
-                txtOgrenciNo.clear();
-                txtSinif.clear();
-                kayitTarihiOgrenci.setValue(null);
+            txtAd.clear();
+            txtSoyad.clear();
+            txtTc.clear();
+            txtOgrenciNo.clear();
+            txtSinif.clear();
+            kayitTarihiOgrenci.setValue(null);
 
         } catch (Exception e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
@@ -203,5 +312,7 @@ public class Yonteci_sisController {
 
     }
 }
+
+
 
 

@@ -64,6 +64,7 @@ public class OgrenciDao {
     public Document ogrencisearch(String tc){
         Document filitre = new Document("tc", tc);
         return collection.find(filitre).first() ;
+
     }
 
 
