@@ -25,6 +25,7 @@ public class Ogretmen extends Kisi {
     public Ogretmen(String id, String ad, String soyad, String brans, LocalDate kayitTarihi) {
         super(id, ad, soyad, kayitTarihi);
         setBrans(brans);
+
     }
 
     // ====================== GETTER - SETTER ======================

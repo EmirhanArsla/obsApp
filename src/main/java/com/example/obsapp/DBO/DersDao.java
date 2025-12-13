@@ -14,7 +14,7 @@ public class DersDao {
 
     public DersDao() {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
-        this.collection = database.getCollection("Ders");
+        this.collection = database.getCollection("Dersler");
     }
 
     public List<Document> dersSearch (String dersid ){

@@ -19,7 +19,7 @@ import java.util.List;
 public class RaporlamaManager {
     MongoDatabase database = DBUtil.getInstance().getDatabase();
     private final OgrenciDao ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
-    private final NotDao notDao = new NotDao();
+    private final NotDao notDao = new NotDao(database.getCollection("Notlar"));
     private final DersDao dersDao = new DersDao();
 
     //Notları çekebilmek ve Tabloda görüntülemek için kullanabilceğimiz fonksiyon

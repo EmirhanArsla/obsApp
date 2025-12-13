@@ -12,7 +12,7 @@ import java.util.List;
 public class NotDao {
     private MongoCollection<Document> collection;
 
-    public NotDao() {
+    public NotDao(MongoCollection<Document> database) {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
         this.collection = Db.getCollection("Notlar");
 
@@ -26,6 +26,7 @@ public class NotDao {
         document.append("sinav1",not.getSinav1());
         document.append("sinav2",not.getSinav2());
         document.append("sinif",not.getSinif());
+        document.append("dersad",not.getDersad());
 
         try {
             collection.insertOne(document);
