@@ -2,6 +2,7 @@ package com.example.obsapp.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Ogrenci extends Kisi {
@@ -17,16 +18,8 @@ public class Ogrenci extends Kisi {
     // -------------------- CONSTRUCTORLAR --------------------
 
 
-    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, String ogrenciNo) {
-        super(id, ad, soyad);
-        setSinifSeviyesi(sinifSeviyesi);
-        this.ogrenciNo = ogrenciNo;
-        this.aldigiDersler = new ArrayList<>();
-    }
-
-    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi,
-                   int okulNo, LocalDate kayitTarihi) {
-        super(id, ad, soyad, kayitTarihi);
+    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, String ogrenciNo , LocalDate kayitTarihi) {
+        super(id, ad, soyad,kayitTarihi);
         setSinifSeviyesi(sinifSeviyesi);
         this.ogrenciNo = ogrenciNo;
         this.aldigiDersler = new ArrayList<>();

@@ -5,10 +5,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.time.ZoneId;
+import java.util.*;
 
 public class OgrenciDao {
     private final MongoCollection<Document> collection;
@@ -32,12 +30,15 @@ public class OgrenciDao {
             return mesaj;
         }
 
+        Date dbDate =Date.from(ogrenci.getKayitTarihi().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         Document document = new Document();
         document.append("ad", ogrenci.getAd());
         document.append("soyAd", ogrenci.getSoyad());
         document.append("tc", ogrenci.getId());
         document.append("ogrenciNo", ogrenci.getOgrenciNo());
         document.append("sinifSeviyesi", ogrenci.getSinifSeviyesi());
+        document.append("kayitTarihi",dbDate);
 
 
         try {
