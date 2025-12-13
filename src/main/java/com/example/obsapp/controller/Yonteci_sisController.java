@@ -1,10 +1,15 @@
 package com.example.obsapp.controller;
 import com.example.obsapp.DBO.OgrenciDao;
+import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.model.Ogrenci;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class Yonteci_sisController {
     @FXML
@@ -47,7 +52,7 @@ public class Yonteci_sisController {
     private TextField txtSinif;
 
     @FXML
-    private DatePicker KayitTarihiOgrenci;
+    private DatePicker kayitTarihiOgrenci;
 
     @FXML
     private Button ekleButton;
@@ -71,10 +76,17 @@ public class Yonteci_sisController {
     private Button buttonOgrenciAra;
 
     @FXML
-    private TableView<?> tableViewOgrenciBilgileri;
+    private TableView<Ogrenci> tableViewOgrenciBilgileri;
 
     @FXML
     private Label labelDurumOgrenciAra;
+    @FXML private TableColumn<Ogrenci, String> kolonAraIsim;
+    @FXML private TableColumn<Ogrenci, String> kolonAraSoyisim;
+    @FXML private TableColumn<Ogrenci, String> kolonAraTc;
+    @FXML private TableColumn<Ogrenci, LocalDate> kolonAraKayittarihi;
+    @FXML private TableColumn<Ogrenci, String> kolonAraSinif;
+
+
 
     // ============================
     // DERS NOTU EKLE
@@ -103,16 +115,22 @@ public class Yonteci_sisController {
     private TextField textFieldTcNotG;
 
     @FXML
-    private TableView<?> tableViewDersNotG;
+    private TableView<OrtalamaGorunum> tableViewDersNotG;
+    @FXML private TableColumn<OrtalamaGorunum, String> kolonDersadi;
+    @FXML private TableColumn<OrtalamaGorunum, Integer> kolonYazili1;
+    @FXML private TableColumn<OrtalamaGorunum, Integer> kolonYazili2;
+    @FXML private TableColumn<OrtalamaGorunum, Double> kolonOrtalama;
+    @FXML private Label labelDersNotuG;
+
 
     @FXML
-    private Label labelDersNotuG;
+    private Label labelDersNotDurum;
 
     // ============================
     // ÖĞRETMEN EKLE
     // ============================
     @FXML
-    private TextField textfFieldOgretIsım;
+    private TextField textfFieldOgretIsim;
 
     @FXML
     private TextField textfieldOgretSoyisim;
@@ -151,11 +169,13 @@ public class Yonteci_sisController {
 
     private void ogrenciEkle() {
 
+
         String ad = txtAd.getText();
         String soyad = txtSoyad.getText();
         String tc = txtTc.getText();
         String ogrenciNo = txtOgrenciNo.getText();
         int sinifSeviyesi =Integer.parseInt(txtSinif.getText());
+        LocalDate kayitTarihiOgrenciLocalDate = kayitTarihiOgrenci.getValue();
 
         if (ad.isEmpty() || soyad.isEmpty() || tc.isEmpty() || ogrenciNo.isEmpty() || sinifSeviyesi == 0) {
             durumMesajLabel.setText("Lütfen tüm alanları doldurun!");
@@ -164,7 +184,7 @@ public class Yonteci_sisController {
 
         try {
 
-            Ogrenci yeniOgrenci = new Ogrenci(tc,ad,soyad,sinifSeviyesi,ogrenciNo);
+            Ogrenci yeniOgrenci = new Ogrenci(tc,ad,soyad,sinifSeviyesi,ogrenciNo,kayitTarihiOgrenciLocalDate);
                 //ogrenciDao.ogrenciAdd(ad, soyad, tc, ogrenciNo,sinifSeviyesi);
 
                 String sonuc = ogrenciDao.ogrenciAdd(yeniOgrenci);
@@ -175,6 +195,7 @@ public class Yonteci_sisController {
                 txtTc.clear();
                 txtOgrenciNo.clear();
                 txtSinif.clear();
+                kayitTarihiOgrenci.setValue(null);
 
         } catch (Exception e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
