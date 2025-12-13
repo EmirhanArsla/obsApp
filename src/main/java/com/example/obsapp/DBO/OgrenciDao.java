@@ -39,6 +39,7 @@ public class OgrenciDao {
         document.append("ogrenciNo", ogrenci.getOgrenciNo());
         document.append("sinifSeviyesi", ogrenci.getSinifSeviyesi());
 
+
         try {
             collection.insertOne(document);
            return "Öğrenci Başarıyla Eklendi";       }
