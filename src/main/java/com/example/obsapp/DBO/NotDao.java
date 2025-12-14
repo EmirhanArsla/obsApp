@@ -59,5 +59,7 @@ public class NotDao {
         List<Document> notlist= new ArrayList<>();
         return collection.find(filitre).into(notlist);
     }
+
+
 }
 

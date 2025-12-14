@@ -20,7 +20,7 @@ public class RaporlamaManager {
     MongoDatabase database = DBUtil.getInstance().getDatabase();
     private final OgrenciDao ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
     private final NotDao notDao = new NotDao(database.getCollection("Notlar"));
-    private final DersDao dersDao = new DersDao();
+    private final DersDao dersDao = new DersDao(database.getCollection("Dersler"));
 
     //Notları çekebilmek ve Tabloda görüntülemek için kullanabilceğimiz fonksiyon
     public List<NotGorunum> notGoruntule(String ogrencid) {

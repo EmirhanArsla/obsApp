@@ -12,9 +12,9 @@ import java.util.List;
 public class DersDao {
     private MongoCollection<Document> collection;
 
-    public DersDao() {
-        MongoDatabase database = DBUtil.getInstance().getDatabase();
-        this.collection = database.getCollection("Dersler");
+    public DersDao(MongoCollection<Document> database) {
+        MongoDatabase database0 = DBUtil.getInstance().getDatabase();
+        this.collection = database0.getCollection("Dersler");
     }
 
     public List<Document> dersSearch (String dersid ){
@@ -25,4 +25,13 @@ public class DersDao {
 
     }
 
+    public boolean dersidKontrol (String dersid){
+        Document filtre = new Document ("dersid",dersid);
+        if(collection.find(filtre).first()!=null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

@@ -85,4 +85,14 @@ public class OgrenciDao {
                 .append("tc", tc);
         return collection.find(filtre).first() ;
     }
+
+    public boolean tcKontrol(String tc){
+        Document filtre = new Document("tc", tc);
+        if(collection.find(filtre).first() != null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
