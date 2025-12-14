@@ -30,12 +30,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="283.0">
                      <children>
-                        <TableView layoutX="37.0" layoutY="29.0" prefHeight="280.0" prefWidth="488.0">
+                        <TableView fx:id="tableviewGenelOrt" layoutX="37.0" layoutY="29.0" prefHeight="281.0" prefWidth="483.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="9.sınıf" />
-                            <TableColumn prefWidth="75.0" text="10.sınıf" />
-                              <TableColumn prefWidth="75.0" text="11.sınıf" />
-                              <TableColumn prefWidth="75.0" text="12.sınıf" />
+                            <TableColumn fx:id="genelOrt9Sutun" prefWidth="75.0" text="9.sınıf" />
+                            <TableColumn fx:id="genelOrt10Sutun" prefWidth="75.0" text="10.sınıf" />
+                              <TableColumn fx:id="genelOrt11Sutun" prefWidth="75.0" text="11.sınıf" />
+                              <TableColumn fx:id="genelOrt12Sutun" prefWidth="75.0" text="12.sınıf" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -43,12 +43,32 @@
           </Tab>
             <Tab fx:id="tabDersOrtalama" text="Ders Ortalamaları">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableviewDersOrt" layoutX="50.0" layoutY="35.0" prefHeight="273.0" prefWidth="481.0">
+                          <columns>
+                            <TableColumn fx:id="dersOrtDersSutun" prefWidth="75.0" text="Ders" />
+                            <TableColumn fx:id="dersOrtOrtalamaSutun" prefWidth="75.0" text="Ortalama" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab fx:id="tapOgrenciBilgileri" text="Öğrenci Bilgileri">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableviewOgrenciBilgi" layoutX="11.0" layoutY="22.0" prefHeight="122.0" prefWidth="556.0">
+                          <columns>
+                            <TableColumn fx:id="obAdSutun" prefWidth="115.0" text="Ad" />
+                            <TableColumn fx:id="obSoyadSutun" prefWidth="97.0" text="Soyad" />
+                              <TableColumn fx:id="obTcSutun" prefWidth="110.0" text="TC" />
+                              <TableColumn fx:id="obOgrenciNoSutun" prefWidth="75.0" text="Öğrenci No" />
+                              <TableColumn fx:id="obSinifSutun" prefWidth="41.0" text="Sınıf" />
+                              <TableColumn fx:id="obKayitTarihiSutun" prefWidth="117.0" text="Kayıt Tarihi" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
