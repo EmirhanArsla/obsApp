@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -49,7 +50,6 @@
                         <TextField fx:id="txtSoyad" layoutX="134.0" layoutY="117.0" />
                         <TextField fx:id="txtTc" layoutX="134.0" layoutY="152.0" />
                         <TextField fx:id="txtOgrenciNo" layoutX="134.0" layoutY="191.0" />
-                        <TextField fx:id="txtSinif" layoutX="134.0" layoutY="233.0" />
                         <Label fx:id="labelSinifSeviyesi" layoutX="27.0" layoutY="233.0" prefHeight="25.0" prefWidth="91.0" text="Sınıf Seviyesi" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
@@ -74,6 +74,7 @@
                         <Button fx:id="ogrenciSilButton" layoutX="576.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Sil" />
                         <Label fx:id="labelKayitTarihiOgrenciEkle" layoutX="34.0" layoutY="286.0" text="Kayıt Tarihi" textFill="WHITE" />
                         <DatePicker fx:id="kayitTarihiOgrenci" layoutX="132.0" layoutY="282.0" prefHeight="25.0" prefWidth="153.0" />
+                        <ChoiceBox fx:id="sinifBox" layoutX="134.0" layoutY="233.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </content></Tab>

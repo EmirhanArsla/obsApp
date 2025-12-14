@@ -1,4 +1,5 @@
 package com.example.obsapp.controller;
+import com.example.obsapp.DBO.DersDao;
 import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.OgretmenDao;
@@ -18,7 +19,9 @@ import org.bson.Document;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Yonteci_sisController {
     @FXML
@@ -58,7 +61,7 @@ public class Yonteci_sisController {
     private TextField txtOgrenciNo;
 
     @FXML
-    private TextField txtSinif;
+    private ChoiceBox<Integer> sinifBox;
 
     @FXML
     private DatePicker kayitTarihiOgrenci;
@@ -175,6 +178,7 @@ public class Yonteci_sisController {
     private OgrenciDao ogrenciDao;
     private NotDao notDao;
     private OgretmenDao ogretmenDao;
+    private DersDao dersDao;
 
     public Yonteci_sisController() {
         // DAO sınıfını burada initialize ederiz
@@ -183,10 +187,16 @@ public class Yonteci_sisController {
 
     @FXML
     public void initialize() {
+
+        List<Integer> siniflar = Arrays.asList(9,10,11,12);
+        sinifBox.setItems(FXCollections.observableArrayList(siniflar));
+
+        //Sınıfların Database sınıflarıyla bağlantı kurabilmeleri için oluşturulan nesneler
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
         notDao = new NotDao(database.getCollection("Notlar"));
         ogretmenDao = new OgretmenDao(database.getCollection("Ogretmen"));
+        dersDao = new DersDao(database.getCollection("Dersler"));
 
         ekleButton.setOnAction(event -> ogrenciEkle());
         ogrenciSilButton.setOnAction(e -> ogrenciSil());
@@ -231,6 +241,13 @@ public class Yonteci_sisController {
         if (tc.isEmpty()||dersad.isEmpty()||sinif==0||sinav2==0||sinav1==0){
             labelDurumDersNot.setText("Lütfen Tüm Alanları Doldurunuz");
             return;
+        }
+        if (!ogrenciDao.tcKontrol(tc)){
+            labelDurumDersNot.setText("Tc Bulunamadı ");
+        }
+
+        if (dersDao.dersidKontrol(sinif+dersad)){
+            labelDurumDersNot.setText("Ders Bulunamadı");
         }
         try{
             Not yeninot = new Not(tc,dersad,sinav1,sinav2,sinif);
@@ -283,7 +300,7 @@ public class Yonteci_sisController {
         String soyad = txtSoyad.getText();
         String tc = txtTc.getText();
         String ogrenciNo = txtOgrenciNo.getText();
-        int sinifSeviyesi = Integer.parseInt(txtSinif.getText());
+        Integer sinifSeviyesi = sinifBox.getValue();
         LocalDate kayitTarihiOgrenciLocalDate = kayitTarihiOgrenci.getValue();
 
         if (ad.isEmpty() || soyad.isEmpty() || tc.isEmpty() || ogrenciNo.isEmpty() || sinifSeviyesi == 0) {
@@ -303,7 +320,7 @@ public class Yonteci_sisController {
             txtSoyad.clear();
             txtTc.clear();
             txtOgrenciNo.clear();
-            txtSinif.clear();
+            sinifBox.setValue(null);
             kayitTarihiOgrenci.setValue(null);
 
         } catch (Exception e) {
