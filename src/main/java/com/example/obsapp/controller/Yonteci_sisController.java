@@ -22,19 +22,19 @@ import java.util.Date;
 
 public class Yonteci_sisController {
     @FXML
-    private Tab OgrenciDuzenle;
+    private Tab ogrenciDuzenle;
 
     @FXML
-    private Tab OgrenciAra;
+    private Tab ogrenciAra;
 
     @FXML
-    private Tab DersNotuEKle;
+    private Tab dersNotuEKle;
 
     @FXML
-    private Tab DersNotuGoruntule;
+    private Tab dersNotuGoruntule;
 
     @FXML
-    private Tab OgretmenEkle;
+    private Tab ogretmenEkle;
 
     // ============================
     // ORTAK LABEL
@@ -70,7 +70,7 @@ public class Yonteci_sisController {
     private TextField tcsilTextField;
 
     @FXML
-    private Button OgrenciSilButton;
+    private Button ogrenciSilButton;
 
     @FXML
     private Label durumMesajLabel;
@@ -96,7 +96,7 @@ public class Yonteci_sisController {
     @FXML
     private TableColumn<Ogrenci, String> kolonAraTc;
     @FXML
-    private TableColumn<Ogrenci, LocalDate> kolonAraKayittarihi;
+    private TableColumn<Ogrenci, LocalDate> kolonAraKayitTarihi;
     @FXML
     private TableColumn<Ogrenci, String> kolonAraSinif;
 
@@ -108,13 +108,13 @@ public class Yonteci_sisController {
     private TextField textFieldOgrenciTcDersEKle;
 
     @FXML
-    private TextField textFieldDersİDekle;
+    private TextField textFieldDersIdEkle;
 
     @FXML
     private TextField textFieldYazili1;
 
     @FXML
-    private TextField textFieldyazili2;
+    private TextField textFieldYazili2;
 
     @FXML
     private Button buttonNotEkle;
@@ -150,25 +150,25 @@ public class Yonteci_sisController {
     // ÖĞRETMEN EKLE
     // ============================
     @FXML
-    private TextField textfFieldOgretIsim;
+    private TextField textfieldOgretIsim;
 
     @FXML
     private TextField textfieldOgretSoyisim;
 
     @FXML
-    private TextField textfleldOgretTc;
+    private TextField textfieldOgretTc;
 
     @FXML
-    private TextField textFieldOgretBrans;
+    private TextField textfieldOgretBrans;
 
     @FXML
-    private TextField TextFieldogretDersID;
+    private TextField textfieldOgretDersID;
 
     @FXML
     private DatePicker ogretKayitTarihi;
 
     @FXML
-    private Button buttonogretmenEkle;
+    private Button buttonOgretmenEkle;
 
     private Label labeldurumMesajiOgret;
 
@@ -189,19 +189,19 @@ public class Yonteci_sisController {
         ogretmenDao = new OgretmenDao(database.getCollection("Ogretmen"));
 
         ekleButton.setOnAction(event -> ogrenciEkle());
-        OgrenciSilButton.setOnAction(e -> ogrenciSil());
+        ogrenciSilButton.setOnAction(e -> ogrenciSil());
         buttonOgrenciAra.setOnAction(e-> ogrenciAra());
         buttonNotEkle.setOnAction(e->notEkle());
-        buttonogretmenEkle.setOnAction(e->ogretmenEkle());
+        buttonOgretmenEkle.setOnAction(e->ogretmenEkle());
 
     }
 
     private void ogretmenEkle() {
-        String isim = textfFieldOgretIsim.getText();
+        String isim = textfieldOgretIsim.getText();
         String soyisim = textfieldOgretSoyisim.getText();
-        String tc = textfleldOgretTc.getText();
-        String bransh = textFieldOgretBrans.getText();
-        String dersid =  TextFieldogretDersID.getText();
+        String tc = textfieldOgretTc.getText();
+        String bransh = textfieldOgretBrans.getText();
+        String dersid =  textfieldOgretDersID.getText();
         LocalDate ogretmenKayitTarihi = ogretKayitTarihi.getValue();
 
         if (isim.isEmpty() || soyisim.isEmpty() || tc.isEmpty() || bransh.isEmpty() || dersid.isEmpty() ){
@@ -224,10 +224,10 @@ public class Yonteci_sisController {
 
     private void notEkle() {
         String tc = textFieldOgrenciTcDersEKle.getText();
-        String dersad = textFieldDersİDekle.getText();
+        String dersad = textFieldDersIdEkle.getText();
         int sinif =Integer.parseInt(notEkleSinif.getText());
         int sinav1=Integer.parseInt(textFieldYazili1.getText());
-        int sinav2=Integer.parseInt(textFieldyazili2.getText());
+        int sinav2=Integer.parseInt(textFieldYazili2.getText());
         if (tc.isEmpty()||dersad.isEmpty()||sinif==0||sinav2==0||sinav1==0){
             labelDurumDersNot.setText("Lütfen Tüm Alanları Doldurunuz");
             return;

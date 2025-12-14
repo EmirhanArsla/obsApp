@@ -32,7 +32,9 @@ public class Ogrenci_sisController implements Initializable {
 
     @FXML
     private Tab tabSinifOrtalama;  // "Sınıf Ortalaması"
-
+    // =========================
+    // DERS NOTU TABLOSU
+    // =========================
     @FXML
     private TableView<NotGorunum> dersNotuTablo;
     @FXML
@@ -45,6 +47,7 @@ public class Ogrenci_sisController implements Initializable {
     private TableColumn<NotGorunum,Integer> sinav1Sutun;
     @FXML
     private TableColumn<NotGorunum,Integer> sinav2Sutun;
+
 
     public void setOgrenciNo(String ogrenciNo) {
             this.gelen_ogrenciNo =ogrenciNo;
