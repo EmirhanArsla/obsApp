@@ -2,6 +2,7 @@ package com.example.obsapp.model;
 
 import com.example.obsapp.Interfaceler.INotHesaplayabilir;
 import com.example.obsapp.util.HesaplamaUtil;
+import org.bson.Document;
 
 public class ZorunluDers extends Ders implements INotHesaplayabilir {
 
@@ -18,6 +19,11 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
 
     // ==================== ZORUNLU OVERRIDE ====================
 
+    public Document toDocument() {
+        return new Document("dersAdi", getDersAdi())
+                .append("sinif", getSinifSeviyesi())
+                .append("tur", "Zorunlu");
+    }
     @Override
     public void dersBilgisiYazdir() {
         System.out.println("=== ZORUNLU DERS ===");
