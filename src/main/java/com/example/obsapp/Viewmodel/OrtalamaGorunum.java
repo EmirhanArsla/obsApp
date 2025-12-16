@@ -18,19 +18,31 @@ public class OrtalamaGorunum {
 
     }
 
-    public SimpleIntegerProperty getDersId() {
-        return sinav1;
+    public SimpleIntegerProperty sinav1Property() {return sinav1;
     }
 
-    public SimpleDoubleProperty getOrtalama() {
-        return ortalama;
+    public SimpleDoubleProperty ortalamaProperty() {return ortalama;
     }
 
-    public SimpleIntegerProperty getKredi() {
-        return sinav2;
+    public SimpleIntegerProperty sinav2Property() {return sinav2;
     }
 
-    public SimpleStringProperty getDersAdi() {return dersAdi;
+    public SimpleStringProperty dersAdiProperty() {return dersAdi;
     }
+
+    public String getDersAdi() {
+        return dersAdi.get();
+    }
+
+    public int getSinav1() {
+        return sinav1.get();
+    }
+    public int getSinav2() {
+        return sinav2.get();
+    }
+    public double getOrtalama() {
+        return ortalama.get();
+    }
+
 
 }

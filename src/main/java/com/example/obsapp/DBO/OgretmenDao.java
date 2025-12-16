@@ -2,7 +2,6 @@ package com.example.obsapp.DBO;
 
 import com.example.obsapp.model.Ogretmen;
 import com.example.obsapp.util.DBUtil;
-import com.mongodb.MongoIncompatibleDriverException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -23,8 +22,8 @@ public class OgretmenDao {
 
         Document document = new Document();
         document.append("ad",ogretmen.getAd());
-        document.append("soyAd",ogretmen.getSoyad());
-        document.append("tc",ogretmen.getId());
+        document.append("soyAd",ogretmen.getSoyAd());
+        document.append("tc",ogretmen.getTc());
         document.append("brans",ogretmen.getBrans());
         document.append("dersid",ogretmen.getVerdigiDers());
         document.append("kayitTarihi",dbDate);

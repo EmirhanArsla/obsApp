@@ -10,11 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotDao {
-    private MongoCollection<Document> collection;
+    private final MongoCollection<Document> collection;
 
     public NotDao(MongoCollection<Document> database) {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
-        this.collection = Db.getCollection("Notlar");
+        if (database == null) {
+            throw new IllegalArgumentException("Not koleksiyonu null olamaz.");
+        }
+
+        // Constructor'a gelen koleksiyon nesnesini, sınıfın değişkenine atayın.
+        this.collection = database;
 
     }
 
@@ -22,11 +27,11 @@ public class NotDao {
         Document document = new Document();
         document.append("notid",not.getNotId() );
         document.append("dersid",not.getDersId());
-        document.append("ogrencid",not.getOgrenciId());
+        document.append("tc",not.getOgrenciId());
         document.append("sinav1",not.getSinav1());
         document.append("sinav2",not.getSinav2());
         document.append("sinif",not.getSinif());
-        document.append("dersad",not.getDersad());
+        document.append("dersAdi",not.getDersad());
 
         try {
             collection.insertOne(document);
@@ -48,8 +53,8 @@ public class NotDao {
         }
     }
 
-    public List<Document> notSearch (String ogrencid) {
-        Document filitre = new Document("ogrencid",ogrencid);
+    public List<Document> notSearch (String tc) {
+        Document filitre = new Document("tc",tc);
         List<Document> notlist= new ArrayList<>();
         return collection.find(filitre).into(notlist);
     }

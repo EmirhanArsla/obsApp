@@ -19,7 +19,12 @@ public class DersDao {
 
     public DersDao(MongoCollection<Document> database) {
         MongoDatabase database0 = DBUtil.getInstance().getDatabase();
-        this.collection = database0.getCollection("Dersler");
+        if (database == null) {
+            throw new IllegalArgumentException("Not koleksiyonu null olamaz.");
+        }
+
+        // Constructor'a gelen koleksiyon nesnesini, sınıfın değişkenine atayın.
+        this.collection =database;
     }
     public boolean dersAdd(Ders ders){
         if (dersidKontrol(ders.getDersId())) {

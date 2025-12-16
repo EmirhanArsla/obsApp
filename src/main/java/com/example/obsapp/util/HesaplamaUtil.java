@@ -2,21 +2,21 @@ package com.example.obsapp.util;
 
 public class  HesaplamaUtil {
 
-    public static boolean notGecerliMi(int not) {
+    public static boolean notGecerliMi(double not) {
         return not >= 0 && not <= 100;   // karşılaştırma + mantıksal
     }
 
-    public static boolean notlarGecerliMi(int y1, int y2) {
+    public static boolean notlarGecerliMi(double y1, double y2) {
         return notGecerliMi(y1) && notGecerliMi(y2) ;
     }
 
-    public static double ortalama(int y1, int y2) {
+    public static double ortalama(double y1, double y2) {
 
         if (!notlarGecerliMi(y1, y2) ){
             throw new IllegalArgumentException("Notlar 0–100 arasında olmalıdır!");
         }
 
-        return (y1 + y2 ) / 2.0; // int -> double dönüşümü (implicit)
+        return (double) (y1 + y2 ) / 2.0 ; // int -> double dönüşümü (implicit)
     }
 
     // ======================== AĞIRLIKLI NOT ========================

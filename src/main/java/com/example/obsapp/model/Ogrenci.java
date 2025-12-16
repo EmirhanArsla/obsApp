@@ -2,7 +2,6 @@ package com.example.obsapp.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Ogrenci extends Kisi {
@@ -18,8 +17,8 @@ public class Ogrenci extends Kisi {
     // -------------------- CONSTRUCTORLAR --------------------
 
 
-    public Ogrenci(String id, String ad, String soyad, int sinifSeviyesi, String ogrenciNo , LocalDate kayitTarihi) {
-        super(id, ad, soyad,kayitTarihi);
+    public Ogrenci(String tc, String ad, String soyad, int sinifSeviyesi, String ogrenciNo , LocalDate kayitTarihi) {
+        super(tc, ad, soyad,kayitTarihi);
         setSinifSeviyesi(sinifSeviyesi);
         this.ogrenciNo = ogrenciNo;
         this.aldigiDersler = new ArrayList<>();
@@ -62,7 +61,7 @@ public class Ogrenci extends Kisi {
     @Override
     public void bilgileriYazdir() {
         System.out.println("===== ÖĞRENCİ BİLGİLERİ =====");
-        System.out.println("Ad Soyad     : " + ad + " " + soyad);
+        System.out.println("Ad Soyad     : " + ad + " " + soyAd);
         System.out.println("Okul No      : " +ogrenciNo );
         System.out.println("Sınıf        : " + sinifSeviyesi);
         System.out.println("Kayıt Tarihi : " + getKayitTarihiFormatted());

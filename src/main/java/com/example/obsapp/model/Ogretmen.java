@@ -53,7 +53,7 @@ public class Ogretmen extends Kisi {
     @Override
     public void bilgileriYazdir() {
         System.out.println("===== ÖĞRETMEN BİLGİLERİ =====");
-        System.out.println("Ad Soyad      : " + ad + " " + soyad);
+        System.out.println("Ad Soyad      : " + ad + " " + soyAd);
         System.out.println("Branş         : " + brans);
         System.out.println("Kayıt Tarihi  : " + getKayitTarihiFormatted());
 
