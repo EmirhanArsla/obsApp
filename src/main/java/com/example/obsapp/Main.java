@@ -43,43 +43,43 @@ public class Main extends Application {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         DersDao dersDao = new DersDao(database.getCollection("Dersler"));
         ZorunluDers matematik =
-                new ZorunluDers("MAT9", "Matematik", 9, 5.0, true);
+                new ZorunluDers("MAT12", "Matematik", 12, 5.0, true);
         dersDao.dersAdd(matematik);
         ZorunluDers turkce =
-                new ZorunluDers("TURKCE9", "Türkçe", 9, 5.0, true);
+                new ZorunluDers("TURKCE12", "Türkçe", 12, 5.0, true);
         dersDao.dersAdd(turkce);
         ZorunluDers fizik =
-        new ZorunluDers("FIZIK9", "Fizik", 9, 4.0, true);
+        new ZorunluDers("FIZIK12", "Fizik", 12, 4.0, true);
         dersDao.dersAdd(fizik);
         ZorunluDers kimya =
-        new ZorunluDers("KIMYA9", "Kimya", 9, 4.0, true);
+        new ZorunluDers("KIMYA12", "Kimya", 12, 4.0, true);
         dersDao.dersAdd(kimya);
         ZorunluDers biyoloji =
-        new ZorunluDers("BIYOLOJI9", "Biyoloji", 9, 4.0, true);
+        new ZorunluDers("BIYOLOJI12", "Biyoloji", 12, 4.0, true);
         dersDao.dersAdd(biyoloji);
         ZorunluDers tarih =
-        new ZorunluDers("TARIH9", "Tarih", 9, 4.0, true);
+        new ZorunluDers("TARIH12", "Tarih", 12, 4.0, true);
         dersDao.dersAdd(tarih);
         ZorunluDers cografya =
-        new ZorunluDers("COGRAFYA9", "Cografya", 9, 4.0, true);
+        new ZorunluDers("COGRAFYA12", "Cografya", 12, 4.0, true);
         dersDao.dersAdd(cografya);
         ZorunluDers din =
-        new ZorunluDers("DIN9", "Din Kültürü ve Ahlak Bilgisi", 9, 3.0, true);
+        new ZorunluDers("DIN12", "Din Kültürü ve Ahlak Bilgisi", 12, 3.0, true);
         dersDao.dersAdd(din);
         ZorunluDers ingilizce =
-        new ZorunluDers("ING9", "İngilizce", 9, 3.0, true);
+        new ZorunluDers("ING12", "İngilizce", 12, 3.0, true);
         dersDao.dersAdd(ingilizce);
         ZorunluDers beden =
-        new ZorunluDers("BEDEN9", "Beden Eğitimi", 9, 3.0, true);
+        new ZorunluDers("BEDEN12", "Beden Eğitimi", 12, 3.0, true);
         dersDao.dersAdd(beden);
         ZorunluDers muzik =
-        new ZorunluDers("MUZİK9", "Görsel Sanatlar/Müzik", 9, 3.0, true);
+        new ZorunluDers("MUZİK12", "Görsel Sanatlar/Müzik", 12, 3.0, true);
         dersDao.dersAdd(muzik);
         SecmeliDers zeka =
-        new SecmeliDers("ZEKA9", "Zeka oyunları", 9, 3.0, false);
+        new SecmeliDers("ZEKA12", "Zeka oyunları", 12, 3.0, false);
         dersDao.dersAdd(zeka);
         SecmeliDers felsefe =
-        new SecmeliDers("FELSEFE9", "Felsefe", 9, 3.0, false);
+        new SecmeliDers("FELSEFE12", "Felsefe", 12, 3.0, false);
         dersDao.dersAdd(felsefe);
 
 
