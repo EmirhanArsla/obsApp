@@ -27,12 +27,12 @@ public class DersDao {
         this.collection =database;
     }
     public boolean dersAdd(Ders ders){
-        if (dersidKontrol(ders.getDersId())) {
+        if (dersidKontrol(ders.getDersid())) {
             return false; // Zaten var → ekleme
         }
         Document document = new Document();
         document.append("dersadi",ders.getDersAdi() );
-        document.append("dersid",ders.getDersId());
+        document.append("dersid",ders.getDersid());
         document.append("sinifSeviyesi",ders.getSinifSeviyesi());
         document.append("katsayi",ders.getKatsayi());
 
