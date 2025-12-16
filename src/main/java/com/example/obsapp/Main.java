@@ -46,7 +46,7 @@ public class Main extends Application {
                 new ZorunluDers("MAT9", "Matematik", 9, 5.0, true);
         dersDao.dersAdd(matematik);
         ZorunluDers turkce =
-                new ZorunluDers("TURKCE9", "Türkce", 9, 5.0, true);
+                new ZorunluDers("TURKCE9", "Türkçe", 9, 5.0, true);
         dersDao.dersAdd(turkce);
         ZorunluDers fizik =
         new ZorunluDers("FIZIK9", "Fizik", 9, 4.0, true);

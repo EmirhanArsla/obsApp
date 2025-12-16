@@ -31,7 +31,7 @@ public class DersDao {
             return false; // Zaten var → ekleme
         }
         Document document = new Document();
-        document.append("dersadi",ders.getDersAdi() );
+        document.append("dersAdi",ders.getDersAdi() );
         document.append("dersid",ders.getDersId());
         document.append("sinifSeviyesi",ders.getSinifSeviyesi());
         document.append("katsayi",ders.getKatsayi());
