@@ -1,5 +1,7 @@
 package com.example.obsapp.model;
 
+import org.bson.Document;
+
 import java.util.Objects;
 
 public abstract class DersBase {
@@ -31,6 +33,8 @@ public abstract class DersBase {
         setSinifSeviyesi(sinifSeviyesi);
 
     }
+    public abstract Document toDocument();
+
     public abstract void dersBilgisiYazdir();
 
     public String formatliDersAdi() {

@@ -2,6 +2,7 @@ package com.example.obsapp.model;
 
 import com.example.obsapp.Interfaceler.INotHesaplayabilir;
 import com.example.obsapp.util.HesaplamaUtil;
+import org.bson.Document;
 
 /**
  * Lise Öğrenci Bilgi Sistemi
@@ -24,7 +25,12 @@ public class Ders extends DersBase implements INotHesaplayabilir {
     }
 
     // ======================== OVERRIDES ========================
-
+   @Override
+    public Document toDocument() {
+        return new Document("dersAdi", getDersAdi())
+                .append("sinif", getSinifSeviyesi())
+                .append("tur", "NORMAL");
+    }
     @Override
     public void dersBilgisiYazdir() {
         System.out.println("=== DERS BİLGİLERİ ===");
