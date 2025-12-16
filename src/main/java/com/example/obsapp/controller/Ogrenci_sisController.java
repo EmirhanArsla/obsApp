@@ -5,7 +5,9 @@ import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.OgretmenDao;
 import com.example.obsapp.Manager.RaporlamaManager;
+import com.example.obsapp.Viewmodel.GnoGorunum;
 import com.example.obsapp.Viewmodel.NotGorunum;
+import com.example.obsapp.Viewmodel.OgrenciGorunum;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
@@ -16,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -65,6 +68,38 @@ public class Ogrenci_sisController implements Initializable {
     private TableColumn<OrtalamaGorunum,Integer> dersOrtSinav2;
     @FXML
     private TableColumn<OrtalamaGorunum,Double> dersOrtOrtalamaSutun;
+    // ============================
+    // Genel Ortalama görüntüle Tablosu
+    // ============================
+    private TableView<GnoGorunum> tableviewGenelOrt ;
+    @FXML
+    private TableColumn<GnoGorunum, String> genelOrt9Sutun;
+    @FXML
+    private TableColumn<GnoGorunum, String > genelOrt10Sutun;
+    @FXML
+    private TableColumn<GnoGorunum, String> genelOrt11Sutun;
+    @FXML
+    private TableColumn<GnoGorunum, Double> genelOrt12Sutun;
+    // ============================
+    // Ogrenci Bilgisi Tablosu
+    // ============================
+    private TableView<OgrenciGorunum> tableviewOgrenciBilgi ;
+    @FXML
+    private TableColumn<OgrenciGorunum, String> obAdSutun;
+    @FXML
+    private TableColumn<OgrenciGorunum, String> obSoyadSutun;
+    @FXML
+    private TableColumn<OgrenciGorunum, String> obTcSutun;
+    @FXML
+    private TableColumn<OgrenciGorunum, String> obOgrenciNoSutun;
+    @FXML
+    private TableColumn<OgrenciGorunum, Integer> obSinifSutun;
+    @FXML
+    private TableColumn<OgrenciGorunum, LocalDate> obKayitTarihiSutun;
+
+
+
+
 
     private OgretmenDao ogretmenDao;
     private NotDao notDao;

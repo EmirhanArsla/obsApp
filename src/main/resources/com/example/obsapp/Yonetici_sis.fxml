@@ -216,12 +216,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="38.0" layoutY="230.0" text=" Verdiği Ders (ID)" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="43.0" layoutY="279.0" text="Kayıt Tarihi" textFill="WHITE">
+                        <Label layoutX="43.0" layoutY="236.0" text="Kayıt Tarihi" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -230,17 +225,52 @@
                         <TextField fx:id="textfieldOgretSoyisim" layoutX="176.0" layoutY="92.0" />
                         <TextField fx:id="textfieldOgretTc" layoutX="176.0" layoutY="140.0" />
                         <TextField fx:id="textfieldOgretBrans" layoutX="176.0" layoutY="186.0" />
-                        <TextField fx:id="textfieldOgretDersID" layoutX="176.0" layoutY="228.0" />
                         <Label layoutX="55.0" layoutY="10.0" text="Öğretmen Ekle" textFill="WHITE">
                            <font>
                               <Font name="Cambria" size="24.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="ogretKayitTarihi" layoutX="176.0" layoutY="277.0" prefHeight="25.0" prefWidth="150.0" />
-                        <Button fx:id="buttonOgretmenEkle" layoutX="176.0" layoutY="330.0" mnemonicParsing="false" text="Ekle" />
+                        <DatePicker fx:id="ogretKayitTarihi" layoutX="176.0" layoutY="234.0" prefHeight="25.0" prefWidth="150.0" />
+                        <Button fx:id="buttonOgretmenEkle" layoutX="176.0" layoutY="279.0" mnemonicParsing="false" text="Ekle" />
                         <Label fx:id="labeldurumMesajOgret" layoutX="394.0" layoutY="81.0" prefHeight="26.0" prefWidth="140.0">
                            <font>
                               <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="GNO Görüntüle">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="gnoTable" layoutX="60.0" layoutY="89.0" prefHeight="377.0" prefWidth="698.0">
+                          <columns>
+                            <TableColumn fx:id="gnoOgrenciNo" prefWidth="120.0" text="Öğrenci No" />
+                            <TableColumn fx:id="gnoIsim" prefWidth="117.0" text="İsim" />
+                              <TableColumn fx:id="gnoSoyisim" prefWidth="107.0" text="Soyisim" />
+                              <TableColumn fx:id="gnoGenelOrt" prefWidth="116.0" text="Genel Ortalama" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Sınıf Ortalamaları">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="53.0" layoutY="47.0" text="Sınıf" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="buttonSinifOrt" layoutX="149.0" layoutY="95.0" mnemonicParsing="false" text="Göster" />
+                        <ChoiceBox fx:id="choiceBoxSinifOrt" layoutX="106.0" layoutY="47.0" prefWidth="150.0" />
+                        <Label fx:id="labelSinifOrt" layoutX="53.0" layoutY="152.0" text="Lütfen Sınıf Giriniz" textFill="WHITE">
+                           <font>
+                              <Font size="38.0" />
                            </font>
                         </Label>
                      </children>

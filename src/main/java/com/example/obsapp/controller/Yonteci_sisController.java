@@ -4,6 +4,7 @@ import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.OgretmenDao;
 import com.example.obsapp.Manager.RaporlamaManager;
+import com.example.obsapp.Viewmodel.GnoGorunum;
 import com.example.obsapp.Viewmodel.OgrenciGorunum;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.model.DersBase;
@@ -157,6 +158,7 @@ public class Yonteci_sisController {
     private Label labelDersNotuG;
 
 
+
     @FXML
     private Label labelDersNotDurum;
 
@@ -185,6 +187,31 @@ public class Yonteci_sisController {
     private Button buttonOgretmenEkle;
 
     private Label labeldurumMesajiOgret;
+    // ============================
+    // GNO GÖRÜNTÜLE
+    // ============================
+    @FXML
+    private TableView<GnoGorunum> gnoTable;
+    @FXML
+    private TableColumn<GnoGorunum, String>gnoOgrenciNO ;
+    @FXML
+    private TableColumn<GnoGorunum, String> gnoIsim;
+    @FXML
+    private TableColumn<GnoGorunum, String> gnoSoyisim;
+    @FXML
+    private TableColumn<GnoGorunum, Double> gnoGenelOrt;
+    // ============================
+    // SINIF ORTALAMA
+    // ============================
+    @FXML
+    private ChoiceBox<Integer> choiceBoxSinifOrt;
+    @FXML
+    private Button buttonSinifOrt;
+    @FXML
+    private Label labelSinifOrt;
+
+
+
 
     private OgrenciDao ogrenciDao;
     private NotDao notDao;

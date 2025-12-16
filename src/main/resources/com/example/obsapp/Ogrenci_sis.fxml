@@ -47,10 +47,10 @@
                      <children>
                         <TableView fx:id="tableviewGenelOrt" layoutX="37.0" layoutY="29.0" prefHeight="281.0" prefWidth="483.0">
                           <columns>
-                            <TableColumn fx:id="genelOrt9Sutun" prefWidth="75.0" text="9.sınıf" />
-                            <TableColumn fx:id="genelOrt10Sutun" prefWidth="75.0" text="10.sınıf" />
-                              <TableColumn fx:id="genelOrt11Sutun" prefWidth="75.0" text="11.sınıf" />
-                              <TableColumn fx:id="genelOrt12Sutun" prefWidth="75.0" text="12.sınıf" />
+                            <TableColumn fx:id="genelOrt9Sutun" prefWidth="103.0" text="İsim" />
+                            <TableColumn fx:id="genelOrt10Sutun" prefWidth="104.0" text="Soyisim" />
+                              <TableColumn fx:id="genelOrt11Sutun" prefWidth="127.0" text="TC" />
+                              <TableColumn fx:id="genelOrt12Sutun" prefWidth="148.0" text="Genel Ortalama" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
