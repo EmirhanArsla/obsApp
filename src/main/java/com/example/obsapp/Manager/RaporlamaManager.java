@@ -17,31 +17,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaporlamaManager {
-    MongoDatabase database = DBUtil.getInstance().getDatabase();
-    private final OgrenciDao ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
-    private final NotDao notDao = new NotDao(database.getCollection("Notlar"));
-    private final DersDao dersDao = new DersDao(database.getCollection("Dersler"));
+//    MongoDatabase database = DBUtil.getInstance().getDatabase();
+//    private final OgrenciDao ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
+//    private final NotDao notDao = new NotDao(database.getCollection("Notlar"));
+//    private final DersDao dersDao = new DersDao(database.getCollection("Dersler"));
+
+    private final OgrenciDao ogrenciDao;
+    private final NotDao notDao;
+    private final DersDao dersDao;
+
+    public RaporlamaManager(NotDao notDao, DersDao dersDao, OgrenciDao ogrenciDao) {
+        this.notDao = notDao;
+        this.dersDao = dersDao;
+        this.ogrenciDao = ogrenciDao;
+    }
+
 
     //Notları çekebilmek ve Tabloda görüntülemek için kullanabilceğimiz fonksiyon
-    public List<NotGorunum> notGoruntule(String ogrencid) {
+    public List<NotGorunum> notGoruntule(String tc) {
         List<NotGorunum> notGorunum = new ArrayList<>();
-        List<Document> notlist = notDao.notSearch(ogrencid);
+        List<Document> notlist = notDao.notSearch(tc);
 
-        if (notlist.isEmpty() || notlist == null) {
+        if ( notlist == null || notlist.isEmpty()  ) {
             System.out.println("Not bulunamadi");
             return notGorunum;// eğer dosya boşsa if Döngüsünden çıkması için
         }
-        String ogrenciNo = notlist.get(0).getString("ogrenciNo");
+        String Tc = notlist.getFirst().getString("tc");
 
-        Document student = ogrenciDao.ogrencisearch(ogrenciNo);
+        Document student = ogrenciDao.ogrencisearch(Tc);
 
         if (student == null) {
             System.out.println(" öğrenci bulunamadi");
             return notGorunum;
         }
         for (Document not : notlist) {
-            String dersId = not.getString("dersId");
-            String OgrenciId = not.getString("ogrenciId");
+            String dersId = not.getString("dersid");
+            String OgrenciId = not.getString("tc");
             int Sinif = not.getInteger("sinif");
             int Sinav1 = not.getInteger("sinav1");
             int Sinav2 = not.getInteger("sinav2");
@@ -59,12 +70,12 @@ public class RaporlamaManager {
         return notGorunum;
     }
 
-    public List<OrtalamaGorunum> ortlamaGoster(String ogrencid) {
+    public List<OrtalamaGorunum> ortlamaGoster(String tc) {
         List<OrtalamaGorunum> ortlama = new ArrayList<>();
 
-        Document student = ogrenciDao.ogrencisearch(ogrencid);
+        Document student = ogrenciDao.ogrencisearch(tc);
 
-        List<Document> tumNotKaydi = notDao.notSearch(ogrencid);
+        List<Document> tumNotKaydi = notDao.notSearch(tc);
 
         if (student == null || tumNotKaydi.isEmpty()) {
             System.out.println("Not bulunamadi veya öğrenci bulunamadi");
@@ -72,19 +83,23 @@ public class RaporlamaManager {
         }
 
         for (Document not : tumNotKaydi) {
-            String dersId = not.getString("dersId");
-            int sinav1 = not.getInteger("sinav1", 0);
-            int sinav2 = not.getInteger("sinav2", 0);
+            String dersId = not.getString("dersid");
+
+            double sinav1_double = ((Number )not.get("sinav1")).doubleValue() ;
+            double sinav2_double = ((Number )not.get("sinav2")).doubleValue() ;
 
             List<Document> derslistesi = dersDao.dersSearch(dersId);
-            Document dersBilgisi = derslistesi.get(0);
+            Document dersBilgisi = derslistesi.getFirst();
 
 
-            if (dersBilgisi != null && dersBilgisi.containsKey("katsayi")) {
+            if (dersBilgisi != null ) {
                 String dersAdi = dersBilgisi.getString("dersAdi");
-                int kredi = dersBilgisi.getInteger("katsayi");
 
-                double dersOrtalama = HesaplamaUtil.ortalama(sinav1, sinav2);
+
+                double dersOrtalama = HesaplamaUtil.ortalama(sinav1_double, sinav2_double);
+
+                int sinav1 =(int) sinav1_double;
+                int sinav2 =(int) sinav2_double;
 
                 OrtalamaGorunum detay = new OrtalamaGorunum(
                          sinav1,dersAdi,dersOrtalama,sinav2
@@ -96,22 +111,22 @@ public class RaporlamaManager {
         return ortlama;
     }
 
-    public double gnoHesapla(String ogrenciNo) {
-        Document student = ogrenciDao.ogrencisearch(ogrenciNo);
+    public double gnoHesapla(String tc) {
+        Document student = ogrenciDao.ogrencisearch(tc);
         double toplamagirlikliNot = 0.0;
         double toplamKredi = 0.0;
         if (student == null) {
             System.out.println("öğrenci bulunamadi");
             return 0.0;
         }
-        List<Document> notlist = notDao.notSearch(ogrenciNo);
+        List<Document> notlist = notDao.notSearch(tc);
         if (notlist.isEmpty()) {
             System.out.println("Not bulunamadi");
             return 0.0;
         }
 
         for (Document not : notlist) {
-            String dersId = not.getString("dersId");
+            String dersId = not.getString("dersid");
             int sinav1 = not.getInteger("sinav1", 0);
             int sinav2 = not.getInteger("sinav2", 0);
 
@@ -119,7 +134,7 @@ public class RaporlamaManager {
 
             Document dersBilgisi = null;
             if (derslistesi != null) {
-                dersBilgisi = derslistesi.get(0);
+                dersBilgisi = derslistesi.getFirst();
             }
 
             if (dersBilgisi != null && dersBilgisi.containsKey("katsayi")) {
@@ -151,9 +166,9 @@ public class RaporlamaManager {
             return 0.0;
         }
         for (Document ogrenci : ogrenciBilgi) {
-            String OgrenciNo = ogrenci.getString("ogrenciNo");
+            String Tc = ogrenci.getString("tc");
 
-            double ogrenciGno= gnoHesapla(OgrenciNo);
+            double ogrenciGno= gnoHesapla(Tc);
 
             if (ogrenciGno >= 0.0) {
                 toplamSinifOrtalama = toplamSinifOrtalama + ogrenciGno;
@@ -178,7 +193,7 @@ public class RaporlamaManager {
         for (Document ogrenci : tumOgrenciler) {
             String OgrenciNo = ogrenci.getString("ogrenciNo");
             String ad = ogrenci.getString("ad");
-            String soyad = ogrenci.getString("soyad");
+            String soyad = ogrenci.getString("soyAd");
 
             double gno =gnoHesapla(OgrenciNo);
 

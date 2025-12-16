@@ -106,7 +106,7 @@
                               <TableColumn fx:id="kolonAraTc" prefWidth="117.0" text="TC" />
                               <TableColumn fx:id="kolonAraKayitTarihi" prefWidth="117.0" text="KayıtTarihi" />
                               <TableColumn fx:id="kolonAraSinif" prefWidth="67.0" text="Sınıf" />
-                              <TableColumn fx:id="ogrenciNo" prefWidth="94.0" text="Öğrenci No" />
+                              <TableColumn fx:id="kolonAraOgrenciNo" prefWidth="94.0" text="Öğrenci No" />
                           </columns>
                         </TableView>
                         <Label fx:id="labelDurumOgrenciAra" layoutX="337.0" layoutY="71.0" text="Label" />
@@ -174,7 +174,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tableViewDersNotG" layoutX="28.0" layoutY="99.0" prefHeight="307.0" prefWidth="629.0">
+                        <TableView fx:id="tableViewDersNotG" layoutX="41.0" layoutY="135.0" prefHeight="307.0" prefWidth="629.0">
                           <columns>
                               <TableColumn fx:id="kolonDersadi" prefWidth="67.0" text="Ders Adı" />
                               <TableColumn fx:id="kolonYazili1" minWidth="4.0" prefWidth="85.0" text="1.Yazılı" />
@@ -187,6 +187,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <Button fx:id="buttonNotlariAra" layoutX="175.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Notları Ara" />
                      </children>
                   </AnchorPane>
               </content>

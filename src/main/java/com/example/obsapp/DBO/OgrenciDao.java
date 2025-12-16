@@ -1,10 +1,12 @@
 package com.example.obsapp.DBO;
+import com.example.obsapp.Viewmodel.OgrenciGorunum;
 import com.example.obsapp.model.Ogrenci;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -14,13 +16,40 @@ public class OgrenciDao {
 
     public OgrenciDao(MongoCollection<Document> database) {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
-        this.collection = Db.getCollection("Ogrenciler");
+        if (database == null) {
+            throw new IllegalArgumentException("Not koleksiyonu null olamaz.");
+        }
+
+        // Constructor'a gelen koleksiyon nesnesini, sınıfın değişkenine atayın.
+        this.collection = database;
+
+    }
+
+    //tabloya yansıtmak için mapper dönüşümü yapılır
+    private OgrenciGorunum mapDocumentToOgrenciGorunum(Document document) {
+        if (document == null) {
+            return null;
+        }
+        String ad = document.getString("ad");
+        String soyad = document.getString("soyAd");
+        String tc= document.getString("tc");
+        String ogrenciNo = document.getString("ogrenciNo");
+        Integer sinifSeviyesi  = document.getInteger("sinifSeviyesi");
+        Date tarihObjesi = document.getDate("kayitTarihi");
+
+        LocalDate kayitTarihi=null;
+        if (tarihObjesi != null) {
+            kayitTarihi = tarihObjesi.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+
+        return new OgrenciGorunum(ad,soyad,tc,ogrenciNo,sinifSeviyesi,kayitTarihi);
+
 
     }
 
     public String ogrenciAdd(Ogrenci ogrenci) {
         Document filtre= new Document("$or", Arrays.asList(
-                new Document("tc",ogrenci.getId()),
+                new Document("tc",ogrenci.getTc()),
                 new Document("OgrenciNo",ogrenci.getOgrenciNo())
         ));
 
@@ -34,8 +63,8 @@ public class OgrenciDao {
 
         Document document = new Document();
         document.append("ad", ogrenci.getAd());
-        document.append("soyAd", ogrenci.getSoyad());
-        document.append("tc", ogrenci.getId());
+        document.append("soyAd", ogrenci.getSoyAd());
+        document.append("tc", ogrenci.getTc());
         document.append("ogrenciNo", ogrenci.getOgrenciNo());
         document.append("sinifSeviyesi", ogrenci.getSinifSeviyesi());
         document.append("kayitTarihi",dbDate);
@@ -60,11 +89,16 @@ public class OgrenciDao {
         }
     }
 
+    public OgrenciGorunum ogrenciGorunumSearch(String tc){
+
+        Document filtre= new Document("tc", tc);
+        Document doc = collection.find(filtre).first();
+        return mapDocumentToOgrenciGorunum(doc);
+    }
 
     public Document ogrencisearch(String tc){
         Document filitre = new Document("tc", tc);
         return collection.find(filitre).first() ;
-
     }
 
 

@@ -8,17 +8,17 @@ import javafx.beans.property.IntegerProperty;
 public class NotGorunum { // Sınıf adını karışmaması için NotGorunumFx olarak değiştirdim
 
     // 1. Alanlar SimpleProperty olarak tanımlanır
-    private final StringProperty dersId;
-    private final StringProperty ogrenciId;
+    private final StringProperty dersid;
+    private final StringProperty tc;
     private final IntegerProperty sinif;
     private final IntegerProperty sinav1;
     private final IntegerProperty sinav2;
 
     // Kurucu (Constructor)
-    public NotGorunum(String dersId, String ogrenciId, int sinif, int sinav1, int sinav2) {
+    public NotGorunum(String dersid, String tc, int sinif, int sinav1, int sinav2) {
         // 2. Kurucuda, temel Java değerleri Property nesnelerine sarılır (wrap)
-        this.dersId = new SimpleStringProperty(dersId);
-        this.ogrenciId = new SimpleStringProperty(ogrenciId);
+        this.dersid = new SimpleStringProperty(dersid);
+        this.tc = new SimpleStringProperty(tc);
         this.sinif = new SimpleIntegerProperty(sinif);
         this.sinav1 = new SimpleIntegerProperty(sinav1);
         this.sinav2 = new SimpleIntegerProperty(sinav2);
@@ -29,12 +29,12 @@ public class NotGorunum { // Sınıf adını karışmaması için NotGorunumFx o
     // JavaFX TableView, bu metotları (alan adı + "Property") çağırarak
     // Property nesnesinin kendisini alır ve binding'i kurar.
 
-    public StringProperty dersIdProperty() {
-        return dersId;
+    public StringProperty dersidProperty() {
+        return dersid;
     }
 
-    public StringProperty ogrenciIdProperty() {
-        return ogrenciId;
+    public StringProperty tcProperty() {
+        return tc;
     }
 
     public IntegerProperty sinifProperty() {
@@ -49,23 +49,18 @@ public class NotGorunum { // Sınıf adını karışmaması için NotGorunumFx o
         return sinav2;
     }
 
-    // --- 4. Getter ve Setter Metotları (İsteğe bağlı, ancak tavsiye edilir) ---
+    public String getTc() {return tc.get();}
 
-    // Veriyi normal Java kodu içinde kullanmak (get) veya değiştirmek (set) için kullanılır.
+    public int getSinif() {return sinif.get();}
 
-    // Getter'lar: Property içindeki gerçek değeri döndürür
-    public String getDersId() {
-        return dersId.get();
+    public String getDersid() {
+        return dersid.get();
     }
 
     public int getSinav1() {
         return sinav1.get();
     }
 
-    // Setter'lar: Property içindeki değeri değiştirir (bu değişiklik otomatik olarak arayüze yansır)
-    public void setSinav1(int sinav1) {
-        this.sinav1.set(sinav1);
-    }
+    public int getSinav2() {return sinav2.get();}
 
-    // Diğer getter ve setter metotlarını aynı şekilde tanımlayabilirsiniz...
 }

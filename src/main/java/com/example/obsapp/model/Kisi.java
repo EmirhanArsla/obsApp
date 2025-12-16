@@ -1,6 +1,7 @@
 package com.example.obsapp.model;
 
 import com.example.obsapp.Interfaceler.IKayitOlabilir;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,9 +15,9 @@ import java.time.format.DateTimeFormatter;
 public abstract class Kisi implements IKayitOlabilir {
 
     // ====================== PROTECTED ALANLAR ======================
-    protected String id;
+    protected String tc;
     protected String ad;
-    protected String soyad;
+    protected String soyAd;
     protected LocalDate kayitTarihi;
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -26,20 +27,20 @@ public abstract class Kisi implements IKayitOlabilir {
     // ====================== CONSTRUCTOR OVERLOADING ======================
     public Kisi(String ad, String soyad) {
         setAd(ad);
-        setSoyad(soyad);
-        this.kayitTarihi = LocalDate.now();
+        setSoyAd(soyad);
+
     }
     public Kisi(String id, String ad, String soyad, LocalDate kayitTarihi) {
-        this.id = id;
+        this.tc = id;
         setAd(ad);
-        setSoyad(soyad);
+        setSoyAd(soyad);
         this.kayitTarihi = kayitTarihi;
     }
     public Kisi(String id, String ad, String soyad) {
-        this.id = id;
+        this.tc = id;
         setAd(ad);
-        setSoyad(soyad);
-        this.kayitTarihi = LocalDate.now();
+        setSoyAd(soyad);
+
     }
     // ====================== ABSTRACT METOT ======================
 
@@ -51,9 +52,9 @@ public abstract class Kisi implements IKayitOlabilir {
 
     // ====================== GETTER - SETTER ======================
 
-    public String getId() { return id; }
+    public String getTc() { return tc; }
 
-    public void setId(String id) { this.id = id; }
+    public void setTc(String tc) { this.tc = tc; }
 
     public String getAd() { return ad; }
 
@@ -63,12 +64,12 @@ public abstract class Kisi implements IKayitOlabilir {
         this.ad = ad;
     }
 
-    public String getSoyad() { return soyad; }
+    public String getSoyAd() { return soyAd; }
 
-    public void setSoyad(String soyad) {
-        if (soyad == null || soyad.length() < 2)
+    public void setSoyAd(String soyAd) {
+        if (soyAd == null || soyAd.length() < 2)
             throw new IllegalArgumentException("Soyad en az 2 karakter olmalıdır!");
-        this.soyad = soyad;
+        this.soyAd = soyAd;
     }
 
     public LocalDate getKayitTarihi() { return kayitTarihi; }
@@ -82,6 +83,6 @@ public abstract class Kisi implements IKayitOlabilir {
 
     @Override
     public void sistemeKayit() {
-        System.out.println(ad + " " + soyad + " sisteme kaydedildi. (Tarih: " + kayitTarihi + ")");
+        System.out.println(ad + " " + soyAd + " sisteme kaydedildi. (Tarih: " + kayitTarihi + ")");
     }
 }

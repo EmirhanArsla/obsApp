@@ -3,6 +3,8 @@ import com.example.obsapp.DBO.DersDao;
 import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
 import com.example.obsapp.DBO.OgretmenDao;
+import com.example.obsapp.Manager.RaporlamaManager;
+import com.example.obsapp.Viewmodel.OgrenciGorunum;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
 import com.example.obsapp.model.DersBase;
 import com.example.obsapp.model.Not;
@@ -14,11 +16,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.bson.Document;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -88,20 +95,22 @@ public class Yonteci_sisController {
     private Button buttonOgrenciAra;
 
     @FXML
-    private TableView<Ogrenci> tableViewOgrenciBilgileri;
+    private TableView<OgrenciGorunum> tableViewOgrenciBilgileri;
 
     @FXML
     private Label labelDurumOgrenciAra;
     @FXML
-    private TableColumn<Ogrenci, String> kolonAraIsim;
+    private TableColumn<OgrenciGorunum ,String> kolonAraIsim;
     @FXML
-    private TableColumn<Ogrenci, String> kolonAraSoyisim;
+    private TableColumn<OgrenciGorunum, String> kolonAraSoyisim;
     @FXML
-    private TableColumn<Ogrenci, String> kolonAraTc;
+    private TableColumn<OgrenciGorunum, String> kolonAraTc;
     @FXML
-    private TableColumn<Ogrenci, LocalDate> kolonAraKayitTarihi;
+    private TableColumn<OgrenciGorunum,String> kolonAraOgrenciNo;
     @FXML
-    private TableColumn<Ogrenci, String> kolonAraSinif;
+    private TableColumn<OgrenciGorunum, Integer> kolonAraSinif;
+    @FXML
+    private TableColumn<OgrenciGorunum, LocalDate> kolonAraKayitTarihi;
 
 
     // ============================
@@ -143,6 +152,8 @@ public class Yonteci_sisController {
     @FXML
     private TableColumn<OrtalamaGorunum, Double> kolonOrtalama;
     @FXML
+    private Button buttonNotlariAra;
+    @FXML
     private Label labelDersNotuG;
 
 
@@ -179,6 +190,9 @@ public class Yonteci_sisController {
     private NotDao notDao;
     private OgretmenDao ogretmenDao;
     private DersDao dersDao;
+    private RaporlamaManager raporlamaManager;
+
+
 
     public Yonteci_sisController() {
         // DAO sınıfını burada initialize ederiz
@@ -187,7 +201,7 @@ public class Yonteci_sisController {
 
     @FXML
     public void initialize() {
-
+        //seçnekli kutuların seçenekleri yazılır
         List<Integer> siniflar = Arrays.asList(9,10,11,12);
         sinifBox.setItems(FXCollections.observableArrayList(siniflar));
 
@@ -197,14 +211,70 @@ public class Yonteci_sisController {
         notDao = new NotDao(database.getCollection("Notlar"));
         ogretmenDao = new OgretmenDao(database.getCollection("Ogretmen"));
         dersDao = new DersDao(database.getCollection("Dersler"));
+        raporlamaManager=new RaporlamaManager(notDao,dersDao,ogrenciDao);
 
         ekleButton.setOnAction(event -> ogrenciEkle());
         ogrenciSilButton.setOnAction(e -> ogrenciSil());
         buttonOgrenciAra.setOnAction(e-> ogrenciAra());
         buttonNotEkle.setOnAction(e->notEkle());
         buttonOgretmenEkle.setOnAction(e->ogretmenEkle());
+        buttonNotlariAra.setOnAction(e->dersNotuGoruntule());
 
+
+        //Ogrenci Ara  için tablolaro değişkenle bağlıyoruz
+        kolonAraIsim.setCellValueFactory(new PropertyValueFactory<>("ad"));
+        kolonAraSoyisim.setCellValueFactory(new PropertyValueFactory<>("soyAd"));
+        kolonAraTc.setCellValueFactory(new PropertyValueFactory<>("tc"));
+        kolonAraSinif.setCellValueFactory(new PropertyValueFactory<>("sinifSeviyesi"));
+        kolonAraOgrenciNo.setCellValueFactory(new PropertyValueFactory<>("ogrenciNo"));
+        kolonAraKayitTarihi.setCellValueFactory(new PropertyValueFactory<>("kayitTarihi"));
+
+        kolonAraKayitTarihi.setCellFactory(column-> new TableCell<OgrenciGorunum,LocalDate >(){
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+            @Override
+            protected void updateItem(LocalDate localDate, boolean b) {
+                super.updateItem(localDate, b);
+                if (localDate == null || b  ){
+                    setText(null);
+                }else  {
+                    setText(formatter.format(localDate));
+                }
+            }
+        });
+
+        //Ders Notları için Tabloları birbirine bağlıyoruz
+        kolonDersadi.setCellValueFactory(new PropertyValueFactory<>("dersAdi"));
+        kolonYazili1.setCellValueFactory(new PropertyValueFactory<>("sinav1"));
+        kolonYazili2.setCellValueFactory(new PropertyValueFactory<>("sinav2"));
+        kolonOrtalama.setCellValueFactory(new PropertyValueFactory<>("ortalama"));
     }
+
+
+
+
+
+
+
+    private void dersNotuGoruntule() {
+        String tc = textFieldTcNotG.getText();
+        if (tc.isEmpty()) {
+            labelDersNotDurum.setText("Lütfen Alanı Doldurunuz");
+            return;
+        }
+            try {
+                List<OrtalamaGorunum> dersOrtlama = raporlamaManager.ortlamaGoster(tc);
+                tableViewDersNotG.setItems(FXCollections.observableArrayList(dersOrtlama));
+                labelDersNotDurum.setText("Ders Notları Getirildi");
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                labelDersNotDurum.setText("Ders Notları Getirilemedi");
+                labelDersNotDurum.setText("");
+            }
+            textFieldTcNotG.clear();
+        }
+
+
 
     private void ogretmenEkle() {
         String isim = textfieldOgretIsim.getText();
@@ -268,12 +338,22 @@ public class Yonteci_sisController {
             return;
         }
         try{
-            Document doc = ogrenciDao.ogrencisearch(tc);
+            OgrenciGorunum ogrenciGorunum =ogrenciDao.ogrenciGorunumSearch(tc);
+            if(ogrenciGorunum!=null){
+                ObservableList<OgrenciGorunum> ogrenciListesi = FXCollections.observableArrayList(ogrenciGorunum);
+
+                tableViewOgrenciBilgileri.setItems(ogrenciListesi);
+                labelDurumOgrenciAra.setText("Ogrenci Bilgileri Getirildi");
+            }
+            else {
+                labelDurumOgrenciAra.setText("Ogrenci Bulunmadı");
+            }
             textFieldOgrenciAraTC.clear();
 
 
         }catch (Exception e){
             labelDurumOgrenciAra.setText("Hata oluştu: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }

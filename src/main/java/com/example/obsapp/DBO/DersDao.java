@@ -10,11 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DersDao {
-    private MongoCollection<Document> collection;
+    private final MongoCollection<Document> collection;
 
     public DersDao(MongoCollection<Document> database) {
         MongoDatabase database0 = DBUtil.getInstance().getDatabase();
-        this.collection = database0.getCollection("Dersler");
+        if (database == null) {
+            throw new IllegalArgumentException("Not koleksiyonu null olamaz.");
+        }
+
+        // Constructor'a gelen koleksiyon nesnesini, sınıfın değişkenine atayın.
+        this.collection =database;
     }
 
     public List<Document> dersSearch (String dersid ){

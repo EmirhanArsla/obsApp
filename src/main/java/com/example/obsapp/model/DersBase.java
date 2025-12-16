@@ -6,20 +6,20 @@ public abstract class DersBase {
 
     // ===================== ALANLAR =====================
              // MongoDB ID (String olarak tutulabilir)
-    private String dersId;
+    private String dersid;
     private String dersAdi;     // Türkçe, Matematik, Fizik...
     private int sinifSeviyesi;  // 9,10,11,12
     private double katsayi;// 0–5 arası pozitif değer
     private String ogretmenAdi;
     public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi,String ogretmenAdi) {
-        setDersId(id);
+        setDersid(id);
         setDersAdi(dersAdi);
         setSinifSeviyesi(sinifSeviyesi);
         setKatsayi(katsayi);
 
     }
     public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
-        setDersId(id);
+        setDersid(id);
         setDersAdi(dersAdi);
         setSinifSeviyesi(sinifSeviyesi);
         setKatsayi(katsayi);
@@ -47,12 +47,12 @@ public abstract class DersBase {
 
         return formatliDersAdi() + " (" + sinifSeviyesi + ". Sınıf)";
     }
-    public String getDersId() { return dersId ; }
+    public String getDersid() { return dersid; }
 
-    public void setDersId(String dersId) {
-        if (dersId != null && dersId.trim().isEmpty())
+    public void setDersid(String dersid) {
+        if (dersid != null && dersid.trim().isEmpty())
             throw new IllegalArgumentException("ID boş olamaz!");
-        this.dersId = dersId;
+        this.dersid = dersid;
     }
 
     public String getDersAdi() { return dersAdi; }
@@ -96,12 +96,12 @@ public abstract class DersBase {
         if (this == o) return true;
         if (!(o instanceof DersBase)) return false;
         DersBase d = (DersBase) o;
-        return Objects.equals(dersId, d.dersId);
+        return Objects.equals(dersid, d.dersid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dersId);
+        return Objects.hash(dersid);
     }
 }
 

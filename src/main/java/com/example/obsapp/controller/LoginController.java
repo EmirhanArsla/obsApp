@@ -92,7 +92,7 @@ public class LoginController implements Initializable {
 
                 Ogrenci_sisController ogrenci_sis = loader.getController();
 
-                ogrenci_sis.setOgrenciNo(user);
+                ogrenci_sis.setGelen_ogrenciTc(pass);
             } catch (IOException e) {
                 e.printStackTrace();
                 hataMesaji.setText("Sayfa yüklenirken Hata oluştu" + e.getMessage());
