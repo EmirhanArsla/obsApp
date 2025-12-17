@@ -1,6 +1,7 @@
 package com.example.obsapp.model;
 
 public class Not {
+    //-------------------Alanlar---------------------
     private String NotId;
     private String DersId;
     private String Dersad;
@@ -8,7 +9,7 @@ public class Not {
     private int Sinav1;
     private int Sinav2;
     private int sinif;
-
+    //-----------------Yapıcı Metot----------------------
     public Not(String ogrenciId , String dersad,int sinav1,int sinav2,int sinif){
         this.OgrenciId=ogrenciId;
         this.Dersad=dersad;
@@ -18,6 +19,7 @@ public class Not {
         this.DersId =dersad.toUpperCase()+sinif;
         this.NotId= ogrenciId + "-" + ogrenciId ;
     }
+    //--------------Getter Setter-------------------
 
     public String getNotId() {
         return NotId;

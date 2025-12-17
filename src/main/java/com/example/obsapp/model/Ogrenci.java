@@ -8,11 +8,9 @@ public class Ogrenci extends Kisi {
 
     private int sinifSeviyesi;
     private String ogrenciNo;
-
-    // Sadece yazılı1 ve yazılı2
     private int[] notlar = new int[2];   // [0] = yazılı1, [1] = yazılı2
 
-    // -------------------- CONSTRUCTORLAR --------------------
+    // --------------Yapıcı Metot-------------
 
     public Ogrenci(String tc, String ad, String soyad, int sinifSeviyesi, String ogrenciNo , LocalDate kayitTarihi) {
         super(tc, ad, soyad,kayitTarihi);
@@ -35,8 +33,7 @@ public class Ogrenci extends Kisi {
     public void setOkulNo(int okulNo) { this.ogrenciNo = ogrenciNo; }
 
     public int[] getNotlar() { return notlar; }
-
-    // Sadece 2 not
+    //throw yapısıyla IllegalArgumentException hatsı fırlatıyoruz
     public void setNotlar(int yazili1, int yazili2) {
 
         if (yazili1 < 0 || yazili1 > 100 || yazili2 < 0 || yazili2 > 100)

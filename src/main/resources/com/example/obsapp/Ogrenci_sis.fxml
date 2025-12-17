@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A192D;;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Ogrenci_sisController">
+<AnchorPane cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="768.0" style="-fx-background-color: #4A70A9;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Ogrenci_sisController">
    <children>
-      <TabPane fx:id="tabPane" layoutX="10.0" layoutY="16.0" prefHeight="372.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutX="10.0" layoutY="16.0" prefHeight="481.0" prefWidth="742.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabDersNotu" text="Ders Notu Görüntüle">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="353.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="353.0" stylesheets="@style.css">
                      <children>
-                        <TableView fx:id="dersNotuTablo" layoutX="41.0" layoutY="35.0" prefHeight="236.0" prefWidth="489.0">
+                        <TableView fx:id="dersNotuTablo" layoutX="210.0" layoutY="38.0" prefHeight="324.0" prefWidth="451.0">
                           <columns>
                             <TableColumn fx:id="dersSutun" prefWidth="75.0" text="Ders" />
-                              <TableColumn fx:id="ogrenciNoSutun" prefWidth="75.0" text="Öğrenci NO" />
-                              <TableColumn fx:id="SinifSutun" prefWidth="75.0" text="Sınıf" />
+                              <TableColumn fx:id="ogrenciNoSutun" prefWidth="94.0" text="TC" />
+                              <TableColumn fx:id="SinifSutun" prefWidth="82.0" text="Sınıf" />
                             <TableColumn fx:id="sinav1Sutun" prefWidth="75.0" text="1.Yazılı" />
-                              <TableColumn fx:id="sinav2Sutun" prefWidth="75.0" text="2.Yazılı" />
+                              <TableColumn fx:id="sinav2Sutun" prefWidth="118.0" text="2.Yazılı" />
                           </columns>
                         </TableView>
+                        <ButtonBar layoutX="14.0" layoutY="271.0" prefHeight="40.0" prefWidth="200.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -30,12 +33,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableviewDersOrt" layoutX="50.0" layoutY="35.0" prefHeight="273.0" prefWidth="481.0">
+                        <TableView fx:id="tableviewDersOrt" layoutX="218.0" layoutY="38.0" prefHeight="326.0" prefWidth="428.0">
                           <columns>
-                            <TableColumn fx:id="dersOrtDersSutun" prefWidth="75.0" text="Ders" />
-                              <TableColumn fx:id="dersOrtSinav1" prefWidth="75.0" text="Sinav1" />
-                              <TableColumn fx:id="dersOrtSinav2" prefWidth="75.0" text="Sinav2" />
-                            <TableColumn fx:id="dersOrtOrtalamaSutun" prefWidth="75.0" text="Ortalama" />
+                            <TableColumn fx:id="dersOrtDersSutun" prefWidth="104.0" text="Ders" />
+                              <TableColumn fx:id="dersOrtSinav1" prefWidth="68.0" text="Sinav1" />
+                              <TableColumn fx:id="dersOrtSinav2" prefWidth="84.0" text="Sinav2" />
+                            <TableColumn fx:id="dersOrtOrtalamaSutun" prefWidth="165.0" text="Ortalama" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -45,12 +48,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="283.0">
                      <children>
-                        <TableView fx:id="tableGenelOrt" layoutX="37.0" layoutY="29.0" prefHeight="281.0" prefWidth="483.0">
+                        <TableView fx:id="tableGenelOrt" layoutX="205.0" layoutY="35.0" prefHeight="332.0" prefWidth="465.0">
                           <columns>
-                            <TableColumn fx:id="genelOrt9Sutun" prefWidth="103.0" text="İsim" />
-                            <TableColumn fx:id="genelOrt10Sutun" prefWidth="104.0" text="Soyisim" />
-                              <TableColumn fx:id="genelOrt11Sutun" prefWidth="127.0" text="TC" />
-                              <TableColumn fx:id="genelOrt12Sutun" prefWidth="148.0" text="Genel Ortalama" />
+                            <TableColumn fx:id="genelOrt9Sutun" prefWidth="109.0" text="İsim" />
+                            <TableColumn fx:id="genelOrt10Sutun" prefWidth="130.0" text="Soyisim" />
+                              <TableColumn fx:id="genelOrt11Sutun" prefWidth="114.0" text="TC" />
+                              <TableColumn fx:id="genelOrt12Sutun" prefWidth="92.0" text="Genel Ortalama" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -60,13 +63,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableOgrenciBilgi" layoutX="11.0" layoutY="22.0" prefHeight="176.0" prefWidth="556.0">
+                        <TableView fx:id="tableOgrenciBilgi" layoutX="249.0" layoutY="34.0" prefHeight="335.0" prefWidth="430.0">
                           <columns>
-                            <TableColumn fx:id="obAdSutun" prefWidth="115.0" text="Ad" />
-                            <TableColumn fx:id="obSoyadSutun" prefWidth="97.0" text="Soyad" />
-                              <TableColumn fx:id="obTcSutun" prefWidth="110.0" text="TC" />
-                              <TableColumn fx:id="obOgrenciNoSutun" prefWidth="75.0" text="Öğrenci No" />
-                              <TableColumn fx:id="obSinifSutun" prefWidth="41.0" text="Sınıf" />
+                            <TableColumn fx:id="obAdSutun" prefWidth="78.0" text="Ad" />
+                            <TableColumn fx:id="obSoyadSutun" text="Soyad" />
+                              <TableColumn fx:id="obTcSutun" prefWidth="95.0" text="TC" />
+                              <TableColumn fx:id="obOgrenciNoSutun" prefWidth="79.0" text="Öğrenci No" />
+                              <TableColumn fx:id="obSinifSutun" prefWidth="106.0" text="Sınıf" />
                               <TableColumn fx:id="obKayitTarihiSutun" prefWidth="117.0" text="Kayıt Tarihi" />
                           </columns>
                         </TableView>
@@ -76,4 +79,8 @@
         </tabs>
       </TabPane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@ogrenci.css" />
+   </stylesheets>
 </AnchorPane>
