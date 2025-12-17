@@ -7,7 +7,7 @@ import java.util.Objects;
 public abstract class DersBase {
 
     // ===================== ALANLAR =====================
-             // MongoDB ID (String olarak tutulabilir)
+
     private String dersid;
     private String dersAdi;     // Türkçe, Matematik, Fizik...
     private int sinifSeviyesi;  // 9,10,11,12
