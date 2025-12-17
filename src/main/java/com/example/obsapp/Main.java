@@ -43,7 +43,7 @@ public class Main extends Application {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         DersDao dersDao = new DersDao(database.getCollection("Dersler"));
         ZorunluDers matematik =
-                new ZorunluDers("MAT12", "Matematik", 12, 5.0, true);
+                new ZorunluDers("MATEMATİK12", "Matematik", 12, 5.0, true);
         dersDao.dersAdd(matematik);
         ZorunluDers turkce =
                 new ZorunluDers("TURKCE12", "Türkçe", 12, 5.0, true);

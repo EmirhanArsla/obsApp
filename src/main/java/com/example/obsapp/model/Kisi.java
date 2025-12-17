@@ -1,7 +1,5 @@
 package com.example.obsapp.model;
 
-import com.example.obsapp.Interfaceler.IKayitOlabilir;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * PDF'teki abstract class, inheritance, interface, overloading ve LocalDate
  * gereksinimlerini doğrudan karşılar.
  */
-public abstract class Kisi implements IKayitOlabilir {
+public abstract class Kisi {
 
     // ====================== PROTECTED ALANLAR ======================
     protected String tc;
@@ -25,30 +23,19 @@ public abstract class Kisi implements IKayitOlabilir {
 
 
     // ====================== CONSTRUCTOR OVERLOADING ======================
-    public Kisi(String ad, String soyad) {
-        setAd(ad);
-        setSoyAd(soyad);
-
-    }
     public Kisi(String id, String ad, String soyad, LocalDate kayitTarihi) {
         this.tc = id;
         setAd(ad);
         setSoyAd(soyad);
         this.kayitTarihi = kayitTarihi;
     }
-    public Kisi(String id, String ad, String soyad) {
-        this.tc = id;
-        setAd(ad);
-        setSoyAd(soyad);
 
-    }
     // ====================== ABSTRACT METOT ======================
 
     /**
      * Her alt sınıf (Ogrenci, Ogretmen) kendi bilgilerini ekrana
      * farklı şekilde yazmak zorunda olacak.
      */
-    public abstract void bilgileriYazdir();
 
     // ====================== GETTER - SETTER ======================
 
@@ -79,10 +66,4 @@ public abstract class Kisi implements IKayitOlabilir {
     }
 
 
-    // ====================== INTERFACE IMPLEMENTATION ======================
-
-    @Override
-    public void sistemeKayit() {
-        System.out.println(ad + " " + soyAd + " sisteme kaydedildi. (Tarih: " + kayitTarihi + ")");
-    }
 }

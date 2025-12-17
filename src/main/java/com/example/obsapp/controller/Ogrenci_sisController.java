@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,6 +40,9 @@ public class Ogrenci_sisController implements Initializable {
 
     @FXML
     private Tab tabDersOrtalama;  // "Ders Ortalaması"
+    @FXML
+    private Tab tapOgrenciBilgileri;
+
     // =========================
     // DERS NOTU TABLOSU
     // =========================
@@ -71,7 +75,8 @@ public class Ogrenci_sisController implements Initializable {
     // ============================
     // Genel Ortalama görüntüle Tablosu
     // ============================
-    private TableView<GnoGorunum> tableviewGenelOrt ;
+    @FXML
+    private TableView<GnoGorunum> tableGenelOrt ;
     @FXML
     private TableColumn<GnoGorunum, String> genelOrt9Sutun;
     @FXML
@@ -83,7 +88,8 @@ public class Ogrenci_sisController implements Initializable {
     // ============================
     // Ogrenci Bilgisi Tablosu
     // ============================
-    private TableView<OgrenciGorunum> tableviewOgrenciBilgi ;
+    @FXML
+    private TableView<OgrenciGorunum> tableOgrenciBilgi ;
     @FXML
     private TableColumn<OgrenciGorunum, String> obAdSutun;
     @FXML
@@ -141,6 +147,8 @@ public class Ogrenci_sisController implements Initializable {
                 loadGenelOrtalama();
             } else if (newTab == tabDersOrtalama) {
                 loadDersOrtalamasi();
+            } else if (newTab == tapOgrenciBilgileri) {
+                loadOgrenciBilgi();
             }
         });
 
@@ -158,29 +166,33 @@ public class Ogrenci_sisController implements Initializable {
         dersOrtSinav1.setCellValueFactory(new PropertyValueFactory<>("sinav1"));
         dersOrtSinav2.setCellValueFactory(new PropertyValueFactory<>("sinav2"));
         dersOrtOrtalamaSutun.setCellValueFactory(new PropertyValueFactory<>("ortalama"));
+        //3.Tab'ın (Genel Ortalama Görüntüle ) Sutunları ile Değerle eşleşmesi yapıldı
+        genelOrt9Sutun.setCellValueFactory(new PropertyValueFactory<>("ad"));
+        genelOrt10Sutun.setCellValueFactory(new PropertyValueFactory<>("soyAd"));
+        genelOrt11Sutun.setCellValueFactory(new PropertyValueFactory<>("tc"));
+        genelOrt12Sutun.setCellValueFactory(new PropertyValueFactory<>("Gno"));
 
+   //     4.Tab'ın(Ogrenci Bilgilerini Tabı)sutunları ile değerler eşleşmesi yapıldı
+        obAdSutun.setCellValueFactory(new PropertyValueFactory<>("ad"));
+        obSoyadSutun.setCellValueFactory(new PropertyValueFactory<>("soyAd"));
+        obTcSutun.setCellValueFactory(new PropertyValueFactory<>("tc"));
+        obSinifSutun.setCellValueFactory(new PropertyValueFactory<>("sinifSeviyesi"));
+        obOgrenciNoSutun.setCellValueFactory(new PropertyValueFactory<>("ogrenciNo"));
+        obKayitTarihiSutun.setCellValueFactory(new PropertyValueFactory<>("kayitTarihi"));
 
-        //4.Tab'ın(Ogrenci Bilgilerini Tabı)sutunları ile değerler eşleşmesi yapıldı
-//        obAdSutun.setCellValueFactory(new PropertyValueFactory<>("ad"));
-//        obSoyadSutun.setCellValueFactory(new PropertyValueFactory<>("soyAd"));
-//        obTcSutun.setCellValueFactory(new PropertyValueFactory<>("tc"));
-//        obSinifSutun.setCellValueFactory(new PropertyValueFactory<>("sinifSeviyesi"));
-//        obOgrenciNoSutun.setCellValueFactory(new PropertyValueFactory<>("ogrenciNo"));
-//        obKayitTarihiSutun.setCellValueFactory(new PropertyValueFactory<>("kayitTarihi"));
+        obKayitTarihiSutun.setCellFactory(column-> new TableCell<OgrenciGorunum, LocalDate>(){
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-//        obKayitTarihiSutun.setCellFactory(column-> new TableCell<OgrenciGorunum, LocalDate>(){
-//            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-//
-//            @Override
-//            protected void updateItem(LocalDate localDate, boolean b) {
-//                super.updateItem(localDate, b);
-//                if (localDate == null || b  ){
-//                    setText(null);
-//                }else  {
-//                    setText(formatter.format(localDate));
-//                }
-//            }
-//        });
+            @Override
+            protected void updateItem(LocalDate localDate, boolean b) {
+                super.updateItem(localDate, b);
+                if (localDate == null || b  ){
+                    setText(null);
+                }else  {
+                    setText(formatter.format(localDate));
+                }
+            }
+        });
 
     }
     private void loadDersNotlari() {
@@ -191,13 +203,21 @@ public class Ogrenci_sisController implements Initializable {
             dersNotuTablo.setItems(FXCollections.observableArrayList(notlarList));
         }
         else {
-            System.err.println("Öğrenci Numarası Bulunamadi.");
+            System.err.println("Öğrenci TC'si Bulunamadi.");
         }
     }
 
     private void loadGenelOrtalama() {
         System.out.println("➤ Genel ortalama sekmesi açıldı.");
-        // HesaplamaUtil ile genel ortalama hesaplanabilir
+        if (gelen_ogrenciTc != null) {
+            List<GnoGorunum> gnoList = raporlamaManager.gnoGetir(gelen_ogrenciTc);
+
+            tableGenelOrt.setItems(FXCollections.observableArrayList(gnoList));
+        }
+        else {
+            System.err.println("Öğrenci Bulunamadi.");
+        }
+
     }
 
     private void loadDersOrtalamasi() {
@@ -210,6 +230,22 @@ public class Ogrenci_sisController implements Initializable {
     else {
         System.err.println("Öğrenci Bulunamadi.");
     }
+    }
+    private void loadOgrenciBilgi() {
+
+        if (gelen_ogrenciTc != null) {
+           OgrenciGorunum OgrenciB = ogrenciDao.ogrenciGorunumSearch(gelen_ogrenciTc);
+            if(OgrenciB != null){
+                tableOgrenciBilgi.setItems(FXCollections.observableArrayList(OgrenciB));
+                System.out.println("Öğrenci bilgileri yüklendi");
+            }
+            else {
+                System.err.println("Ogrenci Bulunamadi.");
+            }
+        }
+        else {
+            System.err.println("Ogrenci Bulunamadi.");
+        }
     }
 
 }

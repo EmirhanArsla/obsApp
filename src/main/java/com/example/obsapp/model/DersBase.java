@@ -1,7 +1,5 @@
 package com.example.obsapp.model;
 
-import org.bson.Document;
-
 import java.util.Objects;
 
 public abstract class DersBase {
@@ -12,14 +10,8 @@ public abstract class DersBase {
     private String dersAdi;     // Türkçe, Matematik, Fizik...
     private int sinifSeviyesi;  // 9,10,11,12
     private double katsayi;// 0–5 arası pozitif değer
-    private String ogretmenAdi;
-    public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi,String ogretmenAdi) {
-        setDersid(id);
-        setDersAdi(dersAdi);
-        setSinifSeviyesi(sinifSeviyesi);
-        setKatsayi(katsayi);
 
-    }
+
     public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
         setDersid(id);
         setDersAdi(dersAdi);
@@ -27,30 +19,7 @@ public abstract class DersBase {
         setKatsayi(katsayi);
 
     }
-    public DersBase(String dersAdi, int sinifSeviyesi) {
 
-        setDersAdi(dersAdi);
-        setSinifSeviyesi(sinifSeviyesi);
-
-    }
-    public abstract Document toDocument();
-
-    public abstract void dersBilgisiYazdir();
-
-    public String formatliDersAdi() {
-        return dersAdi
-                .trim()
-                .toUpperCase()
-                .replace("İ", "I");
-    }
-    public int katsayiInt() {
-
-        return (int) katsayi;  // Explicit cast
-    }
-    public String tamBilgi() {
-
-        return formatliDersAdi() + " (" + sinifSeviyesi + ". Sınıf)";
-    }
     public String getDersid() { return dersid; }
 
     public void setDersid(String dersid) {
@@ -85,14 +54,6 @@ public abstract class DersBase {
         if (katsayi <= 0 || katsayi > 5)
             throw new IllegalArgumentException("Katsayı 1.0–5.0 aralığında olmalıdır!");
         this.katsayi = katsayi;
-    }
-
-    public String getOgretmenAdi() {
-        return ogretmenAdi;
-    }
-
-    public void setOgretmenAdi(String ogretmenAdi) {
-        this.ogretmenAdi = ogretmenAdi;
     }
 
     @Override

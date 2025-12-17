@@ -9,17 +9,6 @@ public class Ogretmen extends Kisi {
 
     // ====================== CONSTRUCTOR OVERLOADING ======================
 
-    // 1) Branşlı öğretmen
-    public Ogretmen(String ad, String soyad, String brans) {
-        super(ad, soyad);
-        setBrans(brans);
-    }
-
-    // 2) ID ile
-    public Ogretmen(String id, String ad, String soyad, String brans) {
-        super(id, ad, soyad);
-        setBrans(brans);
-    }
 
     // 3) Kayıt tarihli öğretmen
     public Ogretmen(String id, String ad, String soyad, String brans, LocalDate kayitTarihi) {
@@ -48,20 +37,5 @@ public class Ogretmen extends Kisi {
         this.verdigiDers = ders;
     }
 
-    // ====================== OVERRIDE METOT ======================
 
-    @Override
-    public void bilgileriYazdir() {
-        System.out.println("===== ÖĞRETMEN BİLGİLERİ =====");
-        System.out.println("Ad Soyad      : " + ad + " " + soyAd);
-        System.out.println("Branş         : " + brans);
-        System.out.println("Kayıt Tarihi  : " + getKayitTarihiFormatted());
-
-        if (verdigiDers == null)
-            System.out.println("Verdiği Ders  : Henüz ders atanmamış.");
-        else
-            System.out.println("Verdiği Ders  : " + verdigiDers.getDersAdi());
-
-        System.out.println("==============================\n");
-    }
 }

@@ -12,16 +12,12 @@ public class Ogrenci extends Kisi {
     // Sadece yazılı1 ve yazılı2
     private int[] notlar = new int[2];   // [0] = yazılı1, [1] = yazılı2
 
-    private List<DersBase> aldigiDersler;
-
     // -------------------- CONSTRUCTORLAR --------------------
-
 
     public Ogrenci(String tc, String ad, String soyad, int sinifSeviyesi, String ogrenciNo , LocalDate kayitTarihi) {
         super(tc, ad, soyad,kayitTarihi);
         setSinifSeviyesi(sinifSeviyesi);
         this.ogrenciNo = ogrenciNo;
-        this.aldigiDersler = new ArrayList<>();
     }
 
     // -------------------- GETTER - SETTER --------------------
@@ -50,22 +46,5 @@ public class Ogrenci extends Kisi {
         notlar[1] = yazili2;
     }
 
-    public List<DersBase> getAldigiDersler() { return aldigiDersler; }
-
-    public void derseKayitOl(DersBase ders) {
-        aldigiDersler.add(ders);
     }
 
-    // -------------------- OVERRIDE METOT --------------------
-
-    @Override
-    public void bilgileriYazdir() {
-        System.out.println("===== ÖĞRENCİ BİLGİLERİ =====");
-        System.out.println("Ad Soyad     : " + ad + " " + soyAd);
-        System.out.println("Okul No      : " +ogrenciNo );
-        System.out.println("Sınıf        : " + sinifSeviyesi);
-        System.out.println("Kayıt Tarihi : " + getKayitTarihiFormatted());
-        System.out.println("Aldığı Ders  : " + aldigiDersler.size());
-        System.out.println("============================\n");
-    }
-}
