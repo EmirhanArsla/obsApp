@@ -1,16 +1,11 @@
 package com.example.obsapp.DBO;
 
-import com.example.obsapp.Interfaceler.IDao;
 import com.example.obsapp.model.Ders;
-import com.example.obsapp.model.DersBase;
-import com.example.obsapp.model.Not;
-import com.example.obsapp.model.ZorunluDers;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
