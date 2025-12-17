@@ -1,5 +1,6 @@
 package com.example.obsapp.DBO;
 
+import com.example.obsapp.Interfaceler.IDao;
 import com.example.obsapp.model.Ders;
 import com.example.obsapp.model.DersBase;
 import com.example.obsapp.model.Not;
