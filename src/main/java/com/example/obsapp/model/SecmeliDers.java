@@ -6,7 +6,7 @@ import org.bson.Document;
 
 public class SecmeliDers extends Ders implements INotHesaplayabilir {
     boolean zorunluMu=false;
-    // ==================== CONSTRUCTORS ====================
+    // -------------------Yapıcı Metot-------------------
 
 
     public SecmeliDers(String id, String dersAdi, int sinifSeviyesi,
@@ -15,7 +15,7 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
         super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
-    // ==================== INotHesaplayabilir ====================
+    // ----------INotHesaplayabilir interface'inin Override metotları---------------
 
     @Override
     public double ortalama(int y1, int y2) {

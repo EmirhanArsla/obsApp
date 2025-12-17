@@ -12,17 +12,18 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Kisi {
 
-    // ====================== PROTECTED ALANLAR ======================
-    protected String tc;
-    protected String ad;
-    protected String soyAd;
-    protected LocalDate kayitTarihi;
+    // ---------------Alanlar------------
+    private String tc;
+    private String ad;
+    private String soyAd;
+    private LocalDate kayitTarihi;
+    //DateTimeFormater Sınıfyla kayitTarihine format belirliyoruz.
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 
 
-    // ====================== CONSTRUCTOR OVERLOADING ======================
+    // --------------Yapıcı Metot--------------------
     public Kisi(String id, String ad, String soyad, LocalDate kayitTarihi) {
         this.tc = id;
         setAd(ad);
@@ -30,14 +31,7 @@ public abstract class Kisi {
         this.kayitTarihi = kayitTarihi;
     }
 
-    // ====================== ABSTRACT METOT ======================
-
-    /**
-     * Her alt sınıf (Ogrenci, Ogretmen) kendi bilgilerini ekrana
-     * farklı şekilde yazmak zorunda olacak.
-     */
-
-    // ====================== GETTER - SETTER ======================
+    // ------------------Getter Setter-----------------
 
     public String getTc() { return tc; }
 
@@ -45,6 +39,7 @@ public abstract class Kisi {
 
     public String getAd() { return ad; }
 
+    //Isim en az iki karekterli olmalıdır IllegalArgumentException fırlatıyoruz.
     public void setAd(String ad) {
         if (ad == null || ad.length() < 2)
             throw new IllegalArgumentException("İsim en az 2 karakter olmalıdır!");
@@ -53,6 +48,7 @@ public abstract class Kisi {
 
     public String getSoyAd() { return soyAd; }
 
+    //Isim en az iki karekterli olmalıdır IllegalArgumentException fırlatıyoruz.
     public void setSoyAd(String soyAd) {
         if (soyAd == null || soyAd.length() < 2)
             throw new IllegalArgumentException("Soyad en az 2 karakter olmalıdır!");

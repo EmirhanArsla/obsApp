@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="697.0" prefWidth="837.0" style="-fx-background-color: #0A1A2F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Yonteci_sisController">
+<AnchorPane prefHeight="636.0" prefWidth="839.0" style="-fx-background-color: #4A70A9;" stylesheets="@yonetici.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Yonteci_sisController">
    <children>
       <TabPane fx:id="tabPane" layoutY="46.0" prefHeight="540.0" prefWidth="837.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -176,7 +176,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tableViewDersNotG" layoutX="41.0" layoutY="135.0" prefHeight="307.0" prefWidth="629.0">
+                        <TableView fx:id="tableViewDersNotG" layoutX="80.0" layoutY="130.0" prefHeight="307.0" prefWidth="311.0">
                           <columns>
                               <TableColumn fx:id="kolonDersadi" prefWidth="67.0" text="Ders Adı" />
                               <TableColumn fx:id="kolonYazili1" minWidth="4.0" prefWidth="85.0" text="1.Yazılı" />
@@ -247,7 +247,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="gnoTable" layoutX="60.0" layoutY="89.0" prefHeight="377.0" prefWidth="698.0">
+                        <TableView fx:id="gnoTable" layoutX="272.0" layoutY="54.0" prefHeight="355.0" prefWidth="482.0">
                           <columns>
                             <TableColumn fx:id="gnoOgrenciNo" prefWidth="120.0" text="Öğrenci No" />
                             <TableColumn fx:id="gnoIsim" prefWidth="117.0" text="İsim" />
