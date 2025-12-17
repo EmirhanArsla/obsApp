@@ -15,15 +15,22 @@ import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.awt.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +39,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Yonteci_sisController {
+    @FXML
+    private TabPane tabPane;
     @FXML
     private Tab ogrenciDuzenle;
 
@@ -46,6 +55,10 @@ public class Yonteci_sisController {
 
     @FXML
     private Tab ogretmenEkle;
+    @FXML
+    private Tab gnoTab;
+    @FXML
+    private Button  anaMenuDonus;
 
     // ============================
     // ORTAK LABEL
@@ -209,6 +222,8 @@ public class Yonteci_sisController {
     private Button buttonSinifOrt;
     @FXML
     private Label labelSinifOrt;
+    @FXML
+    private Label sinifOrtLabel;
 
 
 
@@ -225,14 +240,51 @@ public class Yonteci_sisController {
         // DAO sınıfını burada initialize ederiz
 
     }
+    @FXML
+    private void handleSayfaAc(ActionEvent event) {
+        try {
+            // 1. FXML dosyasının yolunu belirtin (Örn: "/com/example/obsapp/DashboardView.fxml")
+            String fxmlPath = "/com/example/obsapp/hello-view.fxml";
+            String title = "Giris Ekranı";
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            // 2. Yeni sahneyi (Scene) oluşturun
+            Scene scene = new Scene(root);
+
+            // 3. Mevcut pencereyi (Stage) buton üzerinden bulun
+            // Bu yöntem, 'yoneticiKullanici' gibi spesifik bir değişkene bağımlılığı ortadan kaldırır.
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // 4. Mevcut pencerenin içeriğini değiştirin (Yeni pencere açmak yerine geçiş yapar)
+            currentStage.setTitle(title);
+            currentStage.setScene(scene);
+            currentStage.show();
+
+            // Opsiyonel: Eğer veriyi yeni Controller'a aktarmanız gerekiyorsa:
+            // HedefController controller = loader.getController();
+            // controller.setData("Veri...");
+
+        } catch (IOException e) {
+            System.err.println("Sayfa yüklenirken hata oluştu: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     @FXML
     public void initialize() {
         //seçnekli kutuların seçenekleri yazılır
         List<Integer> siniflar = Arrays.asList(9,10,11,12);
         sinifBox.setItems(FXCollections.observableArrayList(siniflar));
+        choiceBoxSinifOrt.setItems(FXCollections.observableArrayList(siniflar));
 
-        //Sınıfların Database sınıflarıyla bağlantı kurabilmeleri için oluşturulan nesneler
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+            if (newTab == gnoTab) {
+                gnolariGetir();
+            }});
+
+            //Sınıfların Database sınıflarıyla bağlantı kurabilmeleri için oluşturulan nesneler
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
         notDao = new NotDao(database.getCollection("Notlar"));
@@ -246,7 +298,7 @@ public class Yonteci_sisController {
         buttonNotEkle.setOnAction(e->notEkle());
         buttonOgretmenEkle.setOnAction(e->ogretmenEkle());
         buttonNotlariAra.setOnAction(e->dersNotuGoruntule());
-
+        buttonSinifOrt.setOnAction(e->sinifOrtlamasi());
 
         //Ogrenci Ara  için tablolaro değişkenle bağlıyoruz
         kolonAraIsim.setCellValueFactory(new PropertyValueFactory<>("ad"));
@@ -280,7 +332,24 @@ public class Yonteci_sisController {
         gnoOgrenciNo.setCellValueFactory(new PropertyValueFactory<>("tc"));
         gnoIsim.setCellValueFactory(new PropertyValueFactory<>("ad"));
         gnoSoyisim.setCellValueFactory(new PropertyValueFactory<>("soyAd"));
-        gnoGenelOrt.setCellValueFactory(new PropertyValueFactory<>("Gno"));
+        gnoGenelOrt.setCellValueFactory(new PropertyValueFactory<>("gno"));
+
+    }
+
+    public void sinifOrtlamasi(){
+        Integer sinif = choiceBoxSinifOrt.getValue();
+        if (sinif == null){
+            labelSinifOrt.setText("Lütfen Sınıf Seçin ");
+            return;
+        }
+        try {
+            double sinifOrtlamasi = raporlamaManager.sinifOrtalama(sinif);
+            labelSinifOrt.setText( sinif + " Sinif Ortalama: " + sinifOrtlamasi);
+        }
+        catch (Exception e){
+            System.err.println("Ortalama Getirilemedi: "+e.getMessage());
+
+        }
     }
 
 
@@ -450,6 +519,7 @@ public class Yonteci_sisController {
         }
 
     }
+
 }
 
 

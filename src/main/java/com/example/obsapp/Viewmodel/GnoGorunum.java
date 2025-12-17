@@ -9,13 +9,13 @@ public class GnoGorunum {
     private final StringProperty tc;
     private final StringProperty ad;
     private final StringProperty  soyAd;
-    private final DoubleProperty Gno;
+    private final DoubleProperty gno;
 
     public GnoGorunum(String tc, String Ad, String soyAd, double Gno) {
         this.tc = new SimpleStringProperty(tc);
         this.ad = new SimpleStringProperty(Ad);
         this.soyAd = new SimpleStringProperty(soyAd);
-        this.Gno = new SimpleDoubleProperty(Gno) ;
+        this.gno = new SimpleDoubleProperty(Gno) ;
     }
 
     public StringProperty tcProperty() {return tc;}
@@ -24,7 +24,7 @@ public class GnoGorunum {
 
     public StringProperty soyAdProperty() {return soyAd;}
 
-    public DoubleProperty GnoProperty() {return Gno;}
+    public DoubleProperty gnoProperty() {return gno;}
 
 
 
@@ -39,6 +39,6 @@ public class GnoGorunum {
     }
 
     public double getGno() {
-        return Gno.get();
+        return gno.get();
     }
 }

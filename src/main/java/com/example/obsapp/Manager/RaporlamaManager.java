@@ -16,6 +16,7 @@ import org.bson.Document;
 import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RaporlamaManager implements IRaporlamaManager {
 //    MongoDatabase database = DBUtil.getInstance().getDatabase();
@@ -202,6 +203,7 @@ public class RaporlamaManager implements IRaporlamaManager {
             String ad = ogrenci.getString("ad");
             String soyad = ogrenci.getString("soyAd");
 
+
             double gno =gnoHesapla(Tc);
 
             GnoGorunum detay = new GnoGorunum(
@@ -267,6 +269,34 @@ public class RaporlamaManager implements IRaporlamaManager {
         return toplamDersOrtlama/ogrenciSayisi;
     }
 
+    private double gnoHesaplaHizli(List<Document> notlar, Map<String, Document> dersMap) {
+        double toplamAgirlikliNot = 0.0;
+        double toplamKredi = 0.0;
+
+        for (Document not : notlar) {
+            String dersId = not.getString("dersid");
+            double sinav1 = ((Number) not.get("sinav1")).doubleValue();
+            double sinav2 = ((Number) not.get("sinav2")).doubleValue();
+
+            // Map'ten ders bilgisini al (çok hızlı!)
+            Document ders = dersMap.get(dersId);
+
+            if (ders != null && ders.containsKey("katsayi")) {
+                double katsayi = ((Number) ders.get("katsayi")).doubleValue();
+                double dersOrtalama = HesaplamaUtil.ortalama(sinav1, sinav2);
+                double agirlikliNot = HesaplamaUtil.agirlikliNot(dersOrtalama, katsayi);
+
+                toplamAgirlikliNot += agirlikliNot;
+                toplamKredi += katsayi;
+            }
+        }
+
+        if (toplamKredi == 0.0) {
+            return 0.0;
+        }
+
+        return Math.round((toplamAgirlikliNot / toplamKredi) * 100.0) / 100.0;
+    }
 
 
 
