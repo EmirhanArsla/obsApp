@@ -4,14 +4,13 @@ import java.util.Objects;
 
 public abstract class DersBase {
 
-    // ===================== ALANLAR =====================
+    // -------------Alanlar---------------
 
     private String dersid;
     private String dersAdi;     // Türkçe, Matematik, Fizik...
     private int sinifSeviyesi;  // 9,10,11,12
     private double katsayi;// 0–5 arası pozitif değer
-
-
+    //-----------Yapıcı Metot----------------
     public DersBase(String id, String dersAdi, int sinifSeviyesi, double katsayi) {
         setDersid(id);
         setDersAdi(dersAdi);
@@ -19,6 +18,7 @@ public abstract class DersBase {
         setKatsayi(katsayi);
 
     }
+    //----------Getter-Setterlar---------------
 
     public String getDersid() { return dersid; }
 
@@ -56,6 +56,8 @@ public abstract class DersBase {
         this.katsayi = katsayi;
     }
 
+    //-------------equals ve hashCode---------------
+    //Bu yapı sayesinde koleksiyonlarda tekrar eden nesneler eklenmesi engellenmiş olur.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

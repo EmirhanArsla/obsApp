@@ -7,7 +7,7 @@ import org.bson.Document;
 public class ZorunluDers extends Ders implements INotHesaplayabilir {
 
     boolean zorunluMu=true;
-    // ==================== CONSTRUCTORS ====================
+    // -----------------Yapıcı Metot------------------
 
     public ZorunluDers(String id, String dersAdi, int sinifSeviyesi,
                        double katsayi,boolean zorunluMu) {
@@ -15,7 +15,7 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
         super(id, dersAdi, sinifSeviyesi, katsayi);
         this.zorunluMu=zorunluMu;
     }
-    // ==================== INotHesaplayabilir METOTLARI ====================
+    // --------------- INotHesaplayabilir interface'inin Override metotları--------------
 
     @Override
     public double ortalama(int y1, int y2) {
