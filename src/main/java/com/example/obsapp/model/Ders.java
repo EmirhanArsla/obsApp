@@ -20,25 +20,8 @@ public class Ders extends DersBase implements INotHesaplayabilir {
         super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
-    public Ders(String dersAdi, int sinifSeviyesi) {
-        super(dersAdi, sinifSeviyesi);
-    }
 
     // ======================== OVERRIDES ========================
-   @Override
-    public Document toDocument() {
-        return new Document("dersAdi", getDersAdi())
-                .append("sinif", getSinifSeviyesi())
-                .append("tur", "NORMAL");
-    }
-    @Override
-    public void dersBilgisiYazdir() {
-        System.out.println("=== DERS BİLGİLERİ ===");
-        System.out.println("Ders: " + formatliDersAdi());
-        System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
-        System.out.println("Katsayı: " + getKatsayi());
-        System.out.println("=======================\n");
-    }
 
     @Override
     public double agirlikliNot(double ortalama ,int Katsayi) {

@@ -45,7 +45,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="283.0">
                      <children>
-                        <TableView fx:id="tableviewGenelOrt" layoutX="37.0" layoutY="29.0" prefHeight="281.0" prefWidth="483.0">
+                        <TableView fx:id="tableGenelOrt" layoutX="37.0" layoutY="29.0" prefHeight="281.0" prefWidth="483.0">
                           <columns>
                             <TableColumn fx:id="genelOrt9Sutun" prefWidth="103.0" text="İsim" />
                             <TableColumn fx:id="genelOrt10Sutun" prefWidth="104.0" text="Soyisim" />
@@ -60,7 +60,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableviewOgrenciBilgi" layoutX="11.0" layoutY="22.0" prefHeight="176.0" prefWidth="556.0">
+                        <TableView fx:id="tableOgrenciBilgi" layoutX="11.0" layoutY="22.0" prefHeight="176.0" prefWidth="556.0">
                           <columns>
                             <TableColumn fx:id="obAdSutun" prefWidth="115.0" text="Ad" />
                             <TableColumn fx:id="obSoyadSutun" prefWidth="97.0" text="Soyad" />

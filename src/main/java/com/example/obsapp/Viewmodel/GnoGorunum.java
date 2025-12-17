@@ -6,32 +6,39 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class GnoGorunum {
-    private final StringProperty ogrenciNo;
-    private final StringProperty  Ad;
+    private final StringProperty tc;
+    private final StringProperty ad;
     private final StringProperty  soyAd;
     private final DoubleProperty Gno;
 
-    public GnoGorunum(String ogrenciNo, String Ad, String soyAd,  double Gno) {
-        this.ogrenciNo = new SimpleStringProperty(ogrenciNo);
-        this.Ad = new SimpleStringProperty(Ad);
+    public GnoGorunum(String tc, String Ad, String soyAd, double Gno) {
+        this.tc = new SimpleStringProperty(tc);
+        this.ad = new SimpleStringProperty(Ad);
         this.soyAd = new SimpleStringProperty(soyAd);
         this.Gno = new SimpleDoubleProperty(Gno) ;
     }
 
+    public StringProperty tcProperty() {return tc;}
 
-    public StringProperty getOgrenciNo() {
-        return ogrenciNo;
+    public StringProperty adProperty() {return ad;}
+
+    public StringProperty soyAdProperty() {return soyAd;}
+
+    public DoubleProperty GnoProperty() {return Gno;}
+
+
+
+    public String getTc() {
+        return tc.get();
     }
 
-    public StringProperty getAd() {
-        return Ad;
+    public String getAd() {return ad.get();}
+
+    public String getSoyAd() {
+        return soyAd.get();
     }
 
-    public StringProperty getSoyAd() {
-        return soyAd;
-    }
-
-    public DoubleProperty getGno() {
-        return Gno;
+    public double getGno() {
+        return Gno.get();
     }
 }

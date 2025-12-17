@@ -15,24 +15,6 @@ public class SecmeliDers extends Ders implements INotHesaplayabilir {
         super(id, dersAdi, sinifSeviyesi, katsayi);
     }
 
-
-
-    // ==================== OVERRIDES ====================
-    public Document toDocument() {
-        return new Document("dersAdi", getDersAdi())
-                .append("sinif", getSinifSeviyesi())
-                .append("tur", "SECMELI");
-    }
-
-    @Override
-    public void dersBilgisiYazdir() {
-        System.out.println("=== SEÇMELİ DERS ===");
-        System.out.println("Ders Adı: " + formatliDersAdi());
-        System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
-        System.out.println("Katsayı: " + getKatsayi());
-        System.out.println("======================\n");
-    }
-
     // ==================== INotHesaplayabilir ====================
 
     @Override

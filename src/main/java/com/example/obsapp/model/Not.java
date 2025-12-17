@@ -15,8 +15,8 @@ public class Not {
         this.Sinav1=sinav1;
         this.Sinav2=sinav2;
         this.sinif=sinif;
-        this.DersId = sinif + dersad;
-        this.NotId= ogrenciId + "-" + dersad ;
+        this.DersId =dersad.toUpperCase()+sinif;
+        this.NotId= ogrenciId + "-" + ogrenciId ;
     }
 
     public String getNotId() {

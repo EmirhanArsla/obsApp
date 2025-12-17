@@ -193,7 +193,7 @@ public class Yonteci_sisController {
     @FXML
     private TableView<GnoGorunum> gnoTable;
     @FXML
-    private TableColumn<GnoGorunum, String>gnoOgrenciNO ;
+    private TableColumn<GnoGorunum, String> gnoOgrenciNo ;
     @FXML
     private TableColumn<GnoGorunum, String> gnoIsim;
     @FXML
@@ -275,10 +275,25 @@ public class Yonteci_sisController {
         kolonYazili1.setCellValueFactory(new PropertyValueFactory<>("sinav1"));
         kolonYazili2.setCellValueFactory(new PropertyValueFactory<>("sinav2"));
         kolonOrtalama.setCellValueFactory(new PropertyValueFactory<>("ortalama"));
+
+        //Tüm ganolar İçin Tablolaro biribne baülıyoruz
+        gnoOgrenciNo.setCellValueFactory(new PropertyValueFactory<>("tc"));
+        gnoIsim.setCellValueFactory(new PropertyValueFactory<>("ad"));
+        gnoSoyisim.setCellValueFactory(new PropertyValueFactory<>("soyAd"));
+        gnoGenelOrt.setCellValueFactory(new PropertyValueFactory<>("Gno"));
     }
 
 
+    public void gnolariGetir() {
+        try{
+            List<GnoGorunum> gnoGeti = raporlamaManager.tumGnolar();
+            gnoTable.setItems(FXCollections.observableArrayList(gnoGeti));
+        }
+        catch (Exception e){
+            System.err.println("Ders notları getirilmedi ");
 
+        }
+    }
 
 
 

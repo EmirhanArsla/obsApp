@@ -15,24 +15,6 @@ public class ZorunluDers extends Ders implements INotHesaplayabilir {
         super(id, dersAdi, sinifSeviyesi, katsayi);
         this.zorunluMu=zorunluMu;
     }
-
-
-    // ==================== ZORUNLU OVERRIDE ====================
-
-    public Document toDocument() {
-        return new Document("dersAdi", getDersAdi())
-                .append("sinif", getSinifSeviyesi())
-                .append("tur", "Zorunlu");
-    }
-    @Override
-    public void dersBilgisiYazdir() {
-        System.out.println("=== ZORUNLU DERS ===");
-        System.out.println("Ders Adı: " + formatliDersAdi());
-        System.out.println("Sınıf Seviyesi: " + getSinifSeviyesi());
-        System.out.println("Katsayı: " + getKatsayi());
-        System.out.println("=====================\n");
-    }
-
     // ==================== INotHesaplayabilir METOTLARI ====================
 
     @Override

@@ -49,6 +49,7 @@ public class NotGorunum { // Sınıf adını karışmaması için NotGorunumFx o
         return sinav2;
     }
 
+
     public String getTc() {return tc.get();}
 
     public int getSinif() {return sinif.get();}
