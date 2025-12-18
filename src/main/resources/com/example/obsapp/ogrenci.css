@@ -1,10 +1,10 @@
 /* ================= ROOT ================= */
 
 .root {
-    -fx-background-color: #8FABD4; /* Giriş ekranından biraz daha açık mavi */
     -fx-font-family: "Segoe UI", "Arial";
-    -fx-text-fill: #000000;
     -fx-font-size: 13px;
+    -fx-background-color: linear-gradient(to bottom right, #0A2A43, #0F4C75);
+    -fx-text-fill: #EAF6FF;
 }
 
 /* ================= TABPANE ================= */
@@ -15,112 +15,127 @@
 
 /* ÜST TAB BAR */
 .tab-pane .tab-header-area {
-    -fx-background-color: #4A70A9;
-    -fx-padding: 6 8 0 8;
+    -fx-background-color: rgba(15, 76, 117, 0.9);
+    -fx-padding: 6 10 0 10;
+    -fx-border-color: #00C6FF;
+    -fx-border-width: 0 0 1.5 0;
 }
 
 /* TAB */
 .tab {
-    -fx-background-color: #EFECE3;
-    -fx-background-radius: 8 8 0 0;
-    -fx-padding: 7 20;
+    -fx-background-color: rgba(10, 42, 67, 0.85);
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 8 22;
+    -fx-border-color: #00C6FF;
+    -fx-border-width: 1;
 }
 
 /* TAB YAZISI */
 .tab .tab-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #EAF6FF;
     -fx-font-weight: bold;
     -fx-font-size: 12px;
 }
 
 /* SEÇİLİ TAB */
 .tab:selected {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(0, 198, 255, 0.25);
 }
 
 .tab:selected .tab-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
 }
 
 /* HOVER */
 .tab:hover {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(0, 198, 255, 0.35);
 }
 
 /* TAB CONTENT */
 .tab-pane .tab-content-area {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(15, 76, 117, 0.65);
     -fx-padding: 20;
+    -fx-background-radius: 14;
+    -fx-border-color: #00C6FF;
+    -fx-border-width: 1.2;
 }
 
 /* ================= TABLEVIEW ================= */
 
 .table-view {
     -fx-background-color: transparent;
-    -fx-border-color: #4A70A9;
+    -fx-border-color: #00C6FF;
     -fx-border-width: 1.5;
-    -fx-border-radius: 10;
-    -fx-padding: 5;
+    -fx-border-radius: 12;
+    -fx-padding: 6;
 }
 
 /* TABLE İÇ ZEMİN */
 .table-view .virtual-flow {
-    -fx-background-color: #EFECE3;
-    -fx-background-radius: 10;
+    -fx-background-color: rgba(10, 42, 67, 0.85);
+    -fx-background-radius: 12;
 }
 
 /* HEADER */
 .table-view .column-header-background {
-    -fx-background-color: #4A70A9;
+    -fx-background-color: rgba(15, 76, 117, 0.95);
 }
 
 .table-view .column-header {
     -fx-background-color: transparent;
+    -fx-border-color: #00C6FF;
+    -fx-border-width: 0 1 0 0;
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: #EFECE3;
+    -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
     -fx-alignment: CENTER;
 }
 
 /* SATIRLAR */
 .table-row-cell {
-    -fx-background-color: #EFECE3;
-    -fx-text-fill: #000000;
+    -fx-background-color: rgba(10, 42, 67, 0.75);
+    -fx-text-fill: #EAF6FF;
 }
 
 .table-row-cell:odd {
-    -fx-background-color: #F5F3EE;
+    -fx-background-color: rgba(15, 76, 117, 0.6);
 }
 
 /* HOVER */
 .table-row-cell:hover {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(0, 198, 255, 0.35);
 }
 
 /* SEÇİLİ SATIR */
 .table-row-cell:selected {
-    -fx-background-color: #4A70A9;
-    -fx-text-fill: #EFECE3;
+    -fx-background-color: #00C6FF;
+    -fx-text-fill: #0A2A43;
 }
 
 /* HÜCRE */
 .table-cell {
     -fx-alignment: CENTER;
-    -fx-font-size: 11.5px;
+    -fx-font-size: 12px;
     -fx-padding: 6 4;
+    -fx-text-fill: #EAF6FF;
+}
+
+/* SEÇİLİ HÜCRE YAZISI */
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #0A2A43;
 }
 
 /* BOŞ TABLO */
 .table-view .placeholder .label {
-    -fx-text-fill: #4A70A9;
+    -fx-text-fill: #8EDCFF;
     -fx-font-style: italic;
 }
 
 /* ================= SCROLLBAR ================= */
 
 .scroll-bar .thumb {
-    -fx-background-color: #4A70A9;
+    -fx-background-color: #00C6FF;
     -fx-background-radius: 8;
 }

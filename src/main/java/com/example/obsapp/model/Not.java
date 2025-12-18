@@ -16,8 +16,14 @@ public class Not {
         this.Sinav1=sinav1;
         this.Sinav2=sinav2;
         this.sinif=sinif;
-        this.DersId =dersad.toUpperCase()+sinif;
-        this.NotId= ogrenciId + "-" + ogrenciId ;
+        this.DersId =dersad.replace("i", "ı")
+                .replace("ğ", "g")
+                .replace("ü", "u")
+                .replace("ş", "s")
+                .replace("ö", "o")
+                .replace("ç", "c")
+                .toUpperCase() + sinif;
+        this.NotId= ogrenciId + "-" + dersad ;
     }
     //--------------Getter Setter-------------------
 
