@@ -2,8 +2,8 @@
 
 .root {
     -fx-font-family: "Segoe UI";
-    -fx-background-color: linear-gradient(to bottom right, #8FABD4, #4A70A9);
-    -fx-text-fill: #000000;
+    -fx-background-color: linear-gradient(to bottom right, #0A2A43, #0F4C75);
+    -fx-text-fill: #EAF6FF;
 }
 
 /* ================= TABPANE ================= */
@@ -14,97 +14,98 @@
 
 /* ÜST TAB BAR */
 .tab-pane .tab-header-area {
-    -fx-background-color: #4A70A9;
-    -fx-padding: 6 8 0 8;
-    -fx-border-color: #000000;
+    -fx-background-color: rgba(15, 76, 117, 0.85);
+    -fx-padding: 6 10 0 10;
+    -fx-border-color: #00C6FF;
     -fx-border-width: 0 0 1.5 0;
 }
 
 /* TAB */
 .tab {
-    -fx-background-color: #EFECE3;
-    -fx-background-radius: 8 8 0 0;
-    -fx-padding: 7 18;
-    -fx-border-color: #4A70A9;
+    -fx-background-color: rgba(20, 55, 90, 0.75);
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 8 20;
+    -fx-border-color: #00C6FF;
     -fx-border-width: 1;
 }
 
 /* TAB YAZISI */
 .tab .tab-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #EAF6FF;
     -fx-font-weight: bold;
     -fx-font-size: 12px;
 }
 
 /* SEÇİLİ TAB */
 .tab:selected {
-    -fx-background-color: #8FABD4;
-    -fx-border-color: #000000;
+    -fx-background-color: rgba(0, 198, 255, 0.25);
+    -fx-border-color: #00C6FF;
     -fx-border-width: 1.5 1.5 0 1.5;
 }
 
 .tab:selected .tab-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
 }
 
 /* HOVER */
 .tab:hover {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(0, 198, 255, 0.35);
 }
 
 /* TAB CONTENT */
 .tab-pane .tab-content-area {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(15, 76, 117, 0.65);
     -fx-padding: 20;
-    -fx-border-color: #4A70A9;
-    -fx-border-width: 1.5;
+    -fx-background-radius: 14;
+    -fx-border-color: #00C6FF;
+    -fx-border-width: 1.2;
 }
 
 /* ================= LABEL ================= */
 
 .label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #EAF6FF;
 }
 
 .label:title {
     -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
 }
 
 /* ================= TEXTFIELD ================= */
 
 .text-field {
-    -fx-background-color: #EFECE3;
-    -fx-text-fill: #000000;
-    -fx-prompt-text-fill: #4A70A9;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
-    -fx-border-color: #4A70A9;
-    -fx-border-width: 1;
+    -fx-background-color: rgba(10, 42, 67, 0.85);
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #8EDCFF;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #00C6FF;
+    -fx-border-width: 1.2;
     -fx-padding: 8 12;
 }
 
 .text-field:focused {
-    -fx-border-color: #000000;
+    -fx-border-color: #FFFFFF;
 }
 
 /* ================= BUTTON ================= */
 
 .button {
-    -fx-background-color: #EFECE3;
-    -fx-text-fill: #000000;
+    -fx-background-color: rgba(10, 42, 67, 0.9);
+    -fx-text-fill: #8EDCFF;
     -fx-font-weight: bold;
-    -fx-border-color: #4A70A9;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-padding: 8 20;
+    -fx-border-color: #00C6FF;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+    -fx-padding: 9 22;
     -fx-cursor: hand;
 }
 
 .button:hover {
-    -fx-background-color: #4A70A9;
-    -fx-text-fill: #EFECE3;
+    -fx-background-color: #00C6FF;
+    -fx-text-fill: #0A2A43;
 }
 
 .button:pressed {
@@ -116,44 +117,44 @@
 
 .choice-box,
 .date-picker {
-    -fx-background-color: #EFECE3;
-    -fx-border-color: #4A70A9;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+    -fx-background-color: rgba(10, 42, 67, 0.85);
+    -fx-border-color: #00C6FF;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
 }
 
 .choice-box .label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
 }
 
 /* ================= TABLEVIEW ================= */
 
 .table-view {
     -fx-background-color: transparent;
-    -fx-border-color: #4A70A9;
-    -fx-border-radius: 12;
-    -fx-padding: 5;
+    -fx-border-color: #00C6FF;
+    -fx-border-radius: 14;
+    -fx-padding: 6;
 }
 
 /* TABLE İÇİ */
 .table-view .virtual-flow {
-    -fx-background-color: #EFECE3;
-    -fx-background-radius: 12;
+    -fx-background-color: rgba(10, 42, 67, 0.8);
+    -fx-background-radius: 14;
 }
 
 /* HEADER */
 .table-view .column-header-background {
-    -fx-background-color: #4A70A9;
+    -fx-background-color: rgba(15, 76, 117, 0.9);
 }
 
 .table-view .column-header {
     -fx-background-color: transparent;
-    -fx-border-color: #EFECE3;
+    -fx-border-color: #00C6FF;
     -fx-border-width: 0 1 0 0;
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: #EFECE3;
+    -fx-text-fill: #EAF6FF;
     -fx-font-weight: bold;
     -fx-font-size: 12px;
     -fx-alignment: CENTER;
@@ -161,23 +162,23 @@
 
 /* SATIRLAR */
 .table-row-cell {
-    -fx-background-color: #EFECE3;
-    -fx-text-fill: #000000;
+    -fx-background-color: rgba(10, 42, 67, 0.75);
+    -fx-text-fill: #EAF6FF;
 }
 
 .table-row-cell:odd {
-    -fx-background-color: #F5F3EE;
+    -fx-background-color: rgba(15, 76, 117, 0.6);
 }
 
 /* HOVER */
 .table-row-cell:hover {
-    -fx-background-color: #8FABD4;
+    -fx-background-color: rgba(0, 198, 255, 0.35);
 }
 
 /* SEÇİLİ */
 .table-row-cell:selected {
-    -fx-background-color: #4A70A9;
-    -fx-text-fill: #EFECE3;
+    -fx-background-color: #00C6FF;
+    -fx-text-fill: #0A2A43;
 }
 
 .table-cell {
@@ -187,6 +188,33 @@
 /* ================= SCROLLBAR ================= */
 
 .scroll-bar .thumb {
-    -fx-background-color: #4A70A9;
+    -fx-background-color: #00C6FF;
     -fx-background-radius: 8;
+}
+/* ================= TABLE TEXT FIX ================= */
+
+/* Normal hücre yazıları */
+.table-cell {
+    -fx-text-fill: #EAF6FF;   /* Beyaza yakın */
+    -fx-font-size: 12px;
+}
+
+/* Satır içi label’lar (JavaFX bazen burayı kullanır) */
+.table-row-cell .text {
+    -fx-fill: #EAF6FF;
+}
+
+/* Seçili satır yazıları */
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #0A2A43;   /* Açık zemin üstünde koyu */
+}
+
+/* Hover durumunda yazı */
+.table-row-cell:hover .table-cell {
+    -fx-text-fill: #FFFFFF;
+}
+
+/* Header zaten iyiydi ama garanti olsun */
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF;
 }

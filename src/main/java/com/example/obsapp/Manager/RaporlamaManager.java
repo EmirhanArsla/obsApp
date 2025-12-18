@@ -19,10 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RaporlamaManager implements IRaporlamaManager {
-//    MongoDatabase database = DBUtil.getInstance().getDatabase();
-//    private final OgrenciDao ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
-//    private final NotDao notDao = new NotDao(database.getCollection("Notlar"));
-//    private final DersDao dersDao = new DersDao(database.getCollection("Dersler"));
+
 
     private final OgrenciDao ogrenciDao;
     private final NotDao notDao;
