@@ -2,15 +2,16 @@ package com.example.obsapp.controller;
 import com.example.obsapp.DBO.DersDao;
 import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
-import com.example.obsapp.DBO.OgretmenDao;
+import com.example.obsapp.DBO.YoneticiDao;
+import com.example.obsapp.Exception.BosAlanException;
+import com.example.obsapp.Exception.OgrenciBulunamadiException;
 import com.example.obsapp.Manager.RaporlamaManager;
 import com.example.obsapp.Viewmodel.GnoGorunum;
 import com.example.obsapp.Viewmodel.OgrenciGorunum;
 import com.example.obsapp.Viewmodel.OrtalamaGorunum;
-import com.example.obsapp.model.DersBase;
 import com.example.obsapp.model.Not;
 import com.example.obsapp.model.Ogrenci;
-import com.example.obsapp.model.Ogretmen;
+import com.example.obsapp.model.Yonetici;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
 import javafx.collections.FXCollections;
@@ -29,16 +30,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.bson.Document;
 
-import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class Yonteci_sisController {
+    private Document yoneticiBilgisi;
+
+    public void setYoneticiBilgisi(Document yoneticiBilgisi) {
+        this.yoneticiBilgisi = yoneticiBilgisi;
+
+        // Örnek: Label'e yazdır
+        System.out.println("Giriş yapan yönetici: "
+                + yoneticiBilgisi.getString("kullaniciAdi"));
+        }
     @FXML
     private TabPane tabPane;
     @FXML
@@ -198,8 +205,8 @@ public class Yonteci_sisController {
 
     @FXML
     private Button buttonOgretmenEkle;
-
-    private Label labeldurumMesajiOgret;
+    @FXML
+    private Label labelODurumMesaji;
     // ============================
     // GNO GÖRÜNTÜLE
     // ============================
@@ -230,7 +237,7 @@ public class Yonteci_sisController {
 
     private OgrenciDao ogrenciDao;
     private NotDao notDao;
-    private OgretmenDao ogretmenDao;
+    private YoneticiDao yoneticiDao;
     private DersDao dersDao;
     private RaporlamaManager raporlamaManager;
 
@@ -288,17 +295,63 @@ public class Yonteci_sisController {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
         notDao = new NotDao(database.getCollection("Notlar"));
-        ogretmenDao = new OgretmenDao(database.getCollection("Ogretmen"));
+        yoneticiDao = new YoneticiDao(database.getCollection("Ogretmen"));
         dersDao = new DersDao(database.getCollection("Dersler"));
         raporlamaManager=new RaporlamaManager(notDao,dersDao,ogrenciDao);
 
-        ekleButton.setOnAction(event -> ogrenciEkle());
-        ogrenciSilButton.setOnAction(e -> ogrenciSil());
-        buttonOgrenciAra.setOnAction(e-> ogrenciAra());
-        buttonNotEkle.setOnAction(e->notEkle());
-        buttonOgretmenEkle.setOnAction(e->ogretmenEkle());
-        buttonNotlariAra.setOnAction(e->dersNotuGoruntule());
-        buttonSinifOrt.setOnAction(e->sinifOrtlamasi());
+        ekleButton.setOnAction(event -> {
+            try {
+                ogrenciEkle();
+            } catch (BosAlanException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        ogrenciSilButton.setOnAction(e -> {
+            try {
+                ogrenciSil();
+            } catch (BosAlanException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        buttonOgrenciAra.setOnAction(e-> {
+            try {
+                ogrenciAra();
+            } catch (BosAlanException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        buttonNotEkle.setOnAction(e-> {
+            try {
+                notEkle();
+            } catch (BosAlanException ex) {
+                throw new RuntimeException(ex);
+            } catch (OgrenciBulunamadiException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        buttonOgretmenEkle.setOnAction(e-> {
+            try {
+                ogretmenEkle();
+            } catch (BosAlanException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        buttonNotlariAra.setOnAction(e-> {
+            try {
+                dersNotuGoruntule();
+            } catch (BosAlanException ex) {
+                throw new RuntimeException(ex);
+            } catch (OgrenciBulunamadiException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        buttonSinifOrt.setOnAction(e-> {
+            try {
+                sinifOrtlamasi();
+            } catch (BosAlanException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         //Ogrenci Ara  için tablolaro değişkenle bağlıyoruz
         kolonAraIsim.setCellValueFactory(new PropertyValueFactory<>("ad"));
@@ -336,11 +389,11 @@ public class Yonteci_sisController {
 
     }
 
-    public void sinifOrtlamasi(){
+    public void sinifOrtlamasi() throws BosAlanException {
         Integer sinif = choiceBoxSinifOrt.getValue();
         if (sinif == null){
-            labelSinifOrt.setText("Lütfen Sınıf Seçin ");
-            return;
+            labelSinifOrt.setText("Lütfen bir sınıf seçiniz");
+            throw new BosAlanException("Sınıf seçilmedi");
         }
         try {
             double sinifOrtlamasi = raporlamaManager.sinifOrtalama(sinif);
@@ -367,11 +420,15 @@ public class Yonteci_sisController {
 
 
 
-    private void dersNotuGoruntule() {
+    private void dersNotuGoruntule () throws BosAlanException, OgrenciBulunamadiException {
         String tc = textFieldTcNotG.getText();
         if (tc.isEmpty()) {
             labelDersNotDurum.setText("Lütfen Alanı Doldurunuz");
-            return;
+            throw new BosAlanException("Tc Girilmedi");
+        }
+        if (!ogrenciDao.tcKontrol(tc)){
+            labelDersNotDurum.setText("TC Bulunamadı ");
+            throw new OgrenciBulunamadiException();
         }
             try {
                 List<OrtalamaGorunum> dersOrtlama = raporlamaManager.ortlamaGoster(tc);
@@ -387,44 +444,52 @@ public class Yonteci_sisController {
 
 
 
-    private void ogretmenEkle() {
+    private void ogretmenEkle() throws BosAlanException {
         String isim = textfieldOgretIsim.getText();
         String soyisim = textfieldOgretSoyisim.getText();
         String tc = textfieldOgretTc.getText();
-        String bransh = textfieldOgretBrans.getText();
-        String dersid =  textfieldOgretDersID.getText();
+        String sifre = textfieldOgretBrans.getText();
         LocalDate ogretmenKayitTarihi = ogretKayitTarihi.getValue();
 
-        if (isim.isEmpty() || soyisim.isEmpty() || tc.isEmpty() || bransh.isEmpty() || dersid.isEmpty() ){
-            labeldurumMesajiOgret.setText("Lütfen tüm alanları doldurun!");
-            return;
+        if (isim.isEmpty() || soyisim.isEmpty() || tc.isEmpty()|| sifre.isEmpty() ){
+            labelODurumMesaji.setText("Lütfen tüm alanları doldurun!");
+            throw new BosAlanException("Tüm Alanlar Doldurulmadı.");
         }
         try{
-            Ogretmen ogretmen = new Ogretmen(tc,isim,soyisim,bransh,ogretmenKayitTarihi);
+            Yonetici yonetici = new Yonetici(tc,isim,soyisim,sifre,ogretmenKayitTarihi);
 
-            ogretmenDao.ogretmenAdd(ogretmen);
+            yoneticiDao.yoneticiAdd(yonetici);
+            labelODurumMesaji.setText("Yönetici Sisteme Eklendi.");
+            textfieldOgretIsim.clear();
+            textfieldOgretSoyisim.clear();
+            textfieldOgretTc.clear();
+            textfieldOgretBrans.clear();
 
 
 
         }
         catch (Exception e ){
-            labeldurumMesajiOgret.setText
+            labelODurumMesaji.setText
                     ("Hata oluştu: " + e.getMessage());
         }
     }
 
-    private void notEkle() {
+    private void notEkle() throws BosAlanException, OgrenciBulunamadiException {
         String tc = textFieldOgrenciTcDersEKle.getText();
         String dersad = textFieldDersIdEkle.getText();
-        int sinif =Integer.parseInt(notEkleSinif.getText());
-        int sinav1=Integer.parseInt(textFieldYazili1.getText());
-        int sinav2=Integer.parseInt(textFieldYazili2.getText());
-        if (tc.isEmpty()||dersad.isEmpty()||sinif==0||sinav2==0||sinav1==0){
+        String sinifStr = notEkleSinif.getText();
+        String sinav1Str = textFieldYazili1.getText();
+        String sinav2Str = textFieldYazili2.getText();
+        if (tc.isEmpty()||dersad.isEmpty()||sinifStr.isEmpty()||sinav2Str.isEmpty()||sinav1Str.isEmpty()){
             labelDurumDersNot.setText("Lütfen Tüm Alanları Doldurunuz");
-            return;
+            throw new BosAlanException("Tüm Alanlar Doldurulmadı");
         }
+        int sinif = Integer.parseInt(sinifStr);
+        int sinav1 = Integer.parseInt(sinav1Str);
+        int sinav2 = Integer.parseInt(sinav2Str);
         if (!ogrenciDao.tcKontrol(tc)){
             labelDurumDersNot.setText("Tc Bulunamadı ");
+            throw new OgrenciBulunamadiException();
         }
 
         if (dersDao.dersidKontrol(sinif+dersad)){
@@ -433,6 +498,13 @@ public class Yonteci_sisController {
         try{
             Not yeninot = new Not(tc,dersad,sinav1,sinav2,sinif);
             notDao.notadd(yeninot);
+            labelDurumDersNot.setText("Ders Notu Başarıyla Eklendi");
+            textFieldOgrenciTcDersEKle.clear();
+            textFieldDersIdEkle.clear();
+            notEkleSinif.clear();
+            textFieldYazili1.clear();
+            textFieldYazili2.clear();
+
 
         }
         catch (Exception e) {
@@ -442,11 +514,11 @@ public class Yonteci_sisController {
 
     }
 
-    private void ogrenciAra() {
+    private void ogrenciAra() throws BosAlanException {
         String tc = textFieldOgrenciAraTC.getText();
         if(tc.isEmpty()){
             labelDurumOgrenciAra.setText("Lütfen Alanı Doldurunuz");
-            return;
+            throw new BosAlanException("Tc Girilmedi.");
         }
         try{
             OgrenciGorunum ogrenciGorunum =ogrenciDao.ogrenciGorunumSearch(tc);
@@ -458,6 +530,7 @@ public class Yonteci_sisController {
             }
             else {
                 labelDurumOgrenciAra.setText("Ogrenci Bulunmadı");
+                throw new OgrenciBulunamadiException();
             }
             textFieldOgrenciAraTC.clear();
 
@@ -469,22 +542,23 @@ public class Yonteci_sisController {
 
     }
 
-    private void ogrenciSil() {
+    private void ogrenciSil() throws BosAlanException {
         String tc = tcsilTextField.getText();
         if(tc.isEmpty()){
             durumMesajLabel.setText("Lütfen tüm alanları doldurun!");
-            return;
+            throw new BosAlanException("Tc Girilmedi.");
         }
         try{
-            ogrenciDao.ogrenciDelete(tc);
+            String msg=ogrenciDao.ogrenciDelete(tc);
+            durumMesajLabel.setText(msg);
             tcsilTextField.clear();
         }
-        catch (Exception e){
+        catch (OgrenciBulunamadiException e){
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
         }
     }
 
-    private void ogrenciEkle() {
+    private void ogrenciEkle() throws BosAlanException {
 
 
         String ad = txtAd.getText();
@@ -496,7 +570,7 @@ public class Yonteci_sisController {
 
         if (ad.isEmpty() || soyad.isEmpty() || tc.isEmpty() || ogrenciNo.isEmpty() || sinifSeviyesi == 0) {
             durumMesajLabel.setText("Lütfen tüm alanları doldurun!");
-            return;
+            throw new BosAlanException("Tüm Alanlar Doldurulmadı.");
         }
 
         try {
