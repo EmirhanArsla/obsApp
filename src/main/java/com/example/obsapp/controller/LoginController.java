@@ -1,6 +1,7 @@
 package com.example.obsapp.controller;
 
 import com.example.obsapp.DBO.OgrenciDao;
+import com.example.obsapp.DBO.YoneticiDao;
 import com.example.obsapp.repository.YoneticiRepository;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
@@ -22,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     private OgrenciDao ogrenciDao;
+    private YoneticiDao yoneticiDao;
     // ============================
     // FXML BİLEŞENLERİ
     // ============================
@@ -47,6 +49,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
+        this.yoneticiDao = new YoneticiDao(database.getCollection("Ogretmen"));
 
         this.ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
     }
@@ -55,21 +58,49 @@ public class LoginController implements Initializable {
     // YÖNETİCİ GİRİŞİ
     // ============================
     @FXML
-    private void yoneticiGiris() throws IOException {
+    private void yoneticiGiris() {
 
-        String user = yoneticiKullanici.getText();
-        String pass = yoneticiSifre.getText();
+        String user = yoneticiKullanici.getText().trim();
+        String pass = yoneticiSifre.getText().trim();
 
-        YoneticiRepository repo = new YoneticiRepository();
+        Document kontrol = yoneticiDao.yoneticiKontrol(user, pass);
 
-        if (repo.yoneticiDogrula(user, pass)) {
-            hataMesaji.setText("");
-            loadPage("/com/example/obsapp/Yonetici_sis.fxml", "Yönetici Paneli");
+        if (kontrol != null) {
+            try {
+                hataMesaji.setText("");
+
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/com/example/obsapp/Yonetici_sis.fxml")
+                );
+
+                Parent root = loader.load();
+
+                // 🎯 Controller'a erişim
+                Yonteci_sisController controller = loader.getController();
+
+                // 🎯 Yönetici bilgisini controller'a gönder
+                controller.setYoneticiBilgisi(kontrol);
+
+                Stage stage = new Stage();
+                stage.setTitle("Yönetici Paneli");
+                stage.setScene(new Scene(root));
+                stage.show();
+
+                // Login ekranını kapat
+                Stage loginStage = (Stage) yoneticiKullanici.getScene().getWindow();
+                loginStage.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                hataMesaji.setText("Sayfa yüklenirken hata oluştu!");
+            }
+
         } else {
 
             hataMesaji.setText("Hatalı yönetici girişi!");
         }
     }
+
 
 
     // ============================

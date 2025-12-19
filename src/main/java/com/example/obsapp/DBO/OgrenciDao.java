@@ -1,4 +1,5 @@
 package com.example.obsapp.DBO;
+import com.example.obsapp.Exception.OgrenciBulunamadiException;
 import com.example.obsapp.Viewmodel.OgrenciGorunum;
 import com.example.obsapp.model.Ogrenci;
 import com.example.obsapp.util.DBUtil;
@@ -78,14 +79,14 @@ public class OgrenciDao {
         }
     }
 
-    public void ogrenciDelete(String tc){
+    public String ogrenciDelete(String tc) throws OgrenciBulunamadiException {
         Document filitre = new Document("tc", tc);
         long Stc= collection.deleteOne(filitre).getDeletedCount(); // sürücü longu zorunlu tutar
         if(Stc>0){
-            System.out.println("Öğrenci Başarıyla Silindi");
+            return "Öğrenci Başarıyla Silindi";
         }
         else{
-            System.out.println("Öğrenci Bulunamadı");
+            throw new OgrenciBulunamadiException("Öğrenci Bulunamadı");
         }
     }
 
