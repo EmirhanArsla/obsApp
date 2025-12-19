@@ -13,7 +13,7 @@ public class Ogrenci extends Kisi {
     // --------------Yapıcı Metot-------------
 
     public Ogrenci(String tc, String ad, String soyad, int sinifSeviyesi, String ogrenciNo , LocalDate kayitTarihi) {
-        super(tc, ad, soyad,kayitTarihi);
+        super(tc, ad, soyad, kayitTarihi);
         setSinifSeviyesi(sinifSeviyesi);
         this.ogrenciNo = ogrenciNo;
     }

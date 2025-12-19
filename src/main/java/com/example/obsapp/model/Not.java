@@ -5,13 +5,13 @@ public class Not {
     private String NotId;
     private String DersId;
     private String Dersad;
-    private String OgrenciId;
+    private String tc;
     private int Sinav1;
     private int Sinav2;
     private int sinif;
     //-----------------Yapıcı Metot----------------------
     public Not(String ogrenciId , String dersad,int sinav1,int sinav2,int sinif){
-        this.OgrenciId=ogrenciId;
+        this.tc =ogrenciId;
         this.Dersad=dersad;
         this.Sinav1=sinav1;
         this.Sinav2=sinav2;
@@ -43,12 +43,12 @@ public class Not {
         DersId = dersId;
     }
 
-    public String getOgrenciId() {
-        return OgrenciId;
+    public String getTc() {
+        return tc;
     }
 
-    public void setOgrenciId(String ogrenciId) {
-        OgrenciId = ogrenciId;
+    public void setTc(String tc) {
+        this.tc = tc;
     }
 
     public int getSinav1() {

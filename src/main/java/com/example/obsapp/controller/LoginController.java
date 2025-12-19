@@ -96,6 +96,7 @@ public class LoginController implements Initializable {
             }
 
         } else {
+
             hataMesaji.setText("Hatalı yönetici girişi!");
         }
     }

@@ -60,4 +60,10 @@ public class DersDao {
             return false;
         }
     }
+
+    public List <Document> allDers(){
+        List<Document> documents = new  ArrayList<>();
+        return collection.find().into(documents);
+
+    }
 }
