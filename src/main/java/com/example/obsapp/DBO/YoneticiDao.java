@@ -1,6 +1,6 @@
 package com.example.obsapp.DBO;
 
-import com.example.obsapp.model.Ogretmen;
+import com.example.obsapp.model.Yonetici;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -9,23 +9,22 @@ import org.bson.Document;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class OgretmenDao {
+public class YoneticiDao {
     private MongoCollection<Document> collection;
 
-    public OgretmenDao(MongoCollection<Document> database ) {
+    public YoneticiDao(MongoCollection<Document> database ) {
         MongoDatabase database1 = DBUtil.getInstance().getDatabase();
         collection = database1.getCollection("Ogretmen");
     }
 
-    public void ogretmenAdd(Ogretmen ogretmen) {
-        Date dbDate =Date.from(ogretmen.getKayitTarihi().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    public void yoneticiAdd(Yonetici yonetici) {
+        Date dbDate =Date.from(yonetici.getKayitTarihi().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         Document document = new Document();
-        document.append("ad",ogretmen.getAd());
-        document.append("soyAd",ogretmen.getSoyAd());
-        document.append("tc",ogretmen.getTc());
-        document.append("brans",ogretmen.getBrans());
-        document.append("dersid",ogretmen.getVerdigiDers());
+        document.append("ad", yonetici.getAd());
+        document.append("soyAd", yonetici.getSoyAd());
+        document.append("tc", yonetici.getTc());
+        document.append("sifre",yonetici.getSifre());
         document.append("kayitTarihi",dbDate);
         try {
             collection.insertOne(document);
@@ -34,6 +33,11 @@ public class OgretmenDao {
         catch (Exception e) {
             System.out.println("Ogretmen Eklenemedi " + e.getMessage());
         }
+    }
+    public Document yoneticiKontrol(String tc, String sifre){
+        Document filtre = new Document("tc", tc)
+                .append("sifre", sifre);
+        return collection.find(filtre).first() ;
     }
 
 }

@@ -1,3 +1,0 @@
-kullanici;şifre
-admin;1234
-mehmet;9999

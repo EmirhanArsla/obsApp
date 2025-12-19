@@ -3,7 +3,7 @@ package com.example.obsapp.controller;
 import com.example.obsapp.DBO.DersDao;
 import com.example.obsapp.DBO.NotDao;
 import com.example.obsapp.DBO.OgrenciDao;
-import com.example.obsapp.DBO.OgretmenDao;
+import com.example.obsapp.DBO.YoneticiDao;
 import com.example.obsapp.Manager.RaporlamaManager;
 import com.example.obsapp.Viewmodel.GnoGorunum;
 import com.example.obsapp.Viewmodel.NotGorunum;
@@ -107,7 +107,7 @@ public class Ogrenci_sisController implements Initializable {
 
 
 
-    private OgretmenDao ogretmenDao;
+    private YoneticiDao yoneticiDao;
     private NotDao notDao;
     private OgrenciDao ogrenciDao;
     private DersDao dersDao;
@@ -132,7 +132,7 @@ public class Ogrenci_sisController implements Initializable {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
         notDao= new NotDao(database.getCollection("Notlar"));
-        ogretmenDao = new OgretmenDao(database.getCollection("Ogretmen"));
+        yoneticiDao = new YoneticiDao(database.getCollection("Ogretmen"));
         dersDao= new DersDao(database.getCollection("Dersler"));
         this.raporlamaManager = new RaporlamaManager(notDao,dersDao,ogrenciDao);
 

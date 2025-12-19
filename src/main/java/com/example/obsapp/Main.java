@@ -1,11 +1,14 @@
 package com.example.obsapp;
 
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.example.obsapp.DBO.DersDao;
+import com.example.obsapp.DBO.YoneticiDao;
 import com.example.obsapp.controller.LoginController;
 import com.example.obsapp.model.SecmeliDers;
+import com.example.obsapp.model.Yonetici;
 import com.example.obsapp.model.ZorunluDers;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
@@ -42,6 +45,7 @@ public class Main extends Application {
         launch(args);
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         DersDao dersDao = new DersDao(database.getCollection("Dersler"));
+
         ZorunluDers matematik =
                 new ZorunluDers("MATEMATİK12", "Matematik", 12, 5.0, true);
         dersDao.dersAdd(matematik);
@@ -81,7 +85,6 @@ public class Main extends Application {
         SecmeliDers felsefe =
         new SecmeliDers("FELSEFE12", "Felsefe", 12, 3.0, false);
         dersDao.dersAdd(felsefe);
-
 
 
 
