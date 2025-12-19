@@ -15,8 +15,10 @@ import org.bson.Document;
 
 import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RaporlamaManager implements IRaporlamaManager {
 
@@ -189,19 +191,36 @@ public class RaporlamaManager implements IRaporlamaManager {
     public List<GnoGorunum> tumGnolar(){
         List<GnoGorunum> gnoRapor = new ArrayList<>(); //Gno'ların çekileceği liste
         List<Document> tumOgrenciler = ogrenciDao.allOgrenci();
+        List<Document> tumNotlar = notDao.allNot();
+        List<Document> tumDersler = dersDao.allDers();
 
-        if (tumOgrenciler == null) {
+        if (tumOgrenciler == null || tumOgrenciler.isEmpty()) {
             System.out.println("Ogrenci bulunamadi");
             return gnoRapor;
         }
+        //Dersler Map'e çevrilir (diğer yönteme göre daha hızlı getirmek için)
+        Map<String, Document> dersMap = new HashMap<>();
+        for (Document ders : tumDersler) {
+            dersMap.put(ders.getString("dersid"), ders);
+        }
+        //Notlar öğrenci tc'sine göre gruplanır
+        Map<String, List<Document>> notlarByTc = tumNotlar.stream()
+                .collect(Collectors.groupingBy(doc -> doc.getString("tc")));
 
         for (Document ogrenci : tumOgrenciler) {
             String Tc = ogrenci.getString("tc");
             String ad = ogrenci.getString("ad");
             String soyad = ogrenci.getString("soyAd");
 
+            //Belirlenen öğrencinin tc si iel notlar listeye aktarılır
+            List<Document> ogrenciNotlari = notlarByTc.getOrDefault(Tc, new ArrayList<>());
 
-            double gno =gnoHesapla(Tc);
+            /* Bu yöntemde listeden çekilen verile gnohesaplada her öğrenci için ayrı ayrı sorugular ile database
+            kısmına yollanıyorudu sonra getiriliyordu buda hali hazrıda işlemin uzun sürmesini sebeb oluyordu
+            aynı zamanda kullanılan hashmap ile list içinde tekrar tekrar dönemkten kurtuluyoruz
+            */
+//          double gno =gnoHesapla(Tc);
+            double gno =gnoHesaplaHizli(ogrenciNotlari,dersMap);
 
             GnoGorunum detay = new GnoGorunum(
                     Tc,ad,soyad,gno
@@ -243,30 +262,30 @@ public class RaporlamaManager implements IRaporlamaManager {
     }
 
 
-    public double dersOrtalama(String dersid) {
-         double toplamDersOrtlama = 0.0;
-         double ogrenciSayisi=0;
-        List<Document> notlar = notDao.allNot(dersid);
-        if (notlar == null) {
-            return 0.0;
-        }
-        for (Document notlar1 : notlar) {
-            String Dersid = notlar1.getString("dersAdi");
-            int sinav1 = notlar1.getInteger("sinav1",0);
-            int sinav2 = notlar1.getInteger("sinav2",0);
+//    public double dersOrtalama(String dersid) {
+//         double toplamDersOrtlama = 0.0;
+//         double ogrenciSayisi=0;
+//        List<Document> notlar = notDao.allNot(dersid);
+//        if (notlar == null) {
+//            return 0.0;
+//        }
+//        for (Document notlar1 : notlar) {
+//            String Dersid = notlar1.getString("dersAdi");
+//            int sinav1 = notlar1.getInteger("sinav1",0);
+//            int sinav2 = notlar1.getInteger("sinav2",0);
+//
+//            double ortlama=HesaplamaUtil.ortalama(sinav1,sinav2);
+//            toplamDersOrtlama+=ortlama;
+//            ogrenciSayisi++;
+//
+//        }
+//        if (ogrenciSayisi == 0.0) {
+//            return 0.0;
+//        }
+//        return toplamDersOrtlama/ogrenciSayisi;
+//    }
 
-            double ortlama=HesaplamaUtil.ortalama(sinav1,sinav2);
-            toplamDersOrtlama+=ortlama;
-            ogrenciSayisi++;
-
-        }
-        if (ogrenciSayisi == 0.0) {
-            return 0.0;
-        }
-        return toplamDersOrtlama/ogrenciSayisi;
-    }
-
-    private double gnoHesaplaHizli(List<Document> notlar, Map<String, Document> dersMap) {
+        private double gnoHesaplaHizli(List<Document> notlar, Map<String, Document> dersMap) {
         double toplamAgirlikliNot = 0.0;
         double toplamKredi = 0.0;
 
@@ -292,7 +311,7 @@ public class RaporlamaManager implements IRaporlamaManager {
             return 0.0;
         }
 
-        return Math.round((toplamAgirlikliNot / toplamKredi) * 100.0) / 100.0;
+        return (toplamAgirlikliNot / toplamKredi) ;
     }
 
 

@@ -134,7 +134,7 @@ public class Yonteci_sisController {
     private TextField textFieldOgrenciTcDersEKle;
 
     @FXML
-    private TextField textFieldDersIdEkle;
+    private ChoiceBox<String > textFieldDersIdEkle;
 
     @FXML
     private TextField textFieldYazili1;
@@ -147,7 +147,7 @@ public class Yonteci_sisController {
     @FXML
     private Label labelDurumDersNot;
     @FXML
-    private TextField notEkleSinif;
+    private ChoiceBox<Integer> notEkleSinif;
 
     // ============================
     // DERS NOTU GÖRÜNTÜLE
@@ -275,8 +275,12 @@ public class Yonteci_sisController {
     public void initialize() {
         //seçnekli kutuların seçenekleri yazılır
         List<Integer> siniflar = Arrays.asList(9,10,11,12);
+        List<String> dersler=Arrays.asList("Matematik","Türkçe","Fizik","Kimya","Biyoloji","Tarih","Cografya","Din Kültürü ve Ahlak Bilgisi","İngilizce",
+                "Beden Eğitimi","Görsel Sanatlar/Müzik","Zeka oyunları","Felsefe");
         sinifBox.setItems(FXCollections.observableArrayList(siniflar));
         choiceBoxSinifOrt.setItems(FXCollections.observableArrayList(siniflar));
+        notEkleSinif.setItems(FXCollections.observableArrayList(siniflar));
+        textFieldDersIdEkle.setItems(FXCollections.observableArrayList(dersler));
 
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
@@ -374,6 +378,10 @@ public class Yonteci_sisController {
             return;
         }
             try {
+                if(!ogrenciDao.tcKontrol(tc)){
+                    labelDersNotDurum.setText("Tc Bulunamadi");
+                    return;
+                }
                 List<OrtalamaGorunum> dersOrtlama = raporlamaManager.ortlamaGoster(tc);
                 tableViewDersNotG.setItems(FXCollections.observableArrayList(dersOrtlama));
                 labelDersNotDurum.setText("Ders Notları Getirildi");
@@ -415,25 +423,44 @@ public class Yonteci_sisController {
 
     private void notEkle() {
         String tc = textFieldOgrenciTcDersEKle.getText();
-        String dersad = textFieldDersIdEkle.getText();
-        int sinif =Integer.parseInt(notEkleSinif.getText());
-        int sinav1=Integer.parseInt(textFieldYazili1.getText());
-        int sinav2=Integer.parseInt(textFieldYazili2.getText());
-        if (tc.isEmpty()||dersad.isEmpty()||sinif==0||sinav2==0||sinav1==0){
+        String dersad = textFieldDersIdEkle.getValue();
+        Integer sinif=notEkleSinif.getValue();
+        String sinav1Text=textFieldYazili1.getText();
+        String sinav2Text =textFieldYazili2.getText();
+
+        if (tc.isEmpty()||dersad==null|sinif==null ||sinav2Text.isEmpty()||sinav1Text.isEmpty()){
             labelDurumDersNot.setText("Lütfen Tüm Alanları Doldurunuz");
             return;
         }
+        int sinav1,sinav2;
+
+        try {
+            sinav1 = Integer.parseInt(sinav1Text);
+            sinav2 = Integer.parseInt(sinav2Text);
+        }catch (NumberFormatException e){
+            labelDurumDersNot.setText("Lütfen Geçerli Değer Giriniz");
+            return;
+        }
+        if (sinav1 < 0 || sinav1 > 100 || sinav2 < 0 || sinav2 > 100) {
+            labelDurumDersNot.setText("Notlar 0-100 arasında olmalıdır");
+            return;
+        }
+
         if (!ogrenciDao.tcKontrol(tc)){
             labelDurumDersNot.setText("Tc Bulunamadı ");
         }
 
-        if (dersDao.dersidKontrol(sinif+dersad)){
+        if (dersDao.dersidKontrol(sinif + dersad)){
             labelDurumDersNot.setText("Ders Bulunamadı");
         }
         try{
             Not yeninot = new Not(tc,dersad,sinav1,sinav2,sinif);
             notDao.notadd(yeninot);
-
+            textFieldOgrenciTcDersEKle.clear();
+            textFieldDersIdEkle.setValue(" ");
+            textFieldYazili1.clear();
+            textFieldYazili2.clear();
+            labelDurumDersNot.setText("Not Eklendi");
         }
         catch (Exception e) {
             labelDurumDersNot.setText
@@ -477,6 +504,7 @@ public class Yonteci_sisController {
         }
         try{
             ogrenciDao.ogrenciDelete(tc);
+            durumMesajLabel.setText("Öğrenci Başarılı Bir Şekilde Silindi");
             tcsilTextField.clear();
         }
         catch (Exception e){

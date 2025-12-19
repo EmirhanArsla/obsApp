@@ -66,6 +66,7 @@ public class LoginController implements Initializable {
             hataMesaji.setText("");
             loadPage("/com/example/obsapp/Yonetici_sis.fxml", "Yönetici Paneli");
         } else {
+
             hataMesaji.setText("Hatalı yönetici girişi!");
         }
     }

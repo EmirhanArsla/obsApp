@@ -27,7 +27,7 @@ public class NotDao {
         Document document = new Document();
         document.append("notid",not.getNotId() );
         document.append("dersid",not.getDersId());
-        document.append("tc",not.getOgrenciId());
+        document.append("tc",not.getTc());
         document.append("sinav1",not.getSinav1());
         document.append("sinav2",not.getSinav2());
         document.append("sinif",not.getSinif());
@@ -59,12 +59,10 @@ public class NotDao {
         return collection.find(filitre).into(notlist);
     }
 
-    public List<Document> allNot(String dersid) {
-        Document filitre = new Document("dersid",dersid);
-        List<Document> notlist= new ArrayList<>();
-        return collection.find(filitre).into(notlist);
+    public List <Document> allNot(){
+        List<Document> documents = new  ArrayList<>();
+        return collection.find().into(documents);
+
     }
-
-
 }
 

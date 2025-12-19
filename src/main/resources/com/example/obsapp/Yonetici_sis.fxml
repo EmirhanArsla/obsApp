@@ -22,7 +22,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="ekleButton" layoutX="118.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ekle" />
+                        <Button fx:id="ekleButton" layoutX="118.0" layoutY="394.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Ekle" />
                         <Label fx:id="labelAd" layoutX="44.0" layoutY="78.0" text="AD" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
@@ -73,7 +73,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="tcsilTextField" layoutX="528.0" layoutY="76.0" />
-                        <Button fx:id="ogrenciSilButton" layoutX="576.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Sil" />
+                        <Button fx:id="ogrenciSilButton" layoutX="576.0" layoutY="118.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="81.0" text="Sil" />
                         <Label fx:id="labelKayitTarihiOgrenciEkle" layoutX="34.0" layoutY="286.0" text="Kayıt Tarihi" textFill="WHITE" />
                         <DatePicker fx:id="kayitTarihiOgrenci" layoutX="132.0" layoutY="282.0" prefHeight="25.0" prefWidth="153.0" />
                         <ChoiceBox fx:id="sinifBox" layoutX="134.0" layoutY="233.0" prefWidth="150.0" />
@@ -84,7 +84,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="buttonOgrenciAra" layoutX="117.0" layoutY="107.0" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="buttonOgrenciAra" layoutX="117.0" layoutY="107.0" mnemonicParsing="false" text="Ara" />
                         <Label fx:id="labelTCOgrenciAra" layoutX="27.0" layoutY="69.0" text="TC" textFill="#f2f2f2">
                            <font>
                               <Font size="14.0" />
@@ -111,7 +111,7 @@
                               <TableColumn fx:id="kolonAraOgrenciNo" prefWidth="94.0" text="Öğrenci No" />
                           </columns>
                         </TableView>
-                        <Label fx:id="labelDurumOgrenciAra" layoutX="337.0" layoutY="71.0" text="Label" />
+                        <Label fx:id="labelDurumOgrenciAra" layoutX="337.0" layoutY="71.0" prefHeight="15.0" prefWidth="131.0" />
                      </children></AnchorPane>
                </content>
           </Tab>
@@ -135,7 +135,6 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textFieldDersIdEkle" layoutX="128.0" layoutY="83.0" />
                         <TextField fx:id="textFieldYazili1" layoutX="153.0" layoutY="207.0" prefHeight="33.0" prefWidth="50.0" />
                         <Button fx:id="buttonNotEkle" layoutX="162.0" layoutY="254.0" mnemonicParsing="false" text="Notu Ekle" />
                         <TextField fx:id="textFieldYazili2" layoutX="252.0" layoutY="207.0" prefHeight="33.0" prefWidth="58.0" />
@@ -149,14 +148,15 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelDurumDersNot" layoutX="339.0" layoutY="75.0" text="Label" />
+                        <Label fx:id="labelDurumDersNot" layoutX="339.0" layoutY="75.0" prefHeight="15.0" prefWidth="92.0" />
                         <Label layoutX="69.0" text="Ders Notu Ekle" textFill="WHITE">
                            <font>
                               <Font name="Cambria" size="23.0" />
                            </font>
                         </Label>
                         <Label layoutX="60.0" layoutY="129.0" text="Sınıf" textFill="WHITE" />
-                        <TextField fx:id="notEkleSinif" layoutX="128.0" layoutY="125.0" />
+                        <ChoiceBox fx:id="notEkleSinif" layoutX="128.0" layoutY="124.0" prefHeight="25.0" prefWidth="165.0" />
+                        <ChoiceBox fx:id="textFieldDersIdEkle" layoutX="126.0" layoutY="88.0" prefHeight="25.0" prefWidth="167.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -189,7 +189,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="buttonNotlariAra" layoutX="175.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Notları Ara" />
+                        <Button fx:id="buttonNotlariAra" layoutX="169.0" layoutY="87.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Notları Ara" />
                      </children>
                   </AnchorPane>
               </content>
@@ -287,7 +287,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="anaMenuDonus" layoutX="634.0" layoutY="586.0" mnemonicParsing="false" onAction="#handleSayfaAc" prefHeight="60.0" prefWidth="71.0" text="Button">
+      <Button fx:id="anaMenuDonus" layoutX="634.0" layoutY="586.0" mnemonicParsing="false" onAction="#handleSayfaAc" prefHeight="80.0" prefWidth="75.0">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
