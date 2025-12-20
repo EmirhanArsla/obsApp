@@ -8,11 +8,14 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+//DersDao sınıfı, derslere ait veritabanı işlemlerini
+//(ekleme, arama, listeleme, kontrol) gerçekleştirmek için kullanılır.
 
 public class DersDao {
+    // MongoDB üzerinde "Dersler" koleksiyonunu temsil eder
     private final MongoCollection<Document> collection;
 
-
+    //-----------Yapıcı Metot---------------
     public DersDao(MongoCollection<Document> database) {
         MongoDatabase database0 = DBUtil.getInstance().getDatabase();
         if (database == null) {
@@ -22,6 +25,7 @@ public class DersDao {
         // Constructor'a gelen koleksiyon nesnesini, sınıfın değişkenine atayın.
         this.collection =database;
     }
+    //Yeni bir dersi veritabanına ekler.
     public boolean dersAdd(Ders ders){
         if (dersidKontrol(ders.getDersid())) {
             return false; // Zaten var → ekleme
@@ -50,7 +54,7 @@ public class DersDao {
 
     }
 
-
+    // Girilen ders ID'sinin veritabanında mevcut olup olmadığını kontrol eder.
     public boolean dersidKontrol (String dersid){
         Document filtre = new Document ("dersid",dersid);
         if(collection.find(filtre).first()!=null){

@@ -113,6 +113,9 @@ public class Ogrenci_sisController implements Initializable {
     private DersDao dersDao;
 
 
+    //Önceki ekrandan gelen öğrenci TC bilgisini alır.
+    //TC değeri başarıyla alındığında, ders notları otomatik olarak yüklenir
+    // kullanıcı ders notları sekmesine yönlendirilir.
     public void setGelen_ogrenciTc (String tc) {
             this.gelen_ogrenciTc =tc;
             if (raporlamaManager != null) {
@@ -127,7 +130,8 @@ public class Ogrenci_sisController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // Controller yüklendiğinde veritabanı bağlantısını kurar
+        // ve DAO ile raporlama katmanlarını hazırlar
 
         MongoDatabase database = DBUtil.getInstance().getDatabase();
         ogrenciDao = new OgrenciDao(database.getCollection("Ogrenciler"));
@@ -196,6 +200,7 @@ public class Ogrenci_sisController implements Initializable {
 
     }
     private void loadDersNotlari() {
+        // Ders notları sekmesi açıldığında, ilgili öğrencinin ders notlarını tabloya yükler
         System.out.println("➤ Ders notları sekmesi açıldı.");
         if (gelen_ogrenciTc != null) {
             List<NotGorunum> notlarList =raporlamaManager.notGoruntule(gelen_ogrenciTc);
@@ -208,6 +213,7 @@ public class Ogrenci_sisController implements Initializable {
     }
 
     private void loadGenelOrtalama() {
+        // Genel ortalama sekmesi açıldığında öğrencinin Genel Ortalama bilgisini yükler
         System.out.println("➤ Genel ortalama sekmesi açıldı.");
         if (gelen_ogrenciTc != null) {
             List<GnoGorunum> gnoList = raporlamaManager.gnoGetir(gelen_ogrenciTc);
@@ -221,6 +227,7 @@ public class Ogrenci_sisController implements Initializable {
     }
 
     private void loadDersOrtalamasi() {
+        // Ders ortalama sekmesi açıldığında ilgili verileri yükler
         System.out.println("➤ Sınıf ortalaması sekmesi açıldı.");
     if (gelen_ogrenciTc != null) {
         List<OrtalamaGorunum> dersOrtlama = raporlamaManager.ortlamaGoster(gelen_ogrenciTc);
@@ -232,7 +239,7 @@ public class Ogrenci_sisController implements Initializable {
     }
     }
     private void loadOgrenciBilgi() {
-
+        // Öğrenci bilgi sekmesi açıldığında temel öğrenci bilgilerini yükler
         if (gelen_ogrenciTc != null) {
            OgrenciGorunum OgrenciB = ogrenciDao.ogrenciGorunumSearch(gelen_ogrenciTc);
             if(OgrenciB != null){
