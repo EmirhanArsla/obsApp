@@ -18,7 +18,6 @@ public class DBUtil {
 
     private DBUtil() {
         try {
-            // Bağlantı dizesini kullanarak istemci ( nesnesini oluştur
             mongoClient = MongoClients.create(ConnetingString);
             mongoClient.getDatabase("admin").runCommand(new Document("ping", 1)) ;//
             System.out.println("MongoDB bağlantısı başarılı.");
