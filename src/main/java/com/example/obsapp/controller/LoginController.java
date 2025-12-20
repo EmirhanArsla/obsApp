@@ -75,10 +75,10 @@ public class LoginController implements Initializable {
 
                 Parent root = loader.load();
 
-                // 🎯 Controller'a erişim
+                // Controller'a erişim
                 Yonteci_sisController controller = loader.getController();
 
-                // 🎯 Yönetici bilgisini controller'a gönder
+                //  Yönetici bilgisini controller'a gönder
                 controller.setYoneticiBilgisi(kontrol);
 
                 Stage stage = new Stage();

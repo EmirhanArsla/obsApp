@@ -14,10 +14,11 @@ public class YoneticiDao {
 
     public YoneticiDao(MongoCollection<Document> database ) {
         MongoDatabase database1 = DBUtil.getInstance().getDatabase();
-        collection = database1.getCollection("Ogretmen");
+        collection = database1.getCollection("Yönetici");
     }
 
     public void yoneticiAdd(Yonetici yonetici) {
+
         Date dbDate =Date.from(yonetici.getKayitTarihi().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         Document document = new Document();
@@ -28,16 +29,26 @@ public class YoneticiDao {
         document.append("kayitTarihi",dbDate);
         try {
             collection.insertOne(document);
-            System.out.println("Ogretmen Eklendi");
+            System.out.println("Yönetici Eklendi");
         }
         catch (Exception e) {
-            System.out.println("Ogretmen Eklenemedi " + e.getMessage());
+            System.out.println("Yönetici Eklenemedi " + e.getMessage());
         }
     }
     public Document yoneticiKontrol(String tc, String sifre){
         Document filtre = new Document("tc", tc)
                 .append("sifre", sifre);
         return collection.find(filtre).first() ;
+    }
+
+    public boolean tcKontrol(String tc){
+        Document filtre = new Document("tc", tc);
+        if(collection.find(filtre).first() != null){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

@@ -23,46 +23,53 @@ public class NotDao {
 
     }
 
-    public void notadd(Not not){
+    public void notadd(Not not) {
         Document document = new Document();
-        document.append("notid",not.getNotId() );
-        document.append("dersid",not.getDersId());
-        document.append("tc",not.getTc());
-        document.append("sinav1",not.getSinav1());
-        document.append("sinav2",not.getSinav2());
-        document.append("sinif",not.getSinif());
-        document.append("dersAdi",not.getDersad());
+        document.append("notid", not.getNotId());
+        document.append("dersid", not.getDersId());
+        document.append("tc", not.getTc());
+        document.append("sinav1", not.getSinav1());
+        document.append("sinav2", not.getSinav2());
+        document.append("sinif", not.getSinif());
+        document.append("dersAdi", not.getDersad());
 
         try {
             collection.insertOne(document);
             System.out.println("Not başarıyla eklendi");
-        }
-        catch (Exception e){
-            System.out.println("Not eklenemedi " +e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Not eklenemedi " + e.getMessage());
         }
     }
 
     public void notdelete(int notid) {
-        Document filitre = new Document("notid",notid);
+        Document filitre = new Document("notid", notid);
         long SId = collection.deleteOne(filitre).getDeletedCount();
         if (SId > 0) {
             System.out.println("Not Silindi");
-        }
-        else  {
+        } else {
             System.out.println("Silinmedi");
         }
     }
 
-    public List<Document> notSearch (String tc) {
-        Document filitre = new Document("tc",tc);
-        List<Document> notlist= new ArrayList<>();
+    public List<Document> notSearch(String tc) {
+        Document filitre = new Document("tc", tc);
+        List<Document> notlist = new ArrayList<>();
         return collection.find(filitre).into(notlist);
     }
 
-    public List <Document> allNot(){
-        List<Document> documents = new  ArrayList<>();
+    public List<Document> allNot() {
+        List<Document> documents = new ArrayList<>();
         return collection.find().into(documents);
 
+    }
+
+    public boolean notidKontrol(String notid) {
+        Document filtre = new Document("notid", notid);
+        if (collection.find(filtre).first() != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
