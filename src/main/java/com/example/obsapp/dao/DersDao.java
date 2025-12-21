@@ -1,4 +1,4 @@
-package com.example.obsapp.DBO;
+package com.example.obsapp.dao;
 
 import com.example.obsapp.model.Ders;
 import com.example.obsapp.util.DBUtil;

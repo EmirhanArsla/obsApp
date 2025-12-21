@@ -1,14 +1,14 @@
 package com.example.obsapp.controller;
 
-import com.example.obsapp.DBO.DersDao;
-import com.example.obsapp.DBO.NotDao;
-import com.example.obsapp.DBO.OgrenciDao;
-import com.example.obsapp.DBO.YoneticiDao;
-import com.example.obsapp.Manager.RaporlamaManager;
-import com.example.obsapp.Viewmodel.GnoGorunum;
-import com.example.obsapp.Viewmodel.NotGorunum;
-import com.example.obsapp.Viewmodel.OgrenciGorunum;
-import com.example.obsapp.Viewmodel.OrtalamaGorunum;
+import com.example.obsapp.dao.DersDao;
+import com.example.obsapp.dao.NotDao;
+import com.example.obsapp.dao.OgrenciDao;
+import com.example.obsapp.dao.YoneticiDao;
+import com.example.obsapp.manager.RaporlamaManager;
+import com.example.obsapp.viewmodel.GnoGorunum;
+import com.example.obsapp.viewmodel.NotGorunum;
+import com.example.obsapp.viewmodel.OgrenciGorunum;
+import com.example.obsapp.viewmodel.OrtalamaGorunum;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
 import javafx.collections.FXCollections;

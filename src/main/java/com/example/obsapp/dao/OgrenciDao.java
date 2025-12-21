@@ -1,6 +1,6 @@
-package com.example.obsapp.DBO;
-import com.example.obsapp.Exception.OgrenciBulunamadiException;
-import com.example.obsapp.Viewmodel.OgrenciGorunum;
+package com.example.obsapp.dao;
+import com.example.obsapp.exception.OgrenciBulunamadiException;
+import com.example.obsapp.viewmodel.OgrenciGorunum;
 import com.example.obsapp.model.Ogrenci;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoCollection;

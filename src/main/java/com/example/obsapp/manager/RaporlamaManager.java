@@ -1,19 +1,15 @@
-package com.example.obsapp.Manager;
+package com.example.obsapp.manager;
 
-import com.example.obsapp.DBO.DersDao;
-import com.example.obsapp.DBO.OgrenciDao;
-import com.example.obsapp.DBO.NotDao;
-import com.example.obsapp.Interfaceler.IRaporlamaManager;
-import com.example.obsapp.Viewmodel.GnoGorunum;
-import com.example.obsapp.Viewmodel.NotGorunum;
-import com.example.obsapp.Viewmodel.OrtalamaGorunum;
-import com.example.obsapp.model.Ogrenci;
-import com.example.obsapp.util.DBUtil;
+import com.example.obsapp.dao.DersDao;
+import com.example.obsapp.dao.OgrenciDao;
+import com.example.obsapp.dao.NotDao;
+import com.example.obsapp.interfaces.IRaporlamaManager;
+import com.example.obsapp.viewmodel.GnoGorunum;
+import com.example.obsapp.viewmodel.NotGorunum;
+import com.example.obsapp.viewmodel.OrtalamaGorunum;
 import com.example.obsapp.util.HesaplamaUtil;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

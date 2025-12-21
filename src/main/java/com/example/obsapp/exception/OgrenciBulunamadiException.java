@@ -1,4 +1,4 @@
-package com.example.obsapp.Exception;
+package com.example.obsapp.exception;
 
 public class OgrenciBulunamadiException extends Exception {
 

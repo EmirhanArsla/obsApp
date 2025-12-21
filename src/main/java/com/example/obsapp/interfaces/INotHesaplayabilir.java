@@ -1,4 +1,4 @@
-package com.example.obsapp.Interfaceler;
+package com.example.obsapp.interfaces;
 
 public interface INotHesaplayabilir {
     double ortalama(int y1, int y2);

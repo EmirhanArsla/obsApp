@@ -1,8 +1,8 @@
-package com.example.obsapp.Interfaceler;
+package com.example.obsapp.interfaces;
 
-import com.example.obsapp.Viewmodel.GnoGorunum;
-import com.example.obsapp.Viewmodel.NotGorunum;
-import com.example.obsapp.Viewmodel.OrtalamaGorunum;
+import com.example.obsapp.viewmodel.GnoGorunum;
+import com.example.obsapp.viewmodel.NotGorunum;
+import com.example.obsapp.viewmodel.OrtalamaGorunum;
 import java.util.List;
 public interface IRaporlamaManager {
 

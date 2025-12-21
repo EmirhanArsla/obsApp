@@ -1,4 +1,4 @@
-package com.example.obsapp.Viewmodel;
+package com.example.obsapp.viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;

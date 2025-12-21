@@ -1,9 +1,8 @@
-package com.example.obsapp.Viewmodel;
+package com.example.obsapp.viewmodel;
 
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class OgrenciGorunum {
     private final StringProperty ad;
