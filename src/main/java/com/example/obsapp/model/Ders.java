@@ -1,8 +1,7 @@
 package com.example.obsapp.model;
 
-import com.example.obsapp.Interfaceler.INotHesaplayabilir;
+import com.example.obsapp.interfaces.INotHesaplayabilir;
 import com.example.obsapp.util.HesaplamaUtil;
-import org.bson.Document;
 
 public class Ders extends DersBase implements INotHesaplayabilir {
 

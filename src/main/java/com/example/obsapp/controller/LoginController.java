@@ -1,8 +1,7 @@
 package com.example.obsapp.controller;
 
-import com.example.obsapp.DBO.OgrenciDao;
-import com.example.obsapp.DBO.YoneticiDao;
-import com.example.obsapp.repository.YoneticiRepository;
+import com.example.obsapp.dao.OgrenciDao;
+import com.example.obsapp.dao.YoneticiDao;
 import com.example.obsapp.util.DBUtil;
 import com.mongodb.client.MongoDatabase;
 import javafx.fxml.FXML;

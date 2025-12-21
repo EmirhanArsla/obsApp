@@ -1,4 +1,4 @@
-package com.example.obsapp.DBO;
+package com.example.obsapp.dao;
 
 import com.example.obsapp.model.Not;
 import com.example.obsapp.util.DBUtil;
