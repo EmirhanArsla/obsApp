@@ -11,25 +11,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="645.0" prefWidth="986.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.LoginController">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="986.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.LoginController">
 
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Pane prefHeight="603.0" prefWidth="946.0" stylesheets="@style.css">
+    <Pane prefHeight="628.0" prefWidth="946.0" stylesheets="@style.css">
         <children>
-         <ImageView fitHeight="623.0" fitWidth="978.0" layoutX="-16.0" layoutY="-20.0" opacity="0.19">
+         <ImageView fitHeight="667.0" fitWidth="978.0" layoutX="-16.0" layoutY="-64.0" opacity="0.19">
             <image>
                <Image url="@../../../images/img_2.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="138.0" fitWidth="145.0" layoutX="403.0" layoutY="149.0" preserveRatio="true">
+         <ImageView fitHeight="138.0" fitWidth="145.0" layoutX="410.0" layoutY="234.0" preserveRatio="true">
             <image>
                <Image url="@../../../images/img_3.png" />
             </image>
          </ImageView>
-         <Pane layoutX="563.0" layoutY="99.0" prefHeight="383.0" prefWidth="383.0" style="-fx-background-color: rgba(45, 45, 45, 0.5); -fx-background-radius: 15; -fx-border-color: #555555; -fx-border-image-width: 2; -fx-padding: 20;">
+         <Pane layoutX="563.0" layoutY="157.0" prefHeight="383.0" prefWidth="383.0" style="-fx-background-color: rgba(45, 45, 45, 0.5); -fx-background-radius: 15; -fx-border-color: #555555; -fx-border-image-width: 2; -fx-padding: 20;">
             <children>
       
                   <!-- ====================== -->
@@ -51,7 +51,7 @@
                   <Button layoutX="107.0" layoutY="229.0" onAction="#ogrenciGiris" prefHeight="39" prefWidth="86" text="GİRİŞ" />
             </children>
          </Pane>
-         <Pane layoutX="14.0" layoutY="99.0" prefHeight="383.0" prefWidth="371.0" style="-fx-background-color: rgba(45, 45, 45, 0.5); -fx-background-radius: 15; -fx-border-color: #555555; -fx-border-image-width: 2; -fx-padding: 20;">
+         <Pane layoutX="14.0" layoutY="157.0" prefHeight="383.0" prefWidth="371.0" style="-fx-background-color: rgba(45, 45, 45, 0.5); -fx-background-radius: 15; -fx-border-color: #555555; -fx-border-image-width: 2; -fx-padding: 20;">
             <children>
       
       
@@ -81,6 +81,16 @@
             <!-- ====================== -->
 
             <Label fx:id="hataMesaji" layoutX="333.0" layoutY="503.0" prefHeight="86.0" prefWidth="292.0" style="-fx-font-size: 16px;" text="" textFill="RED" />
+         <ImageView fitHeight="123.0" fitWidth="144.0" layoutX="405.0" layoutY="-39.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/pngwing.com.png" />
+            </image>
+         </ImageView>
+         <Label layoutX="341.0" layoutY="46.0" prefHeight="77.0" prefWidth="277.0" text="Öğrenci Bilgi Sistemi">
+            <font>
+               <Font size="29.0" />
+            </font>
+         </Label>
 
         </children>
     </Pane>

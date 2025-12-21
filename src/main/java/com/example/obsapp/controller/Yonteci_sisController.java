@@ -544,6 +544,11 @@ public class Yonteci_sisController {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
             }
 
+            if (!ogrenciDao.tcKontrol(tc)) {
+                durumMesajLabel.setText("TC Bulunamadı ");
+                return;
+            }
+
             String msg = ogrenciDao.ogrenciDelete(tc);
             durumMesajLabel.setText(msg);
             tcsilTextField.clear();

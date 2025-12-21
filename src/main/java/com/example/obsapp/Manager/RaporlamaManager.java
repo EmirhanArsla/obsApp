@@ -91,7 +91,7 @@ public class RaporlamaManager implements IRaporlamaManager {
             double sinav2_double = ((Number )not.get("sinav2")).doubleValue() ;
 
             List<Document> derslistesi = dersDao.dersSearch(dersId);
-            Document dersBilgisi = derslistesi.getFirst();
+            Document dersBilgisi = derslistesi.get(0);
 
 
             if (dersBilgisi != null ) {
