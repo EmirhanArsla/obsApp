@@ -22,6 +22,8 @@ public class Not {
                 .replace("ş", "s")
                 .replace("ö", "o")
                 .replace("ç", "c")
+                .replace("İ", "I")
+
                 .toUpperCase() + sinif;
         this.NotId= ogrenciId + "-" + dersad ;
     }
