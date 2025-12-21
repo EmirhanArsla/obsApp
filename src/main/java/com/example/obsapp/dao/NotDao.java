@@ -9,20 +9,21 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+//NotDao sınıfı, öğrencilere ait not bilgilerinin
+//MongoDB veritabanı üzerinde yönetilmesini sağlar.
 public class NotDao {
+    // MongoDB üzerinde "Notlar" koleksiyonunu temsil eder
     private final MongoCollection<Document> collection;
-
+    //---------------Yapıcı Metot-----------------
     public NotDao(MongoCollection<Document> database) {
         MongoDatabase Db = DBUtil.getInstance().getDatabase();
         if (database == null) {
             throw new IllegalArgumentException("Not koleksiyonu null olamaz.");
         }
-
-        // Constructor'a gelen koleksiyon nesnesini, sınıfın değişkenine atayın.
         this.collection = database;
 
     }
-
+     // Öğrenciye ait yeni bir not kaydını veritabanına ekler.
     public void notadd(Not not) {
         Document document = new Document();
         document.append("notid", not.getNotId());
@@ -40,7 +41,7 @@ public class NotDao {
             System.out.println("Not eklenemedi " + e.getMessage());
         }
     }
-
+   //Not ID bilgisine göre ilgili not kaydını veritabanından siler.
     public void notdelete(int notid) {
         Document filitre = new Document("notid", notid);
         long SId = collection.deleteOne(filitre).getDeletedCount();
@@ -50,19 +51,19 @@ public class NotDao {
             System.out.println("Silinmedi");
         }
     }
-
+  //Not ID bilgisine göre ilgili not kaydını veritabanından siler.
     public List<Document> notSearch(String tc) {
         Document filitre = new Document("tc", tc);
         List<Document> notlist = new ArrayList<>();
         return collection.find(filitre).into(notlist);
     }
-
+  //Veritabanında kayıtlı olan tüm notları listeler.
     public List<Document> allNot() {
         List<Document> documents = new ArrayList<>();
         return collection.find().into(documents);
 
     }
-
+  //Girilen not ID bilgisinin veritabanında mevcut olup olmadığını kontrol eder.
     public boolean notidKontrol(String notid) {
         Document filtre = new Document("notid", notid);
         if (collection.find(filtre).first() != null) {

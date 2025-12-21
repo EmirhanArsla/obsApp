@@ -3,7 +3,7 @@ package com.example.obsapp.util;
 public class  HesaplamaUtil {
 
     public static boolean notGecerliMi(double not) {
-        return not >= 0 && not <= 100;   // karşılaştırma + mantıksal
+        return not >= 0 && not <= 100;
     }
 
     public static boolean notlarGecerliMi(double y1, double y2) {
@@ -16,7 +16,7 @@ public class  HesaplamaUtil {
             throw new IllegalArgumentException("Notlar 0–100 arasında olmalıdır!");
         }
 
-        return (double) (y1 + y2 ) / 2.0 ; // int -> double dönüşümü (implicit)
+        return (double) (y1 + y2 ) / 2.0 ;
     }
 
     // ======================== AĞIRLIKLI NOT ========================
@@ -29,7 +29,7 @@ public class  HesaplamaUtil {
         if (katsayi <= 0 || katsayi > 5)
             throw new IllegalArgumentException("Katsayı 1–5 arası olmalıdır!");
 
-        return ortalama * katsayi;   // aritmetik operatörler
+        return ortalama * katsayi;
     }
     // ======================== TİP DÖNÜŞÜMLERİ ========================
 

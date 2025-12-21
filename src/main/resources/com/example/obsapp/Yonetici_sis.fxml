@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="636.0" prefWidth="839.0" style="-fx-background-color: #4A70A9;" stylesheets="@yonetici.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Yonteci_sisController">
+<AnchorPane prefHeight="690.0" prefWidth="962.0" style="-fx-background-color: #4A70A9;" stylesheets="@yonetici.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.obsapp.controller.Yonteci_sisController">
    <children>
-      <TabPane fx:id="tabPane" layoutY="46.0" prefHeight="540.0" prefWidth="837.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutY="47.0" prefHeight="539.0" prefWidth="962.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="ogrenciDuzenle" text="Öğrenci Düzenle">
                <content>

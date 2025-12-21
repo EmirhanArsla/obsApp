@@ -163,7 +163,6 @@ public class Yonteci_sisController {
     // ============================
     @FXML
     private TextField textFieldTcNotG;
-
     @FXML
     private TableView<OrtalamaGorunum> tableViewDersNotG;
     @FXML
@@ -240,32 +239,28 @@ public class Yonteci_sisController {
     private DersDao dersDao;
     private RaporlamaManager raporlamaManager;
 
-
+    //handleSayfaAc metotu kullanıcının tekrar ana ekrana dönmesini sağlar.
     @FXML
     private void handleSayfaAc(ActionEvent event) {
         try {
-            // 1. FXML dosyasının yolunu belirtin (Örn: "/com/example/obsapp/DashboardView.fxml")
+
             String fxmlPath = "/com/example/obsapp/hello-view.fxml";
             String title = "Giris Ekranı";
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            // 2. Yeni sahneyi (Scene) oluşturun
+
             Scene scene = new Scene(root);
 
-            // 3. Mevcut pencereyi (Stage) buton üzerinden bulun
-            // Bu yöntem, 'yoneticiKullanici' gibi spesifik bir değişkene bağımlılığı ortadan kaldırır.
+
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // 4. Mevcut pencerenin içeriğini değiştirin (Yeni pencere açmak yerine geçiş yapar)
+
             currentStage.setTitle(title);
             currentStage.setScene(scene);
             currentStage.show();
 
-            // Opsiyonel: Eğer veriyi yeni Controller'a aktarmanız gerekiyorsa:
-            // HedefController controller = loader.getController();
-            // controller.setData("Veri...");
 
         } catch (IOException e) {
             System.err.println("Sayfa yüklenirken hata oluştu: " + e.getMessage());
@@ -273,6 +268,8 @@ public class Yonteci_sisController {
         }
     }
 
+    // Controller ilk yüklendiğinde ChoiceBox/ComboBox içeriklerini hazırlar,
+    // DAO ve manager nesnelerini kurar, buton aksiyonlarını ve TableView kolonlarını bağlar.
     @FXML
     public void initialize() {
         //seçnekli kutuların seçenekleri yazılır
@@ -343,7 +340,7 @@ public class Yonteci_sisController {
         gnoGenelOrt.setCellValueFactory(new PropertyValueFactory<>("gno"));
 
     }
-
+    // Seçilen sınıf seviyesine göre sınıf ortalamasını hesaplar ve label'a yazar
     public void sinifOrtlamasi() {
         try {
 
@@ -361,8 +358,7 @@ public class Yonteci_sisController {
 
         }
     }
-
-
+    // Tüm öğrencilerin GNO bilgilerini getirip tabloya yükler
     public void gnolariGetir() {
         try {
             List<GnoGorunum> gnoGeti = raporlamaManager.tumGnolar();
@@ -373,7 +369,7 @@ public class Yonteci_sisController {
         }
     }
 
-
+    // Girilen TC’ye göre öğrencinin ders notlarını getirip tabloya yükler
     private void dersNotuGoruntule() {
         try {
             String tc = textFieldTcNotG.getText();
@@ -406,7 +402,7 @@ public class Yonteci_sisController {
 
     }
 
-
+    //Yönetici bilgilerini kullanıcıdan alarak veritabanına yönetici kaydını ekler
     private void yoneticiEkle() {
         try {
             String isim = textfieldOgretIsim.getText();
@@ -446,7 +442,7 @@ public class Yonteci_sisController {
                     ("Hata oluştu: " + e.getMessage());
         }
     }
-
+    //// Öğrenci TC’si ve ders bilgisine göre not kaydını veritabanına ekler
     private void notEkle() {
         try {
             String tc = textFieldOgrenciTcDersEKle.getText();
@@ -498,7 +494,7 @@ public class Yonteci_sisController {
                     ("Hata oluştu: " + e.getMessage());
         }
     }
-
+    // Girilen TC’ye göre öğrenciyi arar ve sonucu TableView üzerinde gösterir
     private void ogrenciAra() {
         try {
             String tc = textFieldOgrenciAraTC.getText();
@@ -531,7 +527,7 @@ public class Yonteci_sisController {
         }
 
     }
-
+    // Girilen TC’ye göre öğrenciyi veritabanından siler ve sonucu kullanıcıya bildirir
     private void ogrenciSil() {
         try {
             String tc = tcsilTextField.getText();
@@ -559,7 +555,7 @@ public class Yonteci_sisController {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
         }
     }
-
+    // Kullanıcıdan alınan öğrenci bilgilerini veritabanına öğrenci kayı olarak ekler
     private void ogrenciEkle() {
         try {
 
