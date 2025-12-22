@@ -9,7 +9,8 @@ import org.bson.Document;
 
 public class DBUtil {
 
-
+    //veritabanı ile bağlantı kurmak için kullandığımız bağlantı metnini her sınıfta ayrı ayrı
+    //kullanmamak için bir sınıfta yazdık
     private final static String ConnetingString ="mongodb+srv://Emirhan:4002.Emir78@emirhanarslan.7yqfsqr.mongodb.net/?retryWrites=true&w=majority&appName=EmirhanArslan";
     private static MongoClient mongoClient;
     private static MongoDatabase datebase;
@@ -27,7 +28,7 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
-
+//içeri aktarılmasını sağlayan fonksiyon
     public static DBUtil getInstance() {
         if (instance == null) {
             instance = new DBUtil();
@@ -41,7 +42,7 @@ public class DBUtil {
         }
         return mongoClient.getDatabase(DATABASE_NAME);
     }
-
+//Database işlem bittiğinde kapatılır
     public static void closeConnection() {
         if (mongoClient != null) {
             mongoClient.close();

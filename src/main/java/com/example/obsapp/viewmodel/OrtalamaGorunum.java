@@ -3,12 +3,14 @@ package com.example.obsapp.viewmodel;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+// 1. Alanlar SimpleProperty olarak tanımlanır
 
 public class OrtalamaGorunum {
     private final SimpleStringProperty dersAdi;
     private final SimpleIntegerProperty sinav1;
     private final SimpleIntegerProperty sinav2;
     private final SimpleDoubleProperty ortalama;
+    // Kurucu (Constructor)
 
     public OrtalamaGorunum (int sinav1 ,String dersAd ,double ortalama ,int sinav2){
         this.sinav1 = new SimpleIntegerProperty(sinav1);
@@ -17,7 +19,10 @@ public class OrtalamaGorunum {
         this.dersAdi = new SimpleStringProperty(dersAd);
 
     }
+    // --- 3. Property Metotları (Binding için ZORUNLU) ---
 
+    // JavaFX TableView, bu metotları (alan adı + "Property") çağırarak
+    // Property nesnesinin kendisini alır ve binding'i kurar.
     public SimpleIntegerProperty sinav1Property() {return sinav1;
     }
 

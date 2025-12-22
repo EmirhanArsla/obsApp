@@ -9,6 +9,7 @@ public class Yonetici extends Kisi {
 
     //-------------------Yapıcı Metot------------------
 
+
     public Yonetici(String id, String ad, String soyad,String sifre,LocalDate kayitTarihi) {
         super(id, ad, soyad, kayitTarihi);
         this.sifre=sifre;

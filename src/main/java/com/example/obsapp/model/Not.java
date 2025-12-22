@@ -10,13 +10,13 @@ public class Not {
     private int Sinav2;
     private int sinif;
     //-----------------Yapıcı Metot----------------------
-    public Not(String ogrenciId , String dersad,int sinav1,int sinav2,int sinif){
-        this.tc =ogrenciId;
-        this.Dersad=dersad;
-        this.Sinav1=sinav1;
-        this.Sinav2=sinav2;
-        this.sinif=sinif;
-        this.DersId =dersad.replace("i", "ı")
+    public Not(String ogrenciId , String dersad,int sinav1,int sinav2,int sinif) {
+        this.tc = ogrenciId;
+        this.Dersad = dersad;
+        this.Sinav1 = sinav1;
+        this.Sinav2 = sinav2;
+        this.sinif = sinif;
+        this.DersId = dersad.replace("i", "ı")
                 .replace("ğ", "g")
                 .replace("ü", "u")
                 .replace("ş", "s")
@@ -25,8 +25,16 @@ public class Not {
                 .replace("İ", "I")
 
                 .toUpperCase() + sinif;
-        this.NotId= ogrenciId + "-" + dersad ;
+        this.NotId = ogrenciId + "-" + dersad;
     }
+
+    public Not(String tc, String dersad) {
+            this.tc = tc;
+            this.Dersad = dersad;
+            this.Sinav1 = 0;
+            this.Sinav2 = 0;
+        }
+
     //--------------Getter Setter-------------------
 
     public String getNotId() {

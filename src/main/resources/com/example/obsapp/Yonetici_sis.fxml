@@ -249,7 +249,7 @@
                      <children>
                         <TableView fx:id="gnoTable" layoutX="272.0" layoutY="54.0" prefHeight="355.0" prefWidth="482.0">
                           <columns>
-                            <TableColumn fx:id="gnoOgrenciNo" prefWidth="120.0" text="Öğrenci No" />
+                            <TableColumn fx:id="gnoOgrenciNo" prefWidth="120.0" text="TC" />
                             <TableColumn fx:id="gnoIsim" prefWidth="117.0" text="İsim" />
                               <TableColumn fx:id="gnoSoyisim" prefWidth="107.0" text="Soyisim" />
                               <TableColumn fx:id="gnoGenelOrt" prefWidth="116.0" text="Genel Ortalama" />

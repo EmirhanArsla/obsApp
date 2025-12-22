@@ -58,7 +58,7 @@ public class OgrenciDao {
             String mesaj= "Aynı Tc sahip ögrenci var " ;
             return mesaj;
         }
-
+    //yazdığımız alanlara göre veritabanına veri ekler
         Date dbDate =Date.from(ogrenci.getKayitTarihi().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         Document document = new Document();
@@ -102,7 +102,7 @@ public class OgrenciDao {
         return collection.find(filitre).first() ;
     }
     //Sınıf seviyesine göre öğrenci araması yapar.
-    public List<Document> ogrencisearch2(int sinifSeviyesi){
+    public List<Document> ogrencisearch(int sinifSeviyesi){
         Document filitre = new Document("sinifSeviyesi", sinifSeviyesi);
         List<Document> documents = new  ArrayList<>();
         return collection.find(filitre).into(documents) ;
