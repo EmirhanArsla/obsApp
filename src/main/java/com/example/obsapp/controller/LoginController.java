@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
     @FXML
     private Label hataMesaji;  // Hata mesajını ekranda gösterecek label
 
-
+//uygulama başladığında çalışan fonksiyon
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MongoDatabase database = DBUtil.getInstance().getDatabase();
@@ -58,10 +58,10 @@ public class LoginController implements Initializable {
     // ============================
     @FXML
     private void yoneticiGiris() {
-
+//girilen metinler boşluksuz bir şekilde getirilir
         String user = yoneticiKullanici.getText().trim();
         String pass = yoneticiSifre.getText().trim();
-
+//girişler veritabanına kontrol edilir
         Document kontrol = yoneticiDao.yoneticiKontrol(user, pass);
 
         if (kontrol != null) {
@@ -101,16 +101,15 @@ public class LoginController implements Initializable {
     }
 
 
-
     // ============================
     // ÖĞRENCİ GİRİŞİ
     // ============================
     @FXML
     private void ogrenciGiris() throws IOException {
-
+        //girilen metinler boşluksuz bir şekilde getirilir
         String user = ogrenciKullanici.getText().trim();
         String pass = ogrenciSifre.getText().trim();
-
+        //girişler veritabanına kontrol edilir
         Document kontrol = ogrenciDao.girisKontrol(user, pass);
 
         if (kontrol != null) {
@@ -118,11 +117,11 @@ public class LoginController implements Initializable {
 
 
                 hataMesaji.setText(""); // hata mesajını temizle
-
+                //gidilmek istenen sayfanın yolu ve başlığı parametre olarak yollanır
                 FXMLLoader loader = loadPage("/com/example/obsapp/Ogrenci_sis.fxml", "Öğrenci Paneli");
 
                 Ogrenci_sisController ogrenci_sis = loader.getController();
-
+                //diğer sayfaya öğrenci tc yollanmasınnı sağlar
                 ogrenci_sis.setGelen_ogrenciTc(pass);
             } catch (IOException e) {
                 e.printStackTrace();

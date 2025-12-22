@@ -142,7 +142,7 @@ public class Ogrenci_sisController implements Initializable {
 
 
 
-        // Tab değişim dinleyicisi
+        // Tab değişim dinleyicisi(tab her değiştinde otamtik olarak o tabı yükliyecek)
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
 
             if (newTab == tabDersNotu) {
@@ -199,6 +199,7 @@ public class Ogrenci_sisController implements Initializable {
         });
 
     }
+
     private void loadDersNotlari() {
         // Ders notları sekmesi açıldığında, ilgili öğrencinin ders notlarını tabloya yükler
         System.out.println("➤ Ders notları sekmesi açıldı.");

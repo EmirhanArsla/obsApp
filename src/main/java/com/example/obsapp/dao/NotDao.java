@@ -25,6 +25,7 @@ public class NotDao {
     }
      // Öğrenciye ait yeni bir not kaydını veritabanına ekler.
     public void notadd(Not not) {
+        //yazdığımız alanlara göre veritabanına ekler
         Document document = new Document();
         document.append("notid", not.getNotId());
         document.append("dersid", not.getDersId());
@@ -71,6 +72,13 @@ public class NotDao {
         } else {
             return false;
         }
+    }
+
+    public static <T extends Comparable<T>> boolean araliktaMi(T deger, T min, T max) {
+        if (deger == null || min == null || max == null) {
+            return false;
+        }
+        return deger.compareTo(min) >= 0 && deger.compareTo(max) <= 0;
     }
 }
 

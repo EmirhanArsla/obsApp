@@ -21,9 +21,9 @@ public class  HesaplamaUtil {
 
     // ======================== AĞIRLIKLI NOT ========================
 
-    /**
-     * Katsayı ve kredi kullanılarak ağırlıklı ortalama hesaplar.
-     * Formül: ağırlıklı = ortalama * katsayı + kredi
+    /*
+      Katsayı ve kredi kullanılarak ağırlıklı ortalama hesaplar.
+      Formül: ağırlıklı = ortalama * katsayı + kredi
      */
     public static double agirlikliNot(double ortalama, double katsayi) {
         if (katsayi <= 0 || katsayi > 5)
@@ -33,25 +33,15 @@ public class  HesaplamaUtil {
     }
     // ======================== TİP DÖNÜŞÜMLERİ ========================
 
-    /**
-     * Double ortalamayı int değere çevirir.
-     * → Explicit casting
+    /*
+      Double ortalamayı int değere çevirir.
+      Explicit casting
      */
     public static int ortalamaInt(double ort) {
         return (int) ort;   // explicit cast
     }
 
 
-    // ======================== NOTU SINIRLANDIRMA ========================
 
-    /**
-     * Bir notun 0–100 aralığında kalmasını sağlar.
-     * Örn: 120 girilirse → 100 yapılır.
-     */
-    public static int normalize(int not) {
-        if (not < 0) return 0;
-        if (not > 100) return 100;
-        return not;
-    }
 }
 

@@ -272,10 +272,12 @@ public class Yonteci_sisController {
     // DAO ve manager nesnelerini kurar, buton aksiyonlarını ve TableView kolonlarını bağlar.
     @FXML
     public void initialize() {
+
         //seçnekli kutuların seçenekleri yazılır
         List<Integer> siniflar = Arrays.asList(9, 10, 11, 12);
         List<String> dersler = Arrays.asList("Matematik", "Türkçe", "Fizik", "Kimya", "Biyoloji", "Tarih", "Cografya", "Din Kültürü ve Ahlak Bilgisi", "İngilizce",
                 "Beden Eğitimi", "Görsel Sanatlar/Müzik", "Zeka oyunları", "Felsefe");
+
         //seçenkeli kutulara değerler atanır
         sinifBox.setItems(FXCollections.observableArrayList(siniflar));
         choiceBoxSinifOrt.setItems(FXCollections.observableArrayList(siniflar));
@@ -297,6 +299,7 @@ public class Yonteci_sisController {
         dersDao = new DersDao(database.getCollection("Dersler"));
         raporlamaManager = new RaporlamaManager(notDao, dersDao, ogrenciDao);
 
+        //Buttonlara basıldğında etkileşecek fonksiyonlar
         ekleButton.setOnAction(event -> ogrenciEkle());
         ogrenciSilButton.setOnAction(e -> ogrenciSil());
         buttonOgrenciAra.setOnAction(e -> ogrenciAra());
@@ -343,15 +346,17 @@ public class Yonteci_sisController {
     // Seçilen sınıf seviyesine göre sınıf ortalamasını hesaplar ve label'a yazar
     public void sinifOrtlamasi() {
         try {
-
+        //sınıf seçilmemesi durumunda hata yollanır
             Integer sinif = choiceBoxSinifOrt.getValue();
             if (sinif == null) {
                 throw new BosAlanException("Sınıf seçilmedi");
             }
-
+        //sınıf ortlamasın ekrana yazdırır
             double sinifOrtlamasi = raporlamaManager.sinifOrtalama(sinif);
+
             labelSinifOrt.setText(sinif + " Sinif Ortalama: " + sinifOrtlamasi);
-        } catch (BosAlanException e) {
+        }//try catch yapısı ile hata yönetimi yapılır
+        catch (BosAlanException e) {
             labelSinifOrt.setText(e.getMessage());
         } catch (Exception e) {
             System.err.println("Ortalama Getirilemedi: " + e.getMessage());
@@ -360,6 +365,7 @@ public class Yonteci_sisController {
     }
     // Tüm öğrencilerin GNO bilgilerini getirip tabloya yükler
     public void gnolariGetir() {
+        //try catch yapısı ile hata yönetimi yapılır
         try {
             List<GnoGorunum> gnoGeti = raporlamaManager.tumGnolar();
             gnoTable.setItems(FXCollections.observableArrayList(gnoGeti));
@@ -371,24 +377,29 @@ public class Yonteci_sisController {
 
     // Girilen TC’ye göre öğrencinin ders notlarını getirip tabloya yükler
     private void dersNotuGoruntule() {
+        //try catch yapısı ile hata yönetimi yapılır
         try {
             String tc = textFieldTcNotG.getText();
+            //tc boş ise tc girilmedi uyarısı
             if (tc.isEmpty()) {
                 throw new BosAlanException("Tc Girilmedi");
             }
+            //tc 11 haneli olmalı
             if (tc.length() != 11) {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
             }
+            //tc konro edilerek öğrencinin var olup olamadığı bulunur
             if (!ogrenciDao.tcKontrol(tc)) {
                 throw new OgrenciBulunamadiException("Öğrenci Bulunamadi");
             }
 
-
+        //tc ile dersnotları getirilir
             List<OrtalamaGorunum> dersOrtlama = raporlamaManager.ortlamaGoster(tc);
             tableViewDersNotG.setItems(FXCollections.observableArrayList(dersOrtlama));
             labelDersNotDurum.setText("Ders Notları Getirildi");
             textFieldTcNotG.clear();
         }
+        //try catch yapısı ile hata yönetimi yapılır
         catch (IllegalArgumentException e) {
             labelDersNotDurum.setText(e.getMessage());
         }
@@ -411,24 +422,27 @@ public class Yonteci_sisController {
             String sifre = textfieldOgretBrans.getText();
             LocalDate ogretmenKayitTarihi = ogretKayitTarihi.getValue();
 
-
+    //tc alanın 11 haneden oluşmasını sağlar
             if (tc.length() != 11) {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
 
             }
+    //yönetici dao daki tc kontrol ile önceden eklemiş tc kontrol edilir
             if (yoneticiDao.tcKontrol(tc)) {
                 labelODurumMesaji.setText("Aynı Tc Önceden Kullanılmış ");
                 return;
             }
+    //Alanlar boş bırakılması durumunda hata yollar
             if (isim.isEmpty() || soyisim.isEmpty() || sifre.isEmpty()) {
                 labelODurumMesaji.setText("Lütfen tüm alanları doldurun!");
                 throw new BosAlanException("Tüm Alanlar Doldurulmadı.");
             }
+            //gelen veriler yönetecidao daki ekle fonskiyonuna gönderilir
             Yonetici yonetici = new Yonetici(tc, isim, soyisim, sifre, ogretmenKayitTarihi);
 
             yoneticiDao.yoneticiAdd(yonetici);
             labelODurumMesaji.setText("Yönetici Sisteme Eklendi.");
-
+    //textield ler temizelenir
             textfieldOgretIsim.clear();
             textfieldOgretSoyisim.clear();
             textfieldOgretTc.clear();
@@ -442,7 +456,7 @@ public class Yonteci_sisController {
                     ("Hata oluştu: " + e.getMessage());
         }
     }
-    //// Öğrenci TC’si ve ders bilgisine göre not kaydını veritabanına ekler
+    // Öğrenci TC’si ve ders bilgisine göre not kaydını veritabanına ekler
     private void notEkle() {
         try {
             String tc = textFieldOgrenciTcDersEKle.getText();
@@ -451,11 +465,11 @@ public class Yonteci_sisController {
             String sinav1Text = textFieldYazili1.getText();
             String sinav2Text = textFieldYazili2.getText();
 
-
+        //tc 11 haneli olmaalı
             if (tc.length() != 11) {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
             }
-
+        //tc aranarak bulunur ve
             if (!ogrenciDao.tcKontrol(tc)) {
                 labelDurumDersNot.setText("TC Bulunamadı ");
                 return;
@@ -464,21 +478,29 @@ public class Yonteci_sisController {
             int sinav1 = Integer.parseInt(sinav1Text);
             int sinav2 = Integer.parseInt(sinav2Text);
 
-            if (sinav1 < 0 || sinav1 > 100 || sinav2 < 0 || sinav2 > 100) {
+            if (!NotDao.araliktaMi(sinav1,0,100)) {
 
                 throw new IllegalArgumentException("Notlar 0-100 arasında olmalıdır");
 
             }
+
+            if (!NotDao.araliktaMi(sinav2,0,100)) {
+
+                throw new IllegalArgumentException("Notlar 0-100 arasında olmalıdır");
+
+            }
+
+        //id kontrolü yapılarak notun eklenip eklenmediği gösterilir
             if (notDao.notidKontrol(tc+"-"+dersad)) {
                 labelDurumDersNot.setText(" Aynı Not Eklenmiş ");
                 return;
             }
-
+        //ders alanlarının boş olduğu zaman uayrı verir
             if ( dersad == null | sinif == null || sinav2Text.isEmpty() || sinav1Text.isEmpty()) {
                 labelDurumDersNot.setText("Lütfen Tüm Alanları Doldurunuz");
                 throw new BosAlanException("Tüm Alanlar Doldurulmadı");
             }
-
+        //notlar eklenir
             Not yeninot = new Not(tc, dersad, sinav1, sinav2, sinif);
             notDao.notadd(yeninot);
             textFieldOgrenciTcDersEKle.clear();
@@ -487,7 +509,8 @@ public class Yonteci_sisController {
             textFieldYazili2.clear();
             labelDurumDersNot.setText("Not Eklendi");
 
-        } catch (BosAlanException | IllegalArgumentException e) {
+        } //try catch yapısı ile hata yönetimi yapılır
+        catch (BosAlanException | IllegalArgumentException e) {
             labelDurumDersNot.setText(e.getMessage());
         } catch (Exception e) {
             labelDurumDersNot.setText
@@ -498,15 +521,16 @@ public class Yonteci_sisController {
     private void ogrenciAra() {
         try {
             String tc = textFieldOgrenciAraTC.getText();
-
+        //tc boş ise uyarı yollar
             if (tc.isEmpty()) {
                 throw new BosAlanException("Tc Girilmedi.");
             }
+            //tc 11 haneli olmalı
             if (tc.length() != 11) {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
             }
 
-
+//öğrenci bilgilerinin getirlidiği yerdir
             OgrenciGorunum ogrenciGorunum = ogrenciDao.ogrenciGorunumSearch(tc);
             if (ogrenciGorunum != null) {
                 ObservableList<OgrenciGorunum> ogrenciListesi = FXCollections.observableArrayList(ogrenciGorunum);
@@ -520,7 +544,9 @@ public class Yonteci_sisController {
             }
 
 
-        } catch (BosAlanException | IllegalArgumentException e) {
+        }
+        //try catch yapısı ile hata yönetimi yapılır
+        catch (BosAlanException | IllegalArgumentException e) {
             labelDurumOgrenciAra.setText(e.getMessage());
         } catch (Exception e) {
             labelDurumOgrenciAra.setText("Hata oluştu: " + e.getMessage());
@@ -531,25 +557,26 @@ public class Yonteci_sisController {
     private void ogrenciSil() {
         try {
             String tc = tcsilTextField.getText();
-
+    //tc boş bırkalıdğında uyarı verir
             if (tc.isEmpty()) {
                 throw new BosAlanException("Tc Girilmedi.");
             }
-
+    //tc 11 haneli olmalı
             if (tc.length() != 11) {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
             }
-
+    //tc kontrol edilir
             if (!ogrenciDao.tcKontrol(tc)) {
                 durumMesajLabel.setText("TC Bulunamadı ");
                 return;
             }
-
+    //tc iel öğrenci silinir
             String msg = ogrenciDao.ogrenciDelete(tc);
             durumMesajLabel.setText(msg);
             tcsilTextField.clear();
 
-        } catch (BosAlanException | IllegalArgumentException e) {
+        }//try catch yapısı ile hata yönetimi yapılır
+        catch (BosAlanException | IllegalArgumentException e) {
             durumMesajLabel.setText(e.getMessage());
         } catch (OgrenciBulunamadiException e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());
@@ -565,11 +592,11 @@ public class Yonteci_sisController {
             String ogrenciNo = txtOgrenciNo.getText();
             Integer sinifSeviyesi = sinifBox.getValue();
             LocalDate kayitTarihiOgrenciLocalDate = kayitTarihiOgrenci.getValue();
-
+        //tc 11 haneden oluşmalıdır
             if (tc.length() != 11) {
                 throw new IllegalArgumentException("TC Kimlik Numarası 11 hane olmalıdır.");
             }
-
+        //alanlar boş bırakılmalıdır
             if (ad.isEmpty() || soyad.isEmpty() || ogrenciNo.isEmpty() || sinifSeviyesi == 0) {
                 throw new BosAlanException("Tüm Alanlar Doldurulmadı.");
             }
@@ -580,7 +607,7 @@ public class Yonteci_sisController {
 
             String sonuc = ogrenciDao.ogrenciAdd(yeniOgrenci);
             durumMesajLabel.setText(sonuc);
-
+        //textfliede temizlenir
             txtAd.clear();
             txtSoyad.clear();
             txtTc.clear();
@@ -588,7 +615,8 @@ public class Yonteci_sisController {
             sinifBox.setValue(null);
             kayitTarihiOgrenci.setValue(null);
 
-        } catch (BosAlanException | IllegalArgumentException e) {
+        }//try catch yapısı ile hata yönetimi yapılır
+        catch (BosAlanException | IllegalArgumentException e) {
             durumMesajLabel.setText(e.getMessage());
         } catch (Exception e) {
             durumMesajLabel.setText("Hata oluştu: " + e.getMessage());

@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.IntegerProperty;
 
-public class NotGorunum { // Sınıf adını karışmaması için NotGorunumFx olarak değiştirdim
+public class NotGorunum {
 
     // 1. Alanlar SimpleProperty olarak tanımlanır
     private final StringProperty dersid;
@@ -24,7 +24,7 @@ public class NotGorunum { // Sınıf adını karışmaması için NotGorunumFx o
         this.sinav2 = new SimpleIntegerProperty(sinav2);
     }
 
-    // --- 3. Property Metotları (Binding için ZORUNLU) ---
+    // --- 2. Property Metotları (Binding için ZORUNLU) ---
 
     // JavaFX TableView, bu metotları (alan adı + "Property") çağırarak
     // Property nesnesinin kendisini alır ve binding'i kurar.

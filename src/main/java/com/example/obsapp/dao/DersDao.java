@@ -30,6 +30,7 @@ public class DersDao {
         if (dersidKontrol(ders.getDersid())) {
             return false; // Zaten var → ekleme
         }
+        //yazığımız isimler ile veritabanına ekler
         Document document = new Document();
         document.append("dersAdi",ders.getDersAdi() );
         document.append("dersid",ders.getDersid());
@@ -45,7 +46,7 @@ public class DersDao {
         }
         return true;
     }
-
+    //dersid ile ders aranması sağlanır
     public List<Document> dersSearch (String dersid ){
             Document filtere = new Document("dersid",dersid);
             List<Document> documents = new  ArrayList<>();
@@ -55,16 +56,12 @@ public class DersDao {
     }
 
     // Girilen ders ID'sinin veritabanında mevcut olup olmadığını kontrol eder.
-    public boolean dersidKontrol (String dersid){
-        Document filtre = new Document ("dersid",dersid);
-        if(collection.find(filtre).first()!=null){
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean dersidKontrol(String dersid) {
+        // Sorgu sonucunu kontrol edilir ; null değilse true, null ise false döndürülür
+        return (collection.find(new Document("dersid", dersid)).first() != null) ? true : false;
     }
 
+//tüm derslerin getirilmesini sağlar
     public List <Document> allDers(){
         List<Document> documents = new  ArrayList<>();
         return collection.find().into(documents);

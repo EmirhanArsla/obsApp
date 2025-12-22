@@ -3,6 +3,7 @@ package com.example.obsapp.viewmodel;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+// 1. Alanlar SimpleProperty olarak tanımlanır
 
 public class OgrenciGorunum {
     private final StringProperty ad;
@@ -11,6 +12,7 @@ public class OgrenciGorunum {
     private final StringProperty ogrenciNo;
     private final IntegerProperty sinifSeviyesi;
     private final ObjectProperty kayitTarihi;
+    // Kurucu (Constructor)
 
     public OgrenciGorunum(String ad,String soyAd,String tc,String ogrenciNo,Integer sinifSeviyesi,LocalDate kayitTarihi) {
         this.ad = new SimpleStringProperty(ad);

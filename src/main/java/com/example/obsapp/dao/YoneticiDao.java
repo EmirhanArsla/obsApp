@@ -23,7 +23,7 @@ public class YoneticiDao {
     public void yoneticiAdd(Yonetici yonetici) {
 
         Date dbDate =Date.from(yonetici.getKayitTarihi().atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+//Girdiğimiz alanlara göre veri tabanına ekler
         Document document = new Document();
         document.append("ad", yonetici.getAd());
         document.append("soyAd", yonetici.getSoyAd());
